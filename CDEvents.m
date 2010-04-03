@@ -145,16 +145,15 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 	CDEvents *copy = [[CDEvents alloc] init];
 	
 	copy->_delegate = _delegate;
-	copy->_notificationLatency = _notificationLatency;
-	copy->_ignoreEventsFromSubDirectories = _ignoreEventsFromSubDirectories;
+	copy->_notificationLatency = [self notificationLatency];
+	copy->_ignoreEventsFromSubDirectories = [self ignoreEventsFromSubDirectories];
 	copy->_lastEvent = [[self lastEvent] retain];
-	copy->_isWatchingURLs = NO;
+	copy->_sinceEventIdentifier = _sinceEventIdentifier;
 	copy->_watchedURLs = [[self watchedURLs] copyWithZone:zone];
 	copy->_excludedURLs = [[self excludedURLs] copyWithZone:zone];
 	
 	return copy;
 }
-
 
 
 #pragma mark Misc methods
