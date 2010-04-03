@@ -78,7 +78,7 @@
 	CDEvent						*_lastEvent;
 	
 	NSArray						*_watchedURLs;
-	NSMutableArray				*_excludedURLs;
+	NSArray						*_excludedURLs;
 }
 
 #pragma mark Properties
@@ -141,12 +141,12 @@
 /**
  * The URLs that we should ignore events from. 
  *
- * @return A mutable array of <code>NSURL</code> object for the URLs which we want to ignore.
- * @discussion Events from these URLs will not be delivered to the delegate.
+ * @return An array of <code>NSURL</code> object for the URLs which we want to ignore.
+ * @discussion Events from concerning these URLs and there sub-directories will not be delivered to the delegate.
  *
  * @since 1.0.0
  */
-@property (copy) NSMutableArray				*excludedURLs;
+@property (copy) NSArray					*excludedURLs;
 
 
 #pragma mark Event identifier class methods
