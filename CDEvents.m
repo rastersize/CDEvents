@@ -9,6 +9,15 @@
 #import "CDEvents.h"
 
 
+#pragma mark Private API
+// Private API
+@interface CDEvents ()
+
+@end
+
+
+#pragma mark -
+#pragma mark Implementation
 @implementation CDEvents
 
 @end
