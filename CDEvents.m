@@ -13,6 +13,20 @@
 // Private API
 @interface CDEvents ()
 
+// The FSEvents callback function
+static void CDEventsCallback(
+	ConstFSEventStreamRef streamRef,
+	void *callbackCtxInfo,
+	size_t numEvents,
+	void *eventPaths,
+	const FSEventStreamEventFlags eventFlags[],
+	const FSEventStreamEventId eventIds[]);
+
+// Creates and initiates the event stream.
+- (void)createEventsStream;
+// Disposes of the event stream.
+- (void)disposeEventsStream;
+
 @end
 
 
