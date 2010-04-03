@@ -41,6 +41,8 @@
 
 /**
  * The event identifier type.
+ *
+ * @since 1.0.0
  */
 typedef NSUInteger CDEventIdentifier;
 
@@ -48,10 +50,12 @@ typedef NSUInteger CDEventIdentifier;
 /**
  * An Objective-C wrapper for a <code>FSEvents</code> event data.
  *
- * @since 1.0.0
  * @note Inpired by <code>SCEvent</code> class of the <code>SCEvents</code> project by Stuart Connolly.
  * @note The class is immutable.
+ *
  * @see FSEvents.h in CoreServices
+ *
+ * @since 1.0.0
  */
 @interface CDEvent : NSObject <NSCoding, NSCopying> {
 @private
@@ -68,6 +72,8 @@ typedef NSUInteger CDEventIdentifier;
  * The event identifier as returned by <code>FSEvents</code>.
  *
  * @return The event identifier.
+ *
+ * @since 1.0.0
  */
 @property (readonly) CDEventIdentifier			identifier;
 
@@ -75,6 +81,8 @@ typedef NSUInteger CDEventIdentifier;
  * An approximate date and time the event occured.
  *
  * @return The approximate date and time the event occured.
+ *
+ * @since 1.0.0
  */
 @property (readonly) NSDate						*date;
 
@@ -82,6 +90,8 @@ typedef NSUInteger CDEventIdentifier;
  * The URL of the item which changed.
  *
  * @return The URL of the item which changed.
+ *
+ * @since 1.0.0
  */
 @property (readonly) NSURL						*URL;
 
@@ -91,7 +101,10 @@ typedef NSUInteger CDEventIdentifier;
  * The flags of the event as returned by <code>FSEvents</code>.
  *
  * @return The flags of the event.
+ *
  * @see FSEventStreamEventFlags
+ *
+ * @since 1.0.0
  */
 @property (readonly) FSEventStreamEventFlags	flags;
 
@@ -105,8 +118,11 @@ typedef NSUInteger CDEventIdentifier;
  * @param URL The URL of the item the event concerns.
  * @param flags The flags of the event.
  * @return An <code>CDEvent</code> created with the given identifier, date, URL and flags.
+ *
  * @see FSEventStreamEventFlags
  * @see initWithIdentifier:date:URL:flags:
+ *
+ * @since 1.0.0
  */
 + (CDEvent *)eventWithIdentifier:(NSUInteger)identifier
 							date:(NSDate *)date
@@ -124,6 +140,8 @@ typedef NSUInteger CDEventIdentifier;
  * @return An <code>CDEvent</code> object initialized with the given identifier, date, URL and flags.
  * @see FSEventStreamEventFlags
  * @see eventWithIdentifier:date:URL:flags:
+ *
+ * @since 1.0.0
  */
 - (id)initWithIdentifier:(NSUInteger)identifier
 					date:(NSDate *)date
