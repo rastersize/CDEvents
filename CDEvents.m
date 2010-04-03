@@ -160,6 +160,13 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 }
 
 
+#pragma mark Flush methods
+- (void)flushSynchronously
+{
+	FSEventStreamFlushSync(_eventStream);
+}
+
+
 #pragma mark Misc methods
 
 
