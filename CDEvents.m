@@ -191,6 +191,57 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 	_eventStream = NULL;
 }
 
-
+static void CDEventsCallback(
+	ConstFSEventStreamRef streamRef,
+	void *callbackCtxInfo,
+	size_t numEvents,
+	void *eventPaths,
+	const FSEventStreamEventFlags eventFlags[],
+	const FSEventStreamEventId eventIds[])
+{
+	CDEvents *watcher = (CDEvents *)callbackCtxInfo;
+	NSArray *excludedURLs = [watcher excludedURLs];
+	NSArray *eventPathsArray = (NSArray *)eventPaths;
+	BOOL shouldIgnore;
+	
+	for (NSUInteger i = 0; i < numEvents; ++i) {
+		shouldIgnore = NO;
+		
+		NSString *eventPath = [eventPathsArray objectAtIndex:i];
+		
+		if ([excludedURLs containsObject:[NSURL URLWithString:eventPath]]) {
+			shouldIgnore = YES;
+		} else if (excludedURLs != nil && [watcher ignoreEventsFromSubDirectories]) {
+			for (NSURL *URL in excludedURLs) {
+				if ([eventPath hasPrefix:[URL path]]) {
+					shouldIgnore = YES;
+					break;
+				}
+			}
+		}
+		
+		if (!shouldIgnore) {
+			NSURL *eventURL = [NSURL URLWithString:eventPath];
+			
+			CDEvent *event = [[CDEvent alloc] initWithIdentifier:eventIds[i]
+												   date:[NSDate date]
+													URL:eventURL
+												  flags:eventFlags[i]];
+			
+			if ([(id)[watcher delegate] conformsToProtocol:@protocol(CDEventsDelegate)]) {
+				[[watcher delegate] URLWatcher:watcher eventOccurred:event];
+			}
+			
+			// Last event?
+			if (i == (numEvents - 1)) {
+				[watcher setLastEvent:event];
+			}
+			
+			[event release];
+		}
+	}
+	
+	
+}
 
 @end
