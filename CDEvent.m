@@ -112,7 +112,9 @@
 {
 	return [NSString stringWithFormat:@"<%@: %p { identifier = %ld, URL = %@, flags = %ld, date = %@ }>",
 			[self className],
+			self,
 			(unsigned long)[self identifier],
+			[self URL],
 			(unsigned long)[self flags],
 			[self date]];
 }
