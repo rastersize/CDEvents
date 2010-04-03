@@ -86,4 +86,11 @@
 
 
 
+#pragma mark Misc methods
++ (NSUInteger)currentEventIdentifier
+{
+	return (NSUInteger)FSEventsGetCurrentEventId();
+}
+
+
 @end
