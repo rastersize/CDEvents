@@ -29,4 +29,43 @@
 @synthesize watchedURLs						= _watchedURLs;
 @synthesize excludedURLs					= _excludedURLs;
 
+#pragma mark Init/dealloc/finalize methods
+- (void)dealloc
+{
+	[self stopWatchingURLs];
+	
+	_delegate = nil;
+	
+	[_lastEvent release];
+	[_watchedURLs release];
+	[_excludedURLs release];
+	
+	[super dealloc];
+}
+
+- (void)finalize
+{
+	[self stopWatchingURLs];
+	
+	_delegate = nil;
+	
+	[super finalize];
+}
+
+- (id)init
+{
+	if ((self = [super init])) {
+		_delegate = nil;
+		_notificationLatency = CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY;
+		_isWatchingURLs = NO;
+		_ignoreEventsFromSubDirectories = CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS;
+		_lastEvent = nil;
+		_watchedURLs = nil;
+		_excludedURLs = nil;
+	}
+	
+	return self;
+}
+
+
 @end
