@@ -8,6 +8,12 @@
 
 #import "CDEvents.h"
 
+#import "CDEventsDelegate.h"
+
+const NSUInteger kCDEventsEventStreamFlags	=
+	(kFSEventStreamCreateFlagUseCFTypes |
+	 kFSEventStreamCreateFlagWatchRoot);
+
 
 #pragma mark Private API
 // Private API
