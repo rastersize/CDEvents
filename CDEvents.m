@@ -125,7 +125,7 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 		
 		_lastEvent = nil;
 		
-		[self createEventsStream];
+		[self createEventStream];
 		
 		FSEventStreamScheduleWithRunLoop(_eventStream,
 										 [runLoop getCFRunLoop],
