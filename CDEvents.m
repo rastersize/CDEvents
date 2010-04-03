@@ -60,7 +60,7 @@ static void CDEventsCallback(
 #pragma mark Init/dealloc/finalize methods
 - (void)dealloc
 {
-	[self stopWatchingURLs];
+	[self disposeEventStream];
 	
 	_delegate = nil;
 	
@@ -73,7 +73,7 @@ static void CDEventsCallback(
 
 - (void)finalize
 {
-	[self stopWatchingURLs];
+	[self disposeEventStream];
 	
 	_delegate = nil;
 	
