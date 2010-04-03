@@ -20,4 +20,13 @@
 #pragma mark Implementation
 @implementation CDEvents
 
+#pragma mark Properties
+@synthesize delegate						= _delegate;
+@synthesize notificationLatency				= _notificationLatency;
+@synthesize isWatchingURLs					= _isWatchingURLs;
+@synthesize ignoreEventsFromSubDirectories	= _ignoreEventsFromSubDirectories;
+@synthesize lastEvent						= _lastEvent;
+@synthesize watchedURLs						= _watchedURLs;
+@synthesize excludedURLs					= _excludedURLs;
+
 @end
