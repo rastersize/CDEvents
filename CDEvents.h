@@ -42,12 +42,21 @@
 
 @protocol CDEventsDelegate;
 
-
+#pragma mark -
+#pragma mark Default values
 /**
  * The default notificaion latency.
  */
 #define CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY			(NSTimeInterval)3.0
 
+/**
+ *
+ */
+#define CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS	NO
+
+
+#pragma mark -
+#pragma mark CDEvents interface
 /**
  * An Objective-C wrapper for the <code>FSEvents</code> C API.
  *
