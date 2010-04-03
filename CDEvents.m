@@ -181,6 +181,15 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 			[self watchedURLs]];
 }
 
+- (NSString *)streamDescription
+{
+	CFStringRef streamDescriptionCF = FSEventStreamCopyDescription(_eventStream);
+	NSString *returnString = [[NSString alloc] initWithString:(NSString *)streamDescriptionCF];
+	CFRelease(streamDescriptionCF);
+	
+	return [returnString autorelease];
+}
+
 
 #pragma mark Private API:
 - (void)createEventStream
@@ -223,6 +232,7 @@ static void CDEventsCallback(
 	const FSEventStreamEventId eventIds[])
 {
 	CDEvents *watcher = (CDEvents *)callbackCtxInfo;
+	
 	NSArray *excludedURLs = [watcher excludedURLs];
 	NSArray *eventPathsArray = (NSArray *)eventPaths;
 	BOOL shouldIgnore;
