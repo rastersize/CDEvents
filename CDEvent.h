@@ -40,7 +40,7 @@
 
 
 /**
- * An Objective-C wrapper for a <code>FSEvents</code>.
+ * An Objective-C wrapper for a <code>FSEvents</code> event data.
  *
  * @since 1.0.0
  * @note Inpired by <code>SCEvent</code> class of the <code>SCEvents</code> project by Stuart Connolly.
