@@ -23,7 +23,7 @@
 #pragma mark Properties
 @synthesize delegate						= _delegate;
 @synthesize notificationLatency				= _notificationLatency;
-@synthesize isWatchingURLs					= _isWatchingURLs;
+@synthesize sinceEventIdentifier			= _sinceEventIdentifier;
 @synthesize ignoreEventsFromSubDirectories	= _ignoreEventsFromSubDirectories;
 @synthesize lastEvent						= _lastEvent;
 @synthesize watchedURLs						= _watchedURLs;
