@@ -43,6 +43,11 @@
 @protocol CDEventsDelegate;
 
 #pragma mark -
+#pragma mark CDEvents custom exceptions
+extern NSString *const CDEventsEventStreamCreationFailureException;
+
+
+#pragma mark -
 #pragma mark Default values
 /**
  * The default notificaion latency.
