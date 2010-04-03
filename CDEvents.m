@@ -29,6 +29,14 @@
 @synthesize watchedURLs						= _watchedURLs;
 @synthesize excludedURLs					= _excludedURLs;
 
+
+#pragma mark Event identifier class methods
++ (CDEventIdentifier)currentEventIdentifier
+{
+	return (NSUInteger)FSEventsGetCurrentEventId();
+}
+
+
 #pragma mark Init/dealloc/finalize methods
 - (void)dealloc
 {
@@ -87,10 +95,10 @@
 
 
 #pragma mark Misc methods
-+ (NSUInteger)currentEventIdentifier
-{
-	return (NSUInteger)FSEventsGetCurrentEventId();
-}
+
+
+#pragma mark Private API:
+
 
 
 @end
