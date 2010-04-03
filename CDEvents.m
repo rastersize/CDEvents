@@ -29,9 +29,9 @@ static void CDEventsCallback(
 	const FSEventStreamEventId eventIds[]);
 
 // Creates and initiates the event stream.
-- (void)createEventsStream;
+- (void)createEventStream;
 // Disposes of the event stream.
-- (void)disposeEventsStream;
+- (void)disposeEventStream;
 
 @end
 
