@@ -40,6 +40,12 @@
 
 
 /**
+ * The event identifier type.
+ */
+typedef NSUInteger CDEventIdentifier;
+
+
+/**
  * An Objective-C wrapper for a <code>FSEvents</code> event data.
  *
  * @since 1.0.0
@@ -49,7 +55,7 @@
  */
 @interface CDEvent : NSObject <NSCoding, NSCopying> {
 @private
-	NSUInteger					_identifier;
+	CDEventIdentifier			_identifier;
 	NSDate						*_date;
 	NSURL						*_URL;
 	FSEventStreamEventFlags		_flags;
@@ -63,7 +69,7 @@
  *
  * @return The event identifier.
  */
-@property (readonly) NSUInteger					identifier;
+@property (readonly) CDEventIdentifier			identifier;
 
 /**
  * An approximate date and time the event occured.
