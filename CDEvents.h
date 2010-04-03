@@ -170,7 +170,7 @@
  *
  * @see FSEventsGetLastEventIdForDeviceBeforeTime(dev_t, CFAbsoluteTime)
  *
- * @since 1.0.0
+ * @since 1.1.0
  */
 + (CDEventIdentifier)lastEventIdentifierForURL:(NSURL *)URL time:(NSDate *)time;
 
