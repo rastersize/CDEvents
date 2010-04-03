@@ -195,17 +195,21 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 - (void)createEventStream
 {
 	FSEventStreamContext callbackCtx;
-	
 	callbackCtx.version			= 0;
 	callbackCtx.info			= (void *)self;
 	callbackCtx.retain			= NULL;
 	callbackCtx.release			= NULL;
 	callbackCtx.copyDescription	= NULL;
 	
+	NSMutableArray *watchedPaths = [NSMutableArray arrayWithCapacity:[[self watchedURLs] count]];
+	for (NSURL *URL in [self watchedURLs]) {
+		[watchedPaths addObject:[URL path]];
+	}
+	
 	_eventStream = FSEventStreamCreate(kCFAllocatorDefault,
 									   &CDEventsCallback,
 									   &callbackCtx,
-									   (CFArrayRef)[self watchedURLs],
+									   (CFArrayRef)watchedPaths,
 									   (FSEventStreamEventId)[self sinceEventIdentifier],
 									   [self notificationLatency],
 									   _eventStreamCreationFlags);
