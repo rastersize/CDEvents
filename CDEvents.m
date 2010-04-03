@@ -173,6 +173,13 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 
 
 #pragma mark Misc methods
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"<%@: %p { watchedURLs = %@ }>",
+			[self className],
+			self,
+			[self watchedURLs]];
+}
 
 
 #pragma mark Private API:
