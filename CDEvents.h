@@ -92,6 +92,7 @@ const NSUInteger kCDEventsDefaultEventStreamFlags =
 	CFTimeInterval				_notificationLatency;
 	
 	CDEventIdentifier			_sinceEventIdentifier;
+	NSUInteger					_eventStreamCreationFlags;
 	
 	BOOL						_ignoreEventsFromSubDirectories;
 	
