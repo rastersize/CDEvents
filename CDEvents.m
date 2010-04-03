@@ -161,6 +161,25 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 
 
 #pragma mark Private API:
+- (void)createEventStream
+{
+	FSEventStreamContext callbackCtx;
+	
+	callbackCtx.version			= 0;
+	callbackCtx.info			= (void *)self;
+	callbackCtx.retain			= NULL;
+	callbackCtx.release			= NULL;
+	callbackCtx.copyDescription	= NULL;
+	
+	_eventStream = FSEventStreamCreate(kCFAllocatorDefault,
+									   &CDEventsCallback,
+									   &callbackCtx,
+									   (CFArrayRef)[self watchedURLs],
+									   (FSEventStreamEventId)[self sinceEventIdentifier],
+									   [self notificationLatency],
+									   kCDEventsEventStreamFlags);
+}
+
 - (void)disposeEventStream
 {
 	if (!(_eventStream)) {
