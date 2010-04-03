@@ -133,7 +133,7 @@
  *
  * @since 1.0.0
  */
-@property (readonly) CDEvent				*lastEvent;
+@property (retain) CDEvent					*lastEvent;
 
 /**
  * The URLs that we watch for events.
