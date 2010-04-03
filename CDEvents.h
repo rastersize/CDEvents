@@ -72,7 +72,8 @@
 	FSEventStreamRef			_eventStream;
 	CFTimeInterval				_notificationLatency;
 	
-	BOOL						_isWatchingURLs;
+	CDEventIdentifier			_sinceEventIdentifier;
+	
 	BOOL						_ignoreEventsFromSubDirectories;
 	
 	CDEvent						*_lastEvent;
@@ -102,13 +103,13 @@
 @property (readonly) CFTimeInterval			notificationLatency;
 
 /**
- * Wheter we are watching the given URLs or not.
+ * The event identifier from which events will be supplied to the delegate.
  *
- * @return <code>YES</code> if we are currently wathing the given URLs, otherwise <code>NO</code>.
+ * @return The event identifier from which events will be supplied to the delegate.
  *
  * @since 1.0.0
  */
-@property (readonly) BOOL					isWatchingURLs;
+@property (readonly) CDEventIdentifier		sinceEventIdentifier;
 
 /**
  * Wheter events from sub-directories of the watched URLs should be ignored or not.
@@ -181,7 +182,7 @@
  *
  * @param URLs An array of URLs we want to watch.
  * @param delegate The delegate object the <code>CDEvents</code> object calls when it recieves an event.
- * @return An <code>CDEvents</code> object initialized with the given URLs to watch.
+ * @return An <code>CDEvents</code> object initialized with the given URLs to watch. 
  * @throws NSInvalidArgumentException if <em>URLs</em> is empty or points to <code>nil</code>.
  * @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
  *
