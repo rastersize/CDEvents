@@ -15,7 +15,19 @@
 		9C6D051D1166BD5800343E46 /* CDEventsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C6D051C1166BD5800343E46 /* CDEventsDelegate.h */; };
 		9C6D05241166BF5300343E46 /* CDEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C6D05221166BF5300343E46 /* CDEvents.h */; };
 		9C6D05251166BF5300343E46 /* CDEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D05231166BF5300343E46 /* CDEvents.m */; };
+		9C6D06851167CC8600343E46 /* CDEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* CDEvents.framework */; };
+		9C6D06881167CCBD00343E46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D06871167CCBD00343E46 /* main.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9C6D06831167CC8300343E46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* CDEvents */;
+			remoteInfo = CDEvents;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0867D6A5FE840307C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -31,6 +43,9 @@
 		9C6D051C1166BD5800343E46 /* CDEventsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDEventsDelegate.h; sourceTree = "<group>"; };
 		9C6D05221166BF5300343E46 /* CDEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDEvents.h; sourceTree = "<group>"; };
 		9C6D05231166BF5300343E46 /* CDEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDEvents.m; sourceTree = "<group>"; };
+		9C6D067D1167CC7400343E46 /* CDEventsTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = CDEventsTestApp.app; path = build/Debug/CDEventsTestApp.app; sourceTree = "<group>"; };
+		9C6D067F1167CC7400343E46 /* CDEventsTestApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CDEventsTestApp-Info.plist"; sourceTree = "<group>"; };
+		9C6D06871167CCBD00343E46 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -44,6 +59,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9C6D067B1167CC7400343E46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C6D06851167CC8600343E46 /* CDEvents.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -51,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				8DC2EF5B0486A6940098B216 /* CDEvents.framework */,
+				9C6D067D1167CC7400343E46 /* CDEventsTestApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,8 +85,10 @@
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				089C1665FE841158C02AAC07 /* Resources */,
+				9C6D06861167CC8E00343E46 /* TestApp */,
 				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
 				034768DFFF38A50411DB9C8B /* Products */,
+				9C6D067F1167CC7400343E46 /* CDEventsTestApp-Info.plist */,
 			);
 			name = CDEvents;
 			sourceTree = "<group>";
@@ -124,6 +150,14 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		9C6D06861167CC8E00343E46 /* TestApp */ = {
+			isa = PBXGroup;
+			children = (
+				9C6D06871167CCBD00343E46 /* main.m */,
+			);
+			path = TestApp;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -159,6 +193,24 @@
 			productReference = 8DC2EF5B0486A6940098B216 /* CDEvents.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		9C6D067C1167CC7400343E46 /* CDEventsTestApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C6D06821167CC7500343E46 /* Build configuration list for PBXNativeTarget "CDEventsTestApp" */;
+			buildPhases = (
+				9C6D06791167CC7400343E46 /* Resources */,
+				9C6D067A1167CC7400343E46 /* Sources */,
+				9C6D067B1167CC7400343E46 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C6D06841167CC8300343E46 /* PBXTargetDependency */,
+			);
+			name = CDEventsTestApp;
+			productName = CDEventsTestApp;
+			productReference = 9C6D067D1167CC7400343E46 /* CDEventsTestApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -173,6 +225,7 @@
 			projectRoot = "";
 			targets = (
 				8DC2EF4F0486A6940098B216 /* CDEvents */,
+				9C6D067C1167CC7400343E46 /* CDEventsTestApp */,
 			);
 		};
 /* End PBXProject section */
@@ -183,6 +236,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C6D06791167CC7400343E46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,7 +258,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9C6D067A1167CC7400343E46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C6D06881167CCBD00343E46 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9C6D06841167CC8300343E46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DC2EF4F0486A6940098B216 /* CDEvents */;
+			targetProxy = 9C6D06831167CC8300343E46 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C1666FE841158C02AAC07 /* InfoPlist.strings */ = {
@@ -283,6 +359,54 @@
 			};
 			name = Release;
 		};
+		9C6D06801167CC7500343E46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "CDEventsTestApp-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CDEventsTestApp;
+			};
+			name = Debug;
+		};
+		9C6D06811167CC7500343E46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "CDEventsTestApp-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CDEventsTestApp;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -300,6 +424,15 @@
 			buildConfigurations = (
 				1DEB91B208733DA50010E9CD /* Debug */,
 				1DEB91B308733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C6D06821167CC7500343E46 /* Build configuration list for PBXNativeTarget "CDEventsTestApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C6D06801167CC7500343E46 /* Debug */,
+				9C6D06811167CC7500343E46 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
