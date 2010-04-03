@@ -161,6 +161,17 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 
 
 #pragma mark Private API:
+- (void)disposeEventStream
+{
+	if (!(_eventStream)) {
+		return;
+	}
+	
+	FSEventStreamStop(_eventStream);
+	FSEventStreamInvalidate(_eventStream);
+	FSEventStreamRelease(_eventStream);
+	_eventStream = NULL;
+}
 
 
 
