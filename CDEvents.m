@@ -98,7 +98,7 @@ static void CDEventsCallback(
 		 notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
 	  ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
 				  excludeURLs:nil
-			streamCreateFlags:kCDEventsDefaultEventStreamFlags];
+		  streamCreationFlags:kCDEventsDefaultEventStreamFlags];
 }
 
 - (id)initWithURLs:(NSArray *)URLs
@@ -108,7 +108,7 @@ sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
 notificationLantency:(CFTimeInterval)notificationLatency
 ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 		 excludeURLs:(NSArray *)exludeURLs
-   streamCreateFlags:(NSUInteger)streamCreateFlags
+ streamCreationFlags:(NSUInteger)streamCreationFlags
 {
 	if (delegate == nil || URLs == nil || [URLs count] == 0) {
 		[NSException raise:NSInvalidArgumentException
