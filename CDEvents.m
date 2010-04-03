@@ -97,7 +97,8 @@ static void CDEventsCallback(
 		 sinceEventIdentifier:[CDEvents currentEventIdentifier]
 		 notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
 	  ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
-				  excludeURLs:nil];
+				  excludeURLs:nil
+			streamCreateFlags:kCDEventsDefaultEventStreamFlags];
 }
 
 - (id)initWithURLs:(NSArray *)URLs
@@ -107,6 +108,7 @@ sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
 notificationLantency:(CFTimeInterval)notificationLatency
 ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 		 excludeURLs:(NSArray *)exludeURLs
+   streamCreateFlags:(NSUInteger)streamCreateFlags
 {
 	if (delegate == nil || URLs == nil || [URLs count] == 0) {
 		[NSException raise:NSInvalidArgumentException
@@ -119,6 +121,7 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 		[self setDelegate:delegate];
 		
 		_sinceEventIdentifier = sinceEventIdentifier;
+		_eventStreamCreationFlags = streamCreationFlags;
 		
 		_notificationLatency = notificationLatency;
 		_ignoreEventsFromSubDirectories = ignoreEventsFromSubDirs;
@@ -131,7 +134,8 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 										 [runLoop getCFRunLoop],
 										 kCFRunLoopDefaultMode);
 		if (!FSEventStreamStart(_eventStream)) {
-			return nil;
+			[NSException raise:CDEventsEventStreamCreationFailureException
+						format:@"Failed to create event stream."];
 		}
 	}
 	
@@ -176,7 +180,7 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 									   (CFArrayRef)[self watchedURLs],
 									   (FSEventStreamEventId)[self sinceEventIdentifier],
 									   [self notificationLatency],
-									   kCDEventsEventStreamFlags);
+									   _eventStreamCreationFlags);
 }
 
 - (void)disposeEventStream

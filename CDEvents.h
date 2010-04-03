@@ -205,16 +205,19 @@ const NSUInteger kCDEventsDefaultEventStreamFlags =
  * @return An <code>CDEvents</code> object initialized with the given URLs to watch. 
  * @throws NSInvalidArgumentException if <em>URLs</em> is empty or points to <code>nil</code>.
  * @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
+ * @throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.
  *
- * @see startWatchingURLs:delegate:onRunLoop:
- * @see startWatchingURLs:delegate:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:
- * @see stopWatchingURLs
+ * @see initWithURLs:delegate:onRunLoop:
+ * @see initWithURLs:delegate:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
+ * @see kCDEventsDefaultEventStreamFlags
  *
- * @discussion Calls startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:
+ * @discussion Calls startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
  * with <em>sinceEventIdentifier</em> with the current event identifier,
  * <em>notificationLatency</em> set to 3.0 seconds,
- * <em>ignoreEventsFromSubDirectories</em> set to <code>NO</code>
- * <em>excludedURLs</em> to no URLs and schedueled on the current run loop.
+ * <em>ignoreEventsFromSubDirectories</em> set to <code>NO</code>,
+ * <em>excludedURLs</em> to no URLs, the event stream creation flags will be set
+ * to <code>kCDEventsDefaultEventStreamFlags</code> and schedueled on the
+ * current run loop.
  *
  * @since 1.0.0
  */
@@ -229,16 +232,18 @@ const NSUInteger kCDEventsDefaultEventStreamFlags =
  * @return An <code>CDEvents</code> object initialized with the given URLs to watch.
  * @throws NSInvalidArgumentException if <em>URLs</em> is empty or points to <code>nil</code>.
  * @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
+ * @throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.
  *
- * @see startWatchingURLs:
- * @see startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:
- * @see stopWatchingURLs
+ * @see initWithURLs:
+ * @see initWithURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
+ * @see kCDEventsDefaultEventStreamFlags
  *
- * @discussion Calls startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:
+ * @discussion Calls startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
  * with <em>runLoop</em> set to the current run loop, <em>sinceEventIdentifier</em>
  * with the current event identifier, <em>notificationLatency</em> set to 3.0
- * seconds, <em>ignoreEventsFromSubDirectories</em> set to <code>NO</code>
- * <em>excludedURLs</em> to no URLs.
+ * seconds, <em>ignoreEventsFromSubDirectories</em> set to <code>NO</code>, 
+ * <em>excludedURLs</em> to no URLs and the event stream creation flags will be
+ * set to <code>kCDEventsDefaultEventStreamFlags</code>.
  *
  * @since 1.0.0
  */
@@ -256,18 +261,21 @@ const NSUInteger kCDEventsDefaultEventStreamFlags =
  * @param notificationLatency The (approximate) time intervall between notifications sent to the delegate.
  * @param ignoreEventsFromSubDirs Wheter events from sub-directories of the watched URLs should be ignored or not.
  * @param exludeURLs An array of URLs that we should ignore events from. Pass <code>nil</code> if none should be excluded.
+ * @param streamCreationFlags The event stream creation flags.
  * @return An <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and run on the given run loop.
  * @throws NSInvalidArgumentException if the parameter URLs is empty or points to <code>nil</code>.
  * @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
+ * @throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.
  *
- * @see startWatchingURLs:
- * @see startWatchingURLs:onRunLoop:
- * @see stopWatchingURLs
+ * @see initWithURLs:
+ * @see initWithURLs:onRunLoop:
  * @see ignoreEventsFromSubDirectories
  * @see excludedURLs
+ * @see FSEventStreamCreateFlags
  *
  * @discussion To ask for events "since now" pass the return value of
  * currentEventIdentifier as the parameter sinceEventIdentifier.
+ * CDEventStreamCreationFailureException should be extremely rare.
  *
  * @since 1.0.0
  */
@@ -277,7 +285,8 @@ const NSUInteger kCDEventsDefaultEventStreamFlags =
 sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
 notificationLantency:(CFTimeInterval)notificationLatency
 ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
-		 excludeURLs:(NSArray *)exludeURLs;
+		 excludeURLs:(NSArray *)exludeURLs
+ streamCreationFlags:(NSUInteger)streamCreationFlags;
 
 #pragma mark Flush methods
 
