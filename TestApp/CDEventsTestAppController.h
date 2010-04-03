@@ -26,21 +26,16 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "CDEventsTestAppController.h"
+#import <Foundation/Foundation.h>
+#import <CDEvents/CDEventsDelegate.h>
 
-/**
- *
- */
-int main(int argc, char *argv[])
-{
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
-	CDEventsTestAppController *controller = [[[CDEventsTestAppController alloc] init] autorelease];
-	[controller run];
-	
-	[[NSRunLoop currentRunLoop] run];
-	
-	[pool drain];
-	
-	return 0;
+@class CDEvents;
+
+
+@interface CDEventsTestAppController : NSObject <CDEventsDelegate> {
+	CDEvents				*_events;
 }
+
+- (void)run;
+
+@end

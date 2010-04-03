@@ -8,15 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
-		9C6D03031166AFFA00343E46 /* CDEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C6D03011166AFFA00343E46 /* CDEvent.h */; };
+		9C6D03031166AFFA00343E46 /* CDEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C6D03011166AFFA00343E46 /* CDEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C6D03041166AFFA00343E46 /* CDEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D03021166AFFA00343E46 /* CDEvent.m */; };
 		9C6D033D1166B32000343E46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C6D033C1166B32000343E46 /* Foundation.framework */; };
 		9C6D04451166B35700343E46 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C6D04441166B35700343E46 /* CoreServices.framework */; };
-		9C6D051D1166BD5800343E46 /* CDEventsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C6D051C1166BD5800343E46 /* CDEventsDelegate.h */; };
-		9C6D05241166BF5300343E46 /* CDEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C6D05221166BF5300343E46 /* CDEvents.h */; };
+		9C6D051D1166BD5800343E46 /* CDEventsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C6D051C1166BD5800343E46 /* CDEventsDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C6D05241166BF5300343E46 /* CDEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C6D05221166BF5300343E46 /* CDEvents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C6D05251166BF5300343E46 /* CDEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D05231166BF5300343E46 /* CDEvents.m */; };
 		9C6D06851167CC8600343E46 /* CDEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* CDEvents.framework */; };
 		9C6D06881167CCBD00343E46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D06871167CCBD00343E46 /* main.m */; };
+		9C6D06B01167CE2000343E46 /* CDEventsTestAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D06AF1167CE2000343E46 /* CDEventsTestAppController.m */; };
+		9C6D06B91167CE8C00343E46 /* CDEvents.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* CDEvents.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +30,20 @@
 			remoteInfo = CDEvents;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9C6D06BD1167CEAA00343E46 /* Copy Bundle Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9C6D06B91167CE8C00343E46 /* CDEvents.framework in Copy Bundle Frameworks */,
+			);
+			name = "Copy Bundle Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0867D6A5FE840307C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -46,6 +62,8 @@
 		9C6D067D1167CC7400343E46 /* CDEventsTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = CDEventsTestApp.app; path = build/Debug/CDEventsTestApp.app; sourceTree = "<group>"; };
 		9C6D067F1167CC7400343E46 /* CDEventsTestApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CDEventsTestApp-Info.plist"; sourceTree = "<group>"; };
 		9C6D06871167CCBD00343E46 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9C6D06AE1167CE2000343E46 /* CDEventsTestAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDEventsTestAppController.h; sourceTree = "<group>"; };
+		9C6D06AF1167CE2000343E46 /* CDEventsTestAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDEventsTestAppController.m; sourceTree = "<group>"; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				9C6D06871167CCBD00343E46 /* main.m */,
+				9C6D06AE1167CE2000343E46 /* CDEventsTestAppController.h */,
+				9C6D06AF1167CE2000343E46 /* CDEventsTestAppController.m */,
 			);
 			path = TestApp;
 			sourceTree = "<group>";
@@ -200,6 +220,7 @@
 				9C6D06791167CC7400343E46 /* Resources */,
 				9C6D067A1167CC7400343E46 /* Sources */,
 				9C6D067B1167CC7400343E46 /* Frameworks */,
+				9C6D06BD1167CEAA00343E46 /* Copy Bundle Frameworks */,
 			);
 			buildRules = (
 			);
@@ -263,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C6D06881167CCBD00343E46 /* main.m in Sources */,
+				9C6D06B01167CE2000343E46 /* CDEventsTestAppController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
