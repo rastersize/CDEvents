@@ -46,11 +46,15 @@
 #pragma mark Default values
 /**
  * The default notificaion latency.
+ *
+ * @since 1.0.0
  */
 #define CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY			(NSTimeInterval)3.0
 
 /**
+ * The default value wheter events from sub directories should be ignored or not.
  *
+ * @since 1.0.0
  */
 #define CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS	NO
 
@@ -60,10 +64,11 @@
 /**
  * An Objective-C wrapper for the <code>FSEvents</code> C API.
  *
- * @since 1.0.0
  * @note Inpired by <code>SCEvents</code> class of the <code>SCEvents</code> project by Stuart Connolly.
- * @note The class is immutable.
+ *
  * @see FSEvents.h in CoreServices
+ *
+ * @since 1.0.0
  */
 @interface CDEvents : NSObject <NSCopying> {
 @private
