@@ -222,7 +222,7 @@
  *
  * @since 1.0.0
  */
-- (void)initWithURLs:(NSArray *)URLs
+- (id)initWithURLs:(NSArray *)URLs
 			delegate:(id<CDEventsDelegate>)delegate
 		  onRunLoop:(NSRunLoop *)runLoop;
 
@@ -251,7 +251,7 @@
  *
  * @since 1.0.0
  */
-- (void)initWithURLs:(NSArray *)URLs
+- (id)initWithURLs:(NSArray *)URLs
 			delegate:(id<CDEventsDelegate>)delegate
 		   onRunLoop:(NSRunLoop *)runLoop
 sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
