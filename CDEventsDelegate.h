@@ -41,6 +41,10 @@
 
 /**
  * The CDEventsDelegate protocol defines the required methods implemented by delegates of CDEvents objects.
+ *
+ * @see CDEvents
+ * @see CDevent
+ *
  * @since 1.0.0
  */
 @protocol CDEventsDelegate
@@ -48,12 +52,20 @@
 @required
 /**
  * The method called by the <code>CDEvents</code> object on its delegate object.
- * 
- * Conforming objects' implementation of this method will be called whenever an
- * event occurs. The instance of CDEvents which received the event and the event
- * itself are passed as parameters.
+ *
+ * @param URLWatcher The <code>CDEvents</code> object which the event was recieved thru.
+ * @param event The event data.
+ *
+ * @see CDEvents
+ * @see CDevent
+ *
+ * @discussion Conforming objects' implementation of this method will be called
+ * whenever an event occurs. The instance of CDEvents which received the event
+ * and the event itself are passed as parameters.
+ *
+ * @since 1.0.0
  */
-- (void)pathWatcher:(CDEvents *)pathWatcher eventOccurred:(CDEvent *)event;
+- (void)URLWatcher:(CDEvents *)URLWatcher eventOccurred:(CDEvent *)event;
 
 @end
 
