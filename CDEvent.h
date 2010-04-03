@@ -30,7 +30,8 @@
  * @headerfile CDEvent.h CDEvents/CDEvent.h
  * A class that wraps the data from a FSEvents event callback.
  * 
- * Inspired by the open source project SCEvents created by Stuart Connolly
+ * A class that wraps the data from a FSEvents event callback. Inspired and
+ * based upon the open source project SCEvents created by Stuart Connolly
  * http://stuconnolly.com/projects/code/
  */
 
