@@ -77,7 +77,7 @@
 	
 	CDEvent						*_lastEvent;
 	
-	NSMutableArray				*_watchedURLs;
+	NSArray						*_watchedURLs;
 	NSMutableArray				*_excludedURLs;
 }
 
