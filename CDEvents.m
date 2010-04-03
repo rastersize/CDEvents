@@ -10,11 +10,11 @@
 
 #import "CDEventsDelegate.h"
 
-const NSUInteger kCDEventsEventStreamFlags	=
-	(kFSEventStreamCreateFlagUseCFTypes |
-	 kFSEventStreamCreateFlagWatchRoot);
+#pragma mark CDEvents custom exceptions
+NSString *const CDEventsEventStreamCreationFailureException = @"CDEventsEventStreamCreationFailureException";
 
 
+#pragma mark -
 #pragma mark Private API
 // Private API
 @interface CDEvents ()

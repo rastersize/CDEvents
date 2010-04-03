@@ -63,6 +63,15 @@ extern NSString *const CDEventsEventStreamCreationFailureException;
  */
 #define CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS	NO
 
+/**
+ * The default event stream creation flags.
+ *
+ * @since 1.0.0
+ */
+const NSUInteger kCDEventsDefaultEventStreamFlags =
+	(kFSEventStreamCreateFlagUseCFTypes |
+	 kFSEventStreamCreateFlagWatchRoot);
+
 
 #pragma mark -
 #pragma mark CDEvents interface
