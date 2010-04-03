@@ -12,6 +12,9 @@
 		9C6D03041166AFFA00343E46 /* CDEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D03021166AFFA00343E46 /* CDEvent.m */; };
 		9C6D033D1166B32000343E46 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C6D033C1166B32000343E46 /* Foundation.framework */; };
 		9C6D04451166B35700343E46 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C6D04441166B35700343E46 /* CoreServices.framework */; };
+		9C6D051D1166BD5800343E46 /* CDEventsDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C6D051C1166BD5800343E46 /* CDEventsDelegate.h */; };
+		9C6D05241166BF5300343E46 /* CDEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C6D05221166BF5300343E46 /* CDEvents.h */; };
+		9C6D05251166BF5300343E46 /* CDEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D05231166BF5300343E46 /* CDEvents.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +28,9 @@
 		9C6D03021166AFFA00343E46 /* CDEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDEvent.m; sourceTree = "<group>"; };
 		9C6D033C1166B32000343E46 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9C6D04441166B35700343E46 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		9C6D051C1166BD5800343E46 /* CDEventsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDEventsDelegate.h; sourceTree = "<group>"; };
+		9C6D05221166BF5300343E46 /* CDEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDEvents.h; sourceTree = "<group>"; };
+		9C6D05231166BF5300343E46 /* CDEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDEvents.m; sourceTree = "<group>"; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +90,9 @@
 			children = (
 				9C6D03011166AFFA00343E46 /* CDEvent.h */,
 				9C6D03021166AFFA00343E46 /* CDEvent.m */,
+				9C6D05221166BF5300343E46 /* CDEvents.h */,
+				9C6D05231166BF5300343E46 /* CDEvents.m */,
+				9C6D051C1166BD5800343E46 /* CDEventsDelegate.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -123,6 +132,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C6D03031166AFFA00343E46 /* CDEvent.h in Headers */,
+				9C6D051D1166BD5800343E46 /* CDEventsDelegate.h in Headers */,
+				9C6D05241166BF5300343E46 /* CDEvents.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C6D03041166AFFA00343E46 /* CDEvent.m in Sources */,
+				9C6D05251166BF5300343E46 /* CDEvents.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
