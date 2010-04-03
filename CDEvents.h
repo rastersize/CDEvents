@@ -175,35 +175,39 @@
 + (CDEventIdentifier)lastEventIdentifierForURL:(NSURL *)URL time:(NSDate *)time;
 
 
-#pragma mark Start and stop watching paths
+#pragma mark Init methods
 /**
  * Returns an <code>CDEvents</code> object initialized with the given URLs to watch.
  *
  * @param URLs An array of URLs we want to watch.
+ * @param delegate The delegate object the <code>CDEvents</code> object calls when it recieves an event.
  * @return An <code>CDEvents</code> object initialized with the given URLs to watch.
  * @throws NSInvalidArgumentException if <em>URLs</em> is empty or points to <code>nil</code>.
+ * @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
  *
- * @see startWatchingURLs:onRunLoop:
- * @see startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:
+ * @see startWatchingURLs:delegate:onRunLoop:
+ * @see startWatchingURLs:delegate:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:
  * @see stopWatchingURLs
  *
  * @discussion Calls startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:
- * with <em>runLoop</em> set to the current run loop, <em>sinceEventIdentifier</em>
- * with the current event identifier, <em>notificationLatency</em> set to 3.0
- * seconds, <em>ignoreEventsFromSubDirectories</em> set to <code>NO</code>
- * <em>excludedURLs</em> to no URLs. and schedueled on the current run loop.
+ * with <em>sinceEventIdentifier</em> with the current event identifier,
+ * <em>notificationLatency</em> set to 3.0 seconds,
+ * <em>ignoreEventsFromSubDirectories</em> set to <code>NO</code>
+ * <em>excludedURLs</em> to no URLs and schedueled on the current run loop.
  *
  * @since 1.0.0
  */
-- (void)startWatchingURLs:(NSArray *)URLs;
+- (id)initWithURLs:(NSArray *)URLs delegate:(id<CDEventsDelegate>)delegate;
 
 /**
  * Returns an <code>CDEvents</code> object initialized with the given URLs to watch and schedules the watcher on the given run loop.
  *
  * @param URLs An array of URLs we want to watch.
+ * @param delegate The delegate object the <code>CDEvents</code> object calls when it recieves an event.
  * @param The run loop which the which the watcher should be schedueled on.
  * @return An <code>CDEvents</code> object initialized with the given URLs to watch.
  * @throws NSInvalidArgumentException if <em>URLs</em> is empty or points to <code>nil</code>.
+ * @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
  *
  * @see startWatchingURLs:
  * @see startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:
@@ -217,12 +221,15 @@
  *
  * @since 1.0.0
  */
-- (void)startWatchingURLs:(NSArray *)URLs onRunLoop:(NSRunLoop *)runLoop;
+- (void)initWithURLs:(NSArray *)URLs
+			delegate:(id<CDEventsDelegate>)delegate
+		  onRunLoop:(NSRunLoop *)runLoop;
 
 /**
  * Returns an <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and schedules the watcher on the given run loop.
  *
  * @param URLs An array of URLs we want to watch.
+ * @param delegate The delegate object the <code>CDEvents</code> object calls when it recieves an event.
  * @param runLoop The run loop which the which the watcher should be schedueled on.
  * @param sinceEventIdentifier Events that have happened after the given event identifier will be supplied.
  * @param notificationLatency The (approximate) time intervall between notifications sent to the delegate.
@@ -230,6 +237,7 @@
  * @param exludeURLs An array of URLs that we should ignore events from. Pass <code>nil</code> if none should be excluded.
  * @return An <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and run on the given run loop.
  * @throws NSInvalidArgumentException if the parameter URLs is empty or points to <code>nil</code>.
+ * @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
  *
  * @see startWatchingURLs:
  * @see startWatchingURLs:onRunLoop:
@@ -242,23 +250,13 @@
  *
  * @since 1.0.0
  */
-- (void)startWatchingURLs:(NSArray *)URLs
-				onRunLoop:(NSRunLoop *)runLoop
-	 sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
-	 notificationLantency:(CFTimeInterval)notificationLatency
-  ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
-			  excludeURLs:(NSArray *)exludeURLs;
-
-/**
- * Stop watching the URLs.
- *
- * @see startWatchingURLs:
- * @see startWatchingURLs:onRunLoop:
- * @see startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:
- *
- * @since 1.0.0
- */
-- (void)stopWatchingURLs;
+- (void)initWithURLs:(NSArray *)URLs
+			delegate:(id<CDEventsDelegate>)delegate
+		   onRunLoop:(NSRunLoop *)runLoop
+sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
+notificationLantency:(CFTimeInterval)notificationLatency
+ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
+		 excludeURLs:(NSArray *)exludeURLs;
 
 #pragma mark Flush methods
 
