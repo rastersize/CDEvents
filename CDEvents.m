@@ -60,16 +60,59 @@
 	[super finalize];
 }
 
-- (id)init
+- (id)initWithURLs:(NSArray *)URLs delegate:(id<CDEventsDelegate>)delegate
 {
+	return [self initWithURLs:URLs
+					 delegate:delegate
+					onRunLoop:[NSRunLoop currentRunLoop]];
+}
+
+- (id)initWithURLs:(NSArray *)URLs
+			delegate:(id<CDEventsDelegate>)delegate
+		   onRunLoop:(NSRunLoop *)runLoop
+{
+	return [self initWithURLs:URLs
+					 delegate:delegate
+					onRunLoop:runLoop
+		 sinceEventIdentifier:[CDEvents currentEventIdentifier]
+		 notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
+	  ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
+				  excludeURLs:nil];
+}
+
+- (id)initWithURLs:(NSArray *)URLs
+		  delegate:(id<CDEventsDelegate>)delegate
+		   onRunLoop:(NSRunLoop *)runLoop
+sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
+notificationLantency:(CFTimeInterval)notificationLatency
+ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
+		 excludeURLs:(NSArray *)exludeURLs
+{
+	if (delegate == nil || URLs == nil || [URLs count] == 0) {
+		[NSException raise:NSInvalidArgumentException
+					format:@"Invalid arguments passed to CDEvents init-method."];
+	}
+	
 	if ((self = [super init])) {
-		_delegate = nil;
-		_notificationLatency = CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY;
-		_isWatchingURLs = NO;
-		_ignoreEventsFromSubDirectories = CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS;
+		_watchedURLs = [URLs copy];
+		[self setExcludedURLs:exludeURLs];
+		[self setDelegate:delegate];
+		
+		_sinceEventIdentifier = sinceEventIdentifier;
+		
+		_notificationLatency = notificationLatency;
+		_ignoreEventsFromSubDirectories = ignoreEventsFromSubDirs;
+		
 		_lastEvent = nil;
-		_watchedURLs = nil;
-		_excludedURLs = nil;
+		
+		[self createEventsStream];
+		
+		FSEventStreamScheduleWithRunLoop(_eventStream,
+										 [runLoop getCFRunLoop],
+										 kCFRunLoopDefaultMode);
+		if (!FSEventStreamStart(_eventStream)) {
+			return nil;
+		}
 	}
 	
 	return self;
