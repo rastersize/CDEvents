@@ -44,6 +44,11 @@
 
 #pragma mark -
 #pragma mark CDEvents custom exceptions
+/**
+ * The exception raised if CDEvents failed to create the event stream.
+ *
+ * @since 1.0.0
+ */
 extern NSString *const CDEventsEventStreamCreationFailureException;
 
 
