@@ -108,7 +108,7 @@ sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
 notificationLantency:(CFTimeInterval)notificationLatency
 ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 		 excludeURLs:(NSArray *)exludeURLs
- streamCreationFlags:(NSUInteger)streamCreationFlags
+ streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags
 {
 	if (delegate == nil || URLs == nil || [URLs count] == 0) {
 		[NSException raise:NSInvalidArgumentException

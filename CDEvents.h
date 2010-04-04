@@ -42,6 +42,17 @@
 
 @protocol CDEventsDelegate;
 
+
+#pragma mark -
+#pragma mark CDEvents types
+/**
+ * The event stream creation flags type.
+ *
+ * @since head
+ */
+typedef FSEventStreamCreateFlags CDEventsEventStreamCreationFlags;
+
+
 #pragma mark -
 #pragma mark CDEvents custom exceptions
 /**
@@ -291,7 +302,7 @@ sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
 notificationLantency:(CFTimeInterval)notificationLatency
 ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 		 excludeURLs:(NSArray *)exludeURLs
- streamCreationFlags:(NSUInteger)streamCreationFlags;
+ streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags;
 
 #pragma mark Flush methods
 
