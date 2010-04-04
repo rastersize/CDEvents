@@ -146,15 +146,14 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 #pragma mark NSCopying method
 - (id)copyWithZone:(NSZone *)zone
 {
-	CDEvents *copy = [[CDEvents alloc] init];
-	
-	copy->_delegate = _delegate;
-	copy->_notificationLatency = [self notificationLatency];
-	copy->_ignoreEventsFromSubDirectories = [self ignoreEventsFromSubDirectories];
-	copy->_lastEvent = [[self lastEvent] retain];
-	copy->_sinceEventIdentifier = _sinceEventIdentifier;
-	copy->_watchedURLs = [[self watchedURLs] copyWithZone:zone];
-	copy->_excludedURLs = [[self excludedURLs] copyWithZone:zone];
+	CDEvents *copy = [[CDEvents alloc] initWithURLs:[self watchedURLs]
+										   delegate:[self delegate]
+										  onRunLoop:[NSRunLoop currentRunLoop]
+							   sinceEventIdentifier:[self sinceEventIdentifier]
+							   notificationLantency:[self notificationLatency]
+							ignoreEventsFromSubDirs:[self ignoreEventsFromSubDirectories]
+										excludeURLs:[self excludedURLs]
+								streamCreationFlags:_eventStreamCreationFlags];
 	
 	return copy;
 }
