@@ -46,6 +46,13 @@
  */
 typedef NSUInteger CDEventIdentifier;
 
+/**
+ * The event stream event flags type.
+ *
+ * @since 1.0.1
+ */
+typedef NSUInteger CDEventFlags;
+
 
 /**
  * An Objective-C wrapper for a <code>FSEvents</code> event data.
@@ -62,7 +69,7 @@ typedef NSUInteger CDEventIdentifier;
 	CDEventIdentifier			_identifier;
 	NSDate						*_date;
 	NSURL						*_URL;
-	FSEventStreamEventFlags		_flags;
+	CDEventFlags				_flags;
 }
 
 #pragma mark Properties
@@ -106,7 +113,7 @@ typedef NSUInteger CDEventIdentifier;
  *
  * @since 1.0.0
  */
-@property (readonly) FSEventStreamEventFlags	flags;
+@property (readonly) CDEventFlags				flags;
 
 #pragma mark Class object creators
 
@@ -127,7 +134,7 @@ typedef NSUInteger CDEventIdentifier;
 + (CDEvent *)eventWithIdentifier:(NSUInteger)identifier
 							date:(NSDate *)date
 							 URL:(NSURL *)URL
-						   flags:(FSEventStreamEventFlags)flags;
+						   flags:(CDEventFlags)flags;
 
 #pragma mark Init methods
 /**
@@ -146,6 +153,6 @@ typedef NSUInteger CDEventIdentifier;
 - (id)initWithIdentifier:(NSUInteger)identifier
 					date:(NSDate *)date
 					 URL:(NSURL *)URL
-				   flags:(FSEventStreamEventFlags)flags;
+				   flags:(CDEventFlags)flags;
 
 @end

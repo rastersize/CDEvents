@@ -26,7 +26,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* CDEvents */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = CDEvents;
 		};
 /* End PBXContainerItemProxy section */
@@ -325,8 +325,9 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CDEvents_Prefix.pch;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "@rpath";
+				INSTALL_PATH = "@loader_path/../Frameworks";
 				PRODUCT_NAME = CDEvents;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -344,8 +345,9 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CDEvents_Prefix.pch;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "@rpath";
+				INSTALL_PATH = "@loader_path/../Frameworks";
 				PRODUCT_NAME = CDEvents;
 				WRAPPER_EXTENSION = framework;
 			};
