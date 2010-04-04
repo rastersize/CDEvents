@@ -42,7 +42,7 @@
 + (CDEvent *)eventWithIdentifier:(NSUInteger)identifier
 							date:(NSDate *)date
 							 URL:(NSURL *)URL
-						   flags:(FSEventStreamEventFlags)flags
+						   flags:(CDEventFlags)flags
 {
 	return [[[CDEvent alloc] initWithIdentifier:identifier
 										   date:date
@@ -65,7 +65,7 @@
 - (id)initWithIdentifier:(NSUInteger)identifier
 					date:(NSDate *)date
 					 URL:(NSURL *)URL
-				   flags:(FSEventStreamEventFlags)flags
+				   flags:(CDEventFlags)flags
 {
 	if ((self = [super init])) {
 		_identifier	= identifier;
