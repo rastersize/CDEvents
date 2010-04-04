@@ -48,7 +48,7 @@
 /**
  * The event stream creation flags type.
  *
- * @since head
+ * @since 1.0.2
  */
 typedef FSEventStreamCreateFlags CDEventsEventStreamCreationFlags;
 
