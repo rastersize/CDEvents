@@ -39,21 +39,25 @@
 #import <CoreServices/CoreServices.h>
 
 
+#pragma mark -
+#pragma mark CDEvent types
 /**
  * The event identifier type.
  *
  * @since 1.0.0
  */
-typedef NSUInteger CDEventIdentifier;
+typedef FSEventStreamEventId CDEventIdentifier;
 
 /**
  * The event stream event flags type.
  *
  * @since 1.0.1
  */
-typedef NSUInteger CDEventFlags;
+typedef FSEventStreamEventFlags CDEventFlags;
 
 
+#pragma mark -
+#pragma mark CDEvent interface
 /**
  * An Objective-C wrapper for a <code>FSEvents</code> event data.
  *
