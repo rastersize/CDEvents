@@ -198,19 +198,6 @@ const NSUInteger kCDEventsDefaultEventStreamFlags =
  */
 + (CDEventIdentifier)currentEventIdentifier;
 
-/**
- * The last event identifier for the given device that was returned before the given date and time
- *
- * @param URL The URL of the item the event identifier is sought for, used to find the device.
- * @param time The date and time.
- * @return The last event identifier for the given URL that was returned before the given time
- *
- * @see FSEventsGetLastEventIdForDeviceBeforeTime(dev_t, CFAbsoluteTime)
- *
- * @since 1.1.0
- */
-+ (CDEventIdentifier)lastEventIdentifierForURL:(NSURL *)URL time:(NSDate *)time;
-
 
 #pragma mark Init methods
 /**
