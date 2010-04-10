@@ -320,6 +320,36 @@ typedef FSEventStreamEventFlags CDEventFlags;
  */
 @property (readonly) BOOL						didVolumeMount;
 
+/**
+ * Denotes a special event sent when a volume is unmounted underneath one of the URLs being watched.
+ *
+ * Denotes a special event sent when a volume is unmounted underneath one of the
+ * URLs being watched. The URL in the event is the URL to the directory from
+ * which the volume was unmounted. You will receive one of these notifications
+ * for every volume unmount event inside the kernel. This is not a substitute
+ * for the notifications provided by the DiskArbitration framework; you only get
+ * notified after the unmount has occurred. Beware that unmounting a volume
+ * could uncover an arbitrarily large directory hierarchy, although Mac OS X
+ * never does that.
+ *
+ * @return <code>YES</code> if a volume is unmounted underneath one of the URLs being watched, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagUnmount
+ * @see flags
+ * @see isGenericChange
+ * @see mustRescanSubDirectories
+ * @see isUserDropped
+ * @see isKernelDropped
+ * @see isEventIdsWrapped
+ * @see isHistoryDone
+ * @see isRootChanged
+ * @see didVolumeMount
+ *
+ * @since head
+ */
+@property (readonly) BOOL						didVolumeUnmount;
+
+
 #pragma mark Class object creators
 
 /**
