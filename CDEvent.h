@@ -147,10 +147,10 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * events were coalesced hierarchically. For example, an event in
  * <code>/Users/jsmith/Music</code> and an event in
  * <code>/Users/jsmith/Pictures</code> might be coalesced into an event with
- * this flag set and <code>URL=/Users/jsmith</code>. If this flag is set you may
- * be able to get an idea of whether the bottleneck happened in the kernel (less
- * likely) or in your client (more likely) by checking if flagUserDropped or
- * flagKernelDropped returns <code>YES</code>.
+ * this flag set and <i>URL</i><code>=/Users/jsmith</code>. If this flag is set
+ * you may be able to get an idea of whether the bottleneck happened in the
+ * kernel (less likely) or in your client (more likely) by checking if
+ * flagUserDropped or flagKernelDropped returns <code>YES</code>.
  *
  * @return <code>YES</code> if you must rescan the whole directory including its children, otherwise <code>NO</code>
  *
