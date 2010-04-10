@@ -209,6 +209,30 @@ typedef FSEventStreamEventFlags CDEventFlags;
  */
 @property (readonly) BOOL						isKernelDropped;
 
+/**
+ * Wheter the 64-bit event identifier counter has wrapped around.
+ *
+ * Wheter the 64-bit event identifier counter has wrapped around. As a result,
+ * previously-issued event identifiers are no longer valid arguments for the
+ * sinceEventIdentifier parameter of the CDEvents init methods.
+ *
+ * @return <code>YES</code> if the 64-bit event identifier counter has wrapped around, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagEventIdsWrapped
+ * @see flags
+ * @see isGenericChange
+ * @see mustRescanSubDirectories
+ * @see isUserDropped
+ * @see isKernelDropped
+ * @see isHistoryDone
+ * @see isRootChanged
+ * @see didVolumeMount
+ * @see didVolumeUnmount
+ *
+ * @since head
+ */
+@property (readonly) BOOL						isEventIdentifiersWrapped;
+
 #pragma mark Class object creators
 
 /**
