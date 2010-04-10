@@ -233,6 +233,32 @@ typedef FSEventStreamEventFlags CDEventFlags;
  */
 @property (readonly) BOOL						isEventIdentifiersWrapped;
 
+/**
+ * Denotes a sentinel event sent to mark the end of the "historical" events sent.
+ *
+ * Denotes a sentinel event sent to mark the end of the "historical" events sent
+ * as a result of specifying a <i>sinceEventIdentifier</i> argument other than
+ * kCDEventsSinceEventNow with the CDEvents init methods.
+ *
+ * @return <code>YES</code> if if the event is sent to mark the end of the "historical" events sent, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagHistoryDone
+ * @see flags
+ * @see isGenericChange
+ * @see mustRescanSubDirectories
+ * @see isUserDropped
+ * @see isKernelDropped
+ * @see isEventIdsWrapped
+ * @see isRootChanged
+ * @see didVolumeMount
+ * @see didVolumeUnmount
+ * @see kCDEventsSinceEventNow
+ * @see CDEvents
+ *
+ * @since head
+ */
+@property (readonly) BOOL						isHistoryDone;
+
 #pragma mark Class object creators
 
 /**
