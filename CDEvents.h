@@ -233,10 +233,11 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
  * @see initWithURLs:delegate:onRunLoop:
  * @see initWithURLs:delegate:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
  * @see kCDEventsDefaultEventStreamFlags
+ * @see kCDEventsSinceEventNow
  *
  * @discussion Calls startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
- * with <em>sinceEventIdentifier</em> with the current event identifier,
- * <em>notificationLatency</em> set to 3.0 seconds,
+ * with <em>sinceEventIdentifier</em> with the event identifier for "event since
+ * now", <em>notificationLatency</em> set to 3.0 seconds,
  * <em>ignoreEventsFromSubDirectories</em> set to <code>NO</code>,
  * <em>excludedURLs</em> to no URLs, the event stream creation flags will be set
  * to <code>kCDEventsDefaultEventStreamFlags</code> and schedueled on the
@@ -260,13 +261,14 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
  * @see initWithURLs:
  * @see initWithURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
  * @see kCDEventsDefaultEventStreamFlags
+ * @see kCDEventsSinceEventNow
  *
  * @discussion Calls startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
  * with <em>runLoop</em> set to the current run loop, <em>sinceEventIdentifier</em>
- * with the current event identifier, <em>notificationLatency</em> set to 3.0
- * seconds, <em>ignoreEventsFromSubDirectories</em> set to <code>NO</code>, 
- * <em>excludedURLs</em> to no URLs and the event stream creation flags will be
- * set to <code>kCDEventsDefaultEventStreamFlags</code>.
+ * with the event identifier for "event since now", <em>notificationLatency</em>
+ * set to 3.0 seconds, <em>ignoreEventsFromSubDirectories</em> set to
+ * <code>NO</code>, <em>excludedURLs</em> to no URLs and the event stream
+ * creation flags will be set to <code>kCDEventsDefaultEventStreamFlags</code>.
  *
  * @since 1.0.0
  */

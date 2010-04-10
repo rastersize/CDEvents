@@ -94,7 +94,7 @@ static void CDEventsCallback(
 	return [self initWithURLs:URLs
 					 delegate:delegate
 					onRunLoop:runLoop
-		 sinceEventIdentifier:[CDEvents currentEventIdentifier]
+		 sinceEventIdentifier:kCDEventsSinceEventNow
 		 notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
 	  ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
 				  excludeURLs:nil
