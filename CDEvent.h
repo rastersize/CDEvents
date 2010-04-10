@@ -119,6 +119,26 @@ typedef FSEventStreamEventFlags CDEventFlags;
  */
 @property (readonly) CDEventFlags				flags;
 
+/**
+ * Wheter there was some change in the directory at the specific path supplied in this event.
+ *
+ * @return <code>YES</code> if there was some change in the directory, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagNone
+ * @see flags
+ * @see mustRescanSubDirectories
+ * @see isUserDropped
+ * @see isKernelDropped
+ * @see isEventIdsWrapped
+ * @see isHistoryDone
+ * @see isRootChanged
+ * @see didVolumeMount
+ * @see didVolumeUnmount
+ *
+ * @since head
+ */
+@property (readonly) BOOL						isGenericChange;
+
 #pragma mark Class object creators
 
 /**
