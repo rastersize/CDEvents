@@ -136,7 +136,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @see didVolumeMount
  * @see didVolumeUnmount
  *
- * @since head
+ * @since 1.1.0
  */
 @property (readonly) BOOL						isGenericChange;
 
@@ -166,7 +166,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @see didVolumeMount
  * @see didVolumeUnmount
  *
- * @since head
+ * @since 1.1.0
  */
 @property (readonly) BOOL						mustRescanSubDirectories;
 
@@ -186,7 +186,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @see didVolumeMount
  * @see didVolumeUnmount
  *
- * @since head
+ * @since 1.1.0
  */
 @property (readonly) BOOL						isUserDropped;
 
@@ -206,7 +206,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @see didVolumeMount
  * @see didVolumeUnmount
  *
- * @since head
+ * @since 1.1.0
  */
 @property (readonly) BOOL						isKernelDropped;
 
@@ -230,7 +230,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @see didVolumeMount
  * @see didVolumeUnmount
  *
- * @since head
+ * @since 1.1.0
  */
 @property (readonly) BOOL						isEventIdentifiersWrapped;
 
@@ -256,7 +256,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @see kCDEventsSinceEventNow
  * @see CDEvents
  *
- * @since head
+ * @since 1.1.0
  */
 @property (readonly) BOOL						isHistoryDone;
 
@@ -286,7 +286,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @see CDEvents
  * @see kCDEventsDefaultEventStreamFlags
  *
- * @since head
+ * @since 1.1.0
  */
 @property (readonly) BOOL						isRootChanged;
 
@@ -317,7 +317,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @see isRootChanged
  * @see didVolumeUnmount
  *
- * @since head
+ * @since 1.1.0
  */
 @property (readonly) BOOL						didVolumeMount;
 
@@ -346,7 +346,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @see isRootChanged
  * @see didVolumeMount
  *
- * @since head
+ * @since 1.1.0
  */
 @property (readonly) BOOL						didVolumeUnmount;
 
