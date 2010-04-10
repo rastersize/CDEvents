@@ -119,6 +119,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  */
 @property (readonly) CDEventFlags				flags;
 
+#pragma mark Specific flag properties
 /**
  * Wheter there was some change in the directory at the specific path supplied in this event.
  *

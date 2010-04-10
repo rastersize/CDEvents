@@ -105,6 +105,52 @@
 }
 
 
+#pragma mark Specific flag properties 
+- (BOOL)isGenericChange
+{
+	return (kFSEventStreamEventFlagNone == _flags);
+}
+
+- (BOOL)mustRescanSubDirectories
+{
+	return (_flags & kFSEventStreamEventFlagMustScanSubDirs);
+}
+
+- (BOOL)isUserDropped
+{
+	return (_flags & kFSEventStreamEventFlagUserDropped);
+}
+
+- (BOOL)isKernelDropped
+{
+	return (_flags & kFSEventStreamEventFlagKernelDropped);
+}
+
+- (BOOL)isEventIdentifiersWrapped
+{
+	return (_flags & kFSEventStreamEventFlagEventIdsWrapped);
+}
+
+- (BOOL)isHistoryDone
+{
+	return (_flags & kFSEventStreamEventFlagHistoryDone);
+}
+
+- (BOOL)isRootChanged
+{
+	return (_flags & kFSEventStreamEventFlagRootChanged);
+}
+
+- (BOOL)didVolumeMount
+{
+	return (_flags & kFSEventStreamEventFlagMount);
+}
+
+- (BOOL)didVolumeUnmount
+{
+	return (_flags & kFSEventStreamEventFlagUnmount);
+}
+
 #pragma mark Misc
 - (NSString *)description
 {
