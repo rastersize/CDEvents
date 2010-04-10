@@ -91,7 +91,7 @@ const CDEventsEventStreamCreationFlags kCDEventsDefaultEventStreamFlags =
 /**
  * Use this to get all event since now when initializing a CDEvents object.
  *
- * @since head
+ * @since 1.1.0
  */
 const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 
