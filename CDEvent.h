@@ -119,6 +119,238 @@ typedef FSEventStreamEventFlags CDEventFlags;
  */
 @property (readonly) CDEventFlags				flags;
 
+#pragma mark Specific flag properties
+/**
+ * Wheter there was some change in the directory at the specific path supplied in this event.
+ *
+ * @return <code>YES</code> if there was some change in the directory, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagNone
+ * @see flags
+ * @see mustRescanSubDirectories
+ * @see isUserDropped
+ * @see isKernelDropped
+ * @see isEventIdsWrapped
+ * @see isHistoryDone
+ * @see isRootChanged
+ * @see didVolumeMount
+ * @see didVolumeUnmount
+ *
+ * @since 1.1.0
+ */
+@property (readonly) BOOL						isGenericChange;
+
+/**
+ * Wheter you must rescan the whole URL including its children.
+ *
+ * Wheter your application must rescan not just the URL given in the event, but
+ * all its children, recursively. This can happen if there was a problem whereby
+ * events were coalesced hierarchically. For example, an event in
+ * <code>/Users/jsmith/Music</code> and an event in
+ * <code>/Users/jsmith/Pictures</code> might be coalesced into an event with
+ * this flag set and <i>URL</i><code>=/Users/jsmith</code>. If this flag is set
+ * you may be able to get an idea of whether the bottleneck happened in the
+ * kernel (less likely) or in your client (more likely) by checking if
+ * flagUserDropped or flagKernelDropped returns <code>YES</code>.
+ *
+ * @return <code>YES</code> if you must rescan the whole directory including its children, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagMustScanSubDirs
+ * @see flags
+ * @see isGenericChange
+ * @see isUserDropped
+ * @see isKernelDropped
+ * @see isEventIdsWrapped
+ * @see isHistoryDone
+ * @see isRootChanged
+ * @see didVolumeMount
+ * @see didVolumeUnmount
+ *
+ * @since 1.1.0
+ */
+@property (readonly) BOOL						mustRescanSubDirectories;
+
+/**
+ * Provides some information as to what might have caused the need to rescan the URL including its children.
+ *
+ * @return <code>YES</code> if mustRescanSubDirectories returns <code>YES</code> and the cause were in userland, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagUserDropped
+ * @see flags
+ * @see isGenericChange
+ * @see mustRescanSubDirectories
+ * @see isKernelDropped
+ * @see isEventIdsWrapped
+ * @see isHistoryDone
+ * @see isRootChanged
+ * @see didVolumeMount
+ * @see didVolumeUnmount
+ *
+ * @since 1.1.0
+ */
+@property (readonly) BOOL						isUserDropped;
+
+/**
+ * Provides some information as to what might have caused the need to rescan the URL including its children.
+ *
+ * @return <code>YES</code> if mustRescanSubDirectories returns <code>YES</code> and the cause were in kernelspace, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagKernelDropped
+ * @see flags
+ * @see isGenericChange
+ * @see mustRescanSubDirectories
+ * @see isUserDropped
+ * @see isEventIdsWrapped
+ * @see isHistoryDone
+ * @see isRootChanged
+ * @see didVolumeMount
+ * @see didVolumeUnmount
+ *
+ * @since 1.1.0
+ */
+@property (readonly) BOOL						isKernelDropped;
+
+/**
+ * Wheter the 64-bit event identifier counter has wrapped around.
+ *
+ * Wheter the 64-bit event identifier counter has wrapped around. As a result,
+ * previously-issued event identifiers are no longer valid arguments for the
+ * sinceEventIdentifier parameter of the CDEvents init methods.
+ *
+ * @return <code>YES</code> if the 64-bit event identifier counter has wrapped around, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagEventIdsWrapped
+ * @see flags
+ * @see isGenericChange
+ * @see mustRescanSubDirectories
+ * @see isUserDropped
+ * @see isKernelDropped
+ * @see isHistoryDone
+ * @see isRootChanged
+ * @see didVolumeMount
+ * @see didVolumeUnmount
+ *
+ * @since 1.1.0
+ */
+@property (readonly) BOOL						isEventIdentifiersWrapped;
+
+/**
+ * Denotes a sentinel event sent to mark the end of the "historical" events sent.
+ *
+ * Denotes a sentinel event sent to mark the end of the "historical" events sent
+ * as a result of specifying a <i>sinceEventIdentifier</i> argument other than
+ * kCDEventsSinceEventNow with the CDEvents init methods.
+ *
+ * @return <code>YES</code> if if the event is sent to mark the end of the "historical" events sent, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagHistoryDone
+ * @see flags
+ * @see isGenericChange
+ * @see mustRescanSubDirectories
+ * @see isUserDropped
+ * @see isKernelDropped
+ * @see isEventIdsWrapped
+ * @see isRootChanged
+ * @see didVolumeMount
+ * @see didVolumeUnmount
+ * @see kCDEventsSinceEventNow
+ * @see CDEvents
+ *
+ * @since 1.1.0
+ */
+@property (readonly) BOOL						isHistoryDone;
+
+/**
+ * Denotes a special event sent when there is a change to one of the URLs you asked to watch.
+ *
+ * Denotes a special event sent when there is a change to one of the URLs you
+ * asked to watch. When this method returns <code>YES</code>, the event
+ * identifier is zero and the <code>URL</code> corresponds to one of the URLs
+ * you asked to watch (specifically, the one that changed). The URL may no
+ * longer exist because it or one of its parents was deleted or renamed. Events
+ * with this flag set will only be sent if you passed the flag
+ * <code>kFSEventStreamCreateFlagWatchRoot</code> to the CDEvents.
+ *
+ * @return <code>YES</code> if there is a change to one of the URLs you asked to watch, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagRootChanged
+ * @see flags
+ * @see isGenericChange
+ * @see mustRescanSubDirectories
+ * @see isUserDropped
+ * @see isKernelDropped
+ * @see isEventIdsWrapped
+ * @see isHistoryDone
+ * @see didVolumeMount
+ * @see didVolumeUnmount
+ * @see CDEvents
+ * @see kCDEventsDefaultEventStreamFlags
+ *
+ * @since 1.1.0
+ */
+@property (readonly) BOOL						isRootChanged;
+
+/**
+ * Denotes a special event sent when a volume is mounted underneath one of the URLs being watched.
+ *
+ * Denotes a special event sent when a volume is mounted underneath one of the
+ * URLs being watched. The URL in the event is the URL to the newly-mounted
+ * volume. You will receive one of these notifications for every volume mount
+ * event inside the kernel (independent of DiskArbitration). Beware that a
+ * newly-mounted volume could contain an arbitrarily large directory hierarchy.
+ * Avoid pitfalls like triggering a recursive scan of a non-local filesystem,
+ * which you can detect by checking for the absence of the
+ * <code>MNT_LOCAL</code> flag in the <code>f_flags</code> returned by statfs().
+ * Also be aware of the <code>MNT_DONTBROWSE</code> flag that is set for volumes
+ * which should not be displayed by user interface elements.
+ *
+ * @return <code>YES</code> if a volumen is mounted underneath one of the URLs being watched, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagMount
+ * @see flags
+ * @see isGenericChange
+ * @see mustRescanSubDirectories
+ * @see isUserDropped
+ * @see isKernelDropped
+ * @see isEventIdsWrapped
+ * @see isHistoryDone
+ * @see isRootChanged
+ * @see didVolumeUnmount
+ *
+ * @since 1.1.0
+ */
+@property (readonly) BOOL						didVolumeMount;
+
+/**
+ * Denotes a special event sent when a volume is unmounted underneath one of the URLs being watched.
+ *
+ * Denotes a special event sent when a volume is unmounted underneath one of the
+ * URLs being watched. The URL in the event is the URL to the directory from
+ * which the volume was unmounted. You will receive one of these notifications
+ * for every volume unmount event inside the kernel. This is not a substitute
+ * for the notifications provided by the DiskArbitration framework; you only get
+ * notified after the unmount has occurred. Beware that unmounting a volume
+ * could uncover an arbitrarily large directory hierarchy, although Mac OS X
+ * never does that.
+ *
+ * @return <code>YES</code> if a volume is unmounted underneath one of the URLs being watched, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagUnmount
+ * @see flags
+ * @see isGenericChange
+ * @see mustRescanSubDirectories
+ * @see isUserDropped
+ * @see isKernelDropped
+ * @see isEventIdsWrapped
+ * @see isHistoryDone
+ * @see isRootChanged
+ * @see didVolumeMount
+ *
+ * @since 1.1.0
+ */
+@property (readonly) BOOL						didVolumeUnmount;
+
+
 #pragma mark Class object creators
 
 /**

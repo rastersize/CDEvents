@@ -84,9 +84,16 @@ extern NSString *const CDEventsEventStreamCreationFailureException;
  *
  * @since 1.0.0
  */
-const NSUInteger kCDEventsDefaultEventStreamFlags =
+const CDEventsEventStreamCreationFlags kCDEventsDefaultEventStreamFlags =
 	(kFSEventStreamCreateFlagUseCFTypes |
 	 kFSEventStreamCreateFlagWatchRoot);
+
+/**
+ * Use this to get all event since now when initializing a CDEvents object.
+ *
+ * @since 1.1.0
+ */
+const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 
 
 #pragma mark -
@@ -198,19 +205,6 @@ const NSUInteger kCDEventsDefaultEventStreamFlags =
  */
 + (CDEventIdentifier)currentEventIdentifier;
 
-/**
- * The last event identifier for the given device that was returned before the given date and time
- *
- * @param URL The URL of the item the event identifier is sought for, used to find the device.
- * @param time The date and time.
- * @return The last event identifier for the given URL that was returned before the given time
- *
- * @see FSEventsGetLastEventIdForDeviceBeforeTime(dev_t, CFAbsoluteTime)
- *
- * @since 1.1.0
- */
-+ (CDEventIdentifier)lastEventIdentifierForURL:(NSURL *)URL time:(NSDate *)time;
-
 
 #pragma mark Init methods
 /**
@@ -226,10 +220,11 @@ const NSUInteger kCDEventsDefaultEventStreamFlags =
  * @see initWithURLs:delegate:onRunLoop:
  * @see initWithURLs:delegate:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
  * @see kCDEventsDefaultEventStreamFlags
+ * @see kCDEventsSinceEventNow
  *
  * @discussion Calls startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
- * with <em>sinceEventIdentifier</em> with the current event identifier,
- * <em>notificationLatency</em> set to 3.0 seconds,
+ * with <em>sinceEventIdentifier</em> with the event identifier for "event since
+ * now", <em>notificationLatency</em> set to 3.0 seconds,
  * <em>ignoreEventsFromSubDirectories</em> set to <code>NO</code>,
  * <em>excludedURLs</em> to no URLs, the event stream creation flags will be set
  * to <code>kCDEventsDefaultEventStreamFlags</code> and schedueled on the
@@ -253,13 +248,14 @@ const NSUInteger kCDEventsDefaultEventStreamFlags =
  * @see initWithURLs:
  * @see initWithURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
  * @see kCDEventsDefaultEventStreamFlags
+ * @see kCDEventsSinceEventNow
  *
  * @discussion Calls startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
  * with <em>runLoop</em> set to the current run loop, <em>sinceEventIdentifier</em>
- * with the current event identifier, <em>notificationLatency</em> set to 3.0
- * seconds, <em>ignoreEventsFromSubDirectories</em> set to <code>NO</code>, 
- * <em>excludedURLs</em> to no URLs and the event stream creation flags will be
- * set to <code>kCDEventsDefaultEventStreamFlags</code>.
+ * with the event identifier for "event since now", <em>notificationLatency</em>
+ * set to 3.0 seconds, <em>ignoreEventsFromSubDirectories</em> set to
+ * <code>NO</code>, <em>excludedURLs</em> to no URLs and the event stream
+ * creation flags will be set to <code>kCDEventsDefaultEventStreamFlags</code>.
  *
  * @since 1.0.0
  */
