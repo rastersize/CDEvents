@@ -53,7 +53,6 @@
 
 
 #pragma mark Init/dealloc methods
-
 - (void)dealloc
 {
 	[_date release];
@@ -79,7 +78,6 @@
 
 
 #pragma mark NSCoding methods
-
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
 	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:[self identifier]] forKey:@"identifier"];
@@ -98,16 +96,16 @@
 	return self;
 }
 
-#pragma mark NSCopying methods
 
+#pragma mark NSCopying methods
 - (id)copyWithZone:(NSZone *)zone
 {
 	// We can do this since we are immutable.
 	return [self retain];
 }
 
-#pragma mark Public API
 
+#pragma mark Misc
 - (NSString *)description
 {
 	return [NSString stringWithFormat:@"<%@: %p { identifier = %ld, URL = %@, flags = %ld, date = %@ }>",
