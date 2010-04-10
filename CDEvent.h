@@ -259,6 +259,36 @@ typedef FSEventStreamEventFlags CDEventFlags;
  */
 @property (readonly) BOOL						isHistoryDone;
 
+/**
+ * Denotes a special event sent when there is a change to one of the URLs you asked to watch.
+ *
+ * Denotes a special event sent when there is a change to one of the URLs you
+ * asked to watch. When this method returns <code>YES</code>, the event
+ * identifier is zero and the <code>URL</code> corresponds to one of the URLs
+ * you asked to watch (specifically, the one that changed). The URL may no
+ * longer exist because it or one of its parents was deleted or renamed. Events
+ * with this flag set will only be sent if you passed the flag
+ * <code>kFSEventStreamCreateFlagWatchRoot</code> to the CDEvents.
+ *
+ * @return <code>YES</code> if there is a change to one of the URLs you asked to watch, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagRootChanged
+ * @see flags
+ * @see isGenericChange
+ * @see mustRescanSubDirectories
+ * @see isUserDropped
+ * @see isKernelDropped
+ * @see isEventIdsWrapped
+ * @see isHistoryDone
+ * @see didVolumeMount
+ * @see didVolumeUnmount
+ * @see CDEvents
+ * @see kCDEventsDefaultEventStreamFlags
+ *
+ * @since head
+ */
+@property (readonly) BOOL						isRootChanged;
+
 #pragma mark Class object creators
 
 /**
