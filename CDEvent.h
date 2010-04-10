@@ -289,6 +289,37 @@ typedef FSEventStreamEventFlags CDEventFlags;
  */
 @property (readonly) BOOL						isRootChanged;
 
+/**
+ * Denotes a special event sent when a volume is mounted underneath one of the URLs being watched.
+ *
+ * Denotes a special event sent when a volume is mounted underneath one of the
+ * URLs being watched. The URL in the event is the URL to the newly-mounted
+ * volume. You will receive one of these notifications for every volume mount
+ * event inside the kernel (independent of DiskArbitration). Beware that a
+ * newly-mounted volume could contain an arbitrarily large directory hierarchy.
+ * Avoid pitfalls like triggering a recursive scan of a non-local filesystem,
+ * which you can detect by checking for the absence of the
+ * <code>MNT_LOCAL</code> flag in the <code>f_flags</code> returned by statfs().
+ * Also be aware of the <code>MNT_DONTBROWSE</code> flag that is set for volumes
+ * which should not be displayed by user interface elements.
+ *
+ * @return <code>YES</code> if a volumen is mounted underneath one of the URLs being watched, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagMount
+ * @see flags
+ * @see isGenericChange
+ * @see mustRescanSubDirectories
+ * @see isUserDropped
+ * @see isKernelDropped
+ * @see isEventIdsWrapped
+ * @see isHistoryDone
+ * @see isRootChanged
+ * @see didVolumeUnmount
+ *
+ * @since head
+ */
+@property (readonly) BOOL						didVolumeMount;
+
 #pragma mark Class object creators
 
 /**
