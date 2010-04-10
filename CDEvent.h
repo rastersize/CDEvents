@@ -169,6 +169,26 @@ typedef FSEventStreamEventFlags CDEventFlags;
  */
 @property (readonly) BOOL						mustRescanSubDirectories;
 
+/**
+ * Provides some information as to what might have caused the need to rescan the URL including its children.
+ *
+ * @return <code>YES</code> if mustRescanSubDirectories returns <code>YES</code> and the cause were in userland, otherwise <code>NO</code>
+ *
+ * @see kFSEventStreamEventFlagUserDropped
+ * @see flags
+ * @see isGenericChange
+ * @see mustRescanSubDirectories
+ * @see isKernelDropped
+ * @see isEventIdsWrapped
+ * @see isHistoryDone
+ * @see isRootChanged
+ * @see didVolumeMount
+ * @see didVolumeUnmount
+ *
+ * @since head
+ */
+@property (readonly) BOOL						isUserDropped;
+
 #pragma mark Class object creators
 
 /**
