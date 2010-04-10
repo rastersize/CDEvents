@@ -84,7 +84,7 @@ extern NSString *const CDEventsEventStreamCreationFailureException;
  *
  * @since 1.0.0
  */
-const NSUInteger kCDEventsDefaultEventStreamFlags =
+const CDEventsEventStreamCreationFlags kCDEventsDefaultEventStreamFlags =
 	(kFSEventStreamCreateFlagUseCFTypes |
 	 kFSEventStreamCreateFlagWatchRoot);
 
