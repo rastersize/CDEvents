@@ -11,7 +11,7 @@ Not all that much but a litle. First of all all classes and protocols are prefix
 
 Another difference between `CDEvents` and `SCEvents` is that `CDEvents` is available for both manual memory management and environments using garbage collection.
 
-So I've some of the code from scratch and taken some from `SCEvents`.
+So I've written some of the code from scratch and taken some from `SCEvents`.
 
 ## License ##
 The code is released under the [MIT-license](http://www.opensource.org/licenses/mit-license.php).
