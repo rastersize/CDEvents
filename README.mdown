@@ -7,11 +7,11 @@ It's an Objective-C wrapper for Mac OS X's [FSEvents C API](http://developer.app
 Requires Mac OS X 10.5, since FSEvents were introduced in 10.5, and an Intel CPU. Supports both manual memory management and garbage collection.
 
 ## What differentiates CDEvents from SCEvents then? ##
-Not all that much but a litle. First of all all classes and protocols are prefixed with `CD` instead of `SC`, I hope that won't be to hard to remember? Secondly `CDEvent` (the event data wrapper-class) is immutable in contrast to `SCEvent` which is mutable. The next reason, this is the initial reason why I decided to rewrite `SCEvents`, being that the class `SCEvents`' is a singleton. I couldn't find a good reason as to why it had been designed this way and for my project an ordinary `alloc`/`init` route would be a better choise.
+Not all that much but a litle. First of all all classes and protocols are prefixed with `CD` instead of `SC`, I hope that won't be to hard to remember? Secondly `CDEvent` (the event data wrapper-class) is immutable in contrast to `SCEvent` which is mutable. The next difference, which were the initial reason why I decided to rewrite `SCEvents`, is that the class `SCEvents`' is a singleton something `CDEvents` isn't. I couldn't find a good reason as to why `SCEvents` had been designed that way and for my project a "normal" non-singleton class would be and is better.
 
 Another difference between `CDEvents` and `SCEvents` is that `CDEvents` is available for both manual memory management and environments using garbage collection.
 
-So I've written some of the code from scratch and taken some from `SCEvents`.
+So I've written some of the code from scratch and "taken" some from `SCEvents`.
 
 ## License ##
 The code is released under the [MIT-license](http://www.opensource.org/licenses/mit-license.php).
