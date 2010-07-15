@@ -13,5 +13,8 @@ Another difference between `CDEvents` and `SCEvents` is that `CDEvents` is avail
 
 So I've written some of the code from scratch and "taken" some from `SCEvents`.
 
+## API documentation ##
+You can generate API documentation with the help of [Doxygen](http://www.stack.nl/~dimitri/doxygen/). In Doxygen open the file `api.doxygen`, click the `Run` tab and then the `Run doxygen` button. When it's done you should have a directory (ignored by git) in the root of the project named `api` with a sub-directory `html` in which you will find `index.html` double-click and enjoy.
+
 ## License ##
 The code is released under the [MIT-license](http://www.opensource.org/licenses/mit-license.php).
