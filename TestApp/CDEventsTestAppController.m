@@ -36,15 +36,17 @@
 - (void)run
 {
 	NSArray *watchedURLs = [NSArray arrayWithObject:
-							[NSURL URLWithString:NSHomeDirectory()]];
+							[NSURL URLWithString:[NSHomeDirectory()
+							 stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 	NSArray *excludeURLs = [NSMutableArray arrayWithObject:
-							[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads"]];
+							[[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads"]
+							 stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 	
 	_events = [[CDEvents alloc] initWithURLs:watchedURLs
 									delegate:self];
 	[_events setExcludedURLs:excludeURLs];
 	
-	NSLog(@"-[CDEventsTestAppController init]:\n%@\n------\n%@",
+	NSLog(@"-[CDEventsTestAppController run]:\n%@\n------\n%@",
 		  _events,
 		  [_events streamDescription]);
 }

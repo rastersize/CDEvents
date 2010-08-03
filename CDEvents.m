@@ -243,9 +243,11 @@ static void CDEventsCallback(
 	for (NSUInteger i = 0; i < numEvents; ++i) {
 		shouldIgnore = NO;
 		
-		NSString *eventPath = [eventPathsArray objectAtIndex:i];
+		NSString *eventPath = [[eventPathsArray objectAtIndex:i]
+							   stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		NSURL *eventURL		= [NSURL URLWithString:eventPath];
 		
-		if ([excludedURLs containsObject:[NSURL URLWithString:eventPath]]) {
+		if ([excludedURLs containsObject:eventURL]) {
 			shouldIgnore = YES;
 		} else if (excludedURLs != nil && [watcher ignoreEventsFromSubDirectories]) {
 			for (NSURL *URL in excludedURLs) {
@@ -257,8 +259,6 @@ static void CDEventsCallback(
 		}
 		
 		if (!shouldIgnore) {
-			NSURL *eventURL = [NSURL URLWithString:eventPath];
-			
 			CDEvent *event = [[CDEvent alloc] initWithIdentifier:eventIds[i]
 												   date:[NSDate date]
 													URL:eventURL
