@@ -7,11 +7,11 @@ It's an Objective-C wrapper for Mac OS X's [FSEvents C API](http://developer.app
 Requires Mac OS X 10.5, since FSEvents were introduced in 10.5, and an Intel CPU. Supports both manual memory management and garbage collection.
 
 ## What differentiates CDEvents from SCEvents then? ##
-Not all that much but a litle. First of all all classes and protocols are prefixed with `CD` instead of `SC`, I hope that won't be to hard to remember? Secondly `CDEvent` (the event data wrapper-class) is immutable in contrast to `SCEvent` which is mutable. The next difference, which were the initial reason why I decided to rewrite `SCEvents`, is that the class `SCEvents`' is a singleton something `CDEvents` isn't. I couldn't find a good reason as to why `SCEvents` had been designed that way and for my project a "normal" non-singleton class would be and is better.
+Not all that much but a few things differentiate the two. The (event data wrapper) class `CDEvent` is immutable in contrast to `SCEvent` which is mutable. The next difference, which were the initial reason why I decided to rewrite `SCEvents` is that the class `SCEvents`' is a singleton class, where's `CDEvents` is a "normal" class. I couldn't find a good reason as to why `SCEvents` had been designed that way and for my project a "normal" non-singleton class would be and is better.
 
 Another difference between `CDEvents` and `SCEvents` is that `CDEvents` is available for both manual memory management and environments using garbage collection.
 
-So I've written some of the code from scratch and "taken" some from `SCEvents`.
+So I've written some of the code from scratch and "borrowed" some from `SCEvents`.
 
 ## API documentation ##
 You can generate API documentation with the help of [Doxygen](http://www.stack.nl/~dimitri/doxygen/). In Doxygen open the file `api.doxygen`, click the `Run` tab and then the `Run doxygen` button. When it's done you should have a directory (ignored by git) in the root of the project named `api` with a sub-directory `html` in which you will find `index.html` double-click and enjoy.
