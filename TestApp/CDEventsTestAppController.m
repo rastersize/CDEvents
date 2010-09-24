@@ -45,11 +45,11 @@
 	_events = [[CDEvents alloc] initWithURLs:watchedURLs
 									delegate:self
 								   onRunLoop:[NSRunLoop currentRunLoop]
-						sinceEventIdentifier:kCDEventsSinceEventNow
+						sinceEventIdentifier:CD_EVENTS_SINCE_EVENT_NOW
 						notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
 					 ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
 								 excludeURLs:excludeURLs
-						 streamCreationFlags:kCDEventsDefaultEventStreamFlags];
+						 streamCreationFlags:CD_EVENTS_DEFAULT_EVENT_STREAM_FLAGS];
 	
 	NSLog(@"-[CDEventsTestAppController run]:\n%@\n------\n%@",
 		  _events,
