@@ -43,8 +43,13 @@
 							 stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 	
 	_events = [[CDEvents alloc] initWithURLs:watchedURLs
-									delegate:self];
-	[_events setExcludedURLs:excludeURLs];
+									delegate:self
+								   onRunLoop:[NSRunLoop currentRunLoop]
+						sinceEventIdentifier:kCDEventsSinceEventNow
+						notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
+					 ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
+								 excludeURLs:excludeURLs
+						 streamCreationFlags:kCDEventsDefaultEventStreamFlags];
 	
 	NSLog(@"-[CDEventsTestAppController run]:\n%@\n------\n%@",
 		  _events,
