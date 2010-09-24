@@ -134,7 +134,7 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
  *
  * @since 1.0.0
  */
-@property (assign) id<CDEventsDelegate>		delegate;
+@property (assign) __weak id<CDEventsDelegate>		delegate;
 
 /**
  * The (approximate) time intervall between notifications sent to the delegate.
