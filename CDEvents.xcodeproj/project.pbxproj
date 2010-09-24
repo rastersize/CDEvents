@@ -239,7 +239,14 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "CDEvents" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* CDEvents */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
@@ -326,7 +333,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CDEvents_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = NS_BUILD_32_LIKE_64;
-				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@loader_path/../Frameworks";
 				PRODUCT_NAME = CDEvents;
@@ -347,7 +353,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CDEvents_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = NS_BUILD_32_LIKE_64;
-				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@loader_path/../Frameworks";
 				PRODUCT_NAME = CDEvents;
@@ -364,7 +369,7 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -382,7 +387,7 @@
 					i386,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
