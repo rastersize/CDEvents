@@ -109,7 +109,7 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
  */
 @interface CDEvents : NSObject <NSCopying> {
 @private
-	id<CDEventsDelegate>		_delegate;
+	__weak id<CDEventsDelegate>	_delegate;
 	
 	FSEventStreamRef			_eventStream;
 	CFTimeInterval				_notificationLatency;
