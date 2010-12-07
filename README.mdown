@@ -1,4 +1,4 @@
-# CDEvents # ![Project status](http://stillmaintained.com/rastersize/CDEvents.png)
+# CDEvents ![Project status](http://stillmaintained.com/rastersize/CDEvents.png) #
 
 ## What is this? ##
 It's an Objective-C wrapper for Mac OS X's [FSEvents C API](http://developer.apple.com/mac/library/documentation/Darwin/Reference/FSEvents_Ref/FSEvents_h/index.html). Inspired and based upon the ([MIT-licensed](http://www.opensource.org/licenses/mit-license.php)) open source project [SCEvents](http://stuconnolly.com/projects/code/) created by [Stuart Connolly](http://stuconnolly.com/).
