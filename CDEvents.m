@@ -13,6 +13,14 @@
 #pragma mark CDEvents custom exceptions
 NSString *const CDEventsEventStreamCreationFailureException = @"CDEventsEventStreamCreationFailureException";
 
+#pragma -
+#pragma mark Default values
+const CDEventsEventStreamCreationFlags kCDEventsDefaultEventStreamFlags =
+	(kFSEventStreamCreateFlagUseCFTypes |
+	 kFSEventStreamCreateFlagWatchRoot);
+
+const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
+
 
 #pragma mark -
 #pragma mark Private API
