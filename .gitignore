@@ -1,3 +1,13 @@
+.svn
+
+*.swp
+*.o
+*.lo
+.libs
+*.la
+
+.DS_Store
+
 build
 
 *.perspectivev3
@@ -6,6 +16,8 @@ build
 *.mode1v3
 *.mode2v3
 *.tm_build_errors
+*.xcodeproj/xcuserdata
+*.xcodeproj/project.xcworkspace
 !default.pbxuser
 !default.perspectivev3
 !default.mode1v3
@@ -13,7 +25,5 @@ build
 
 *~.nib
 *~.xib
-
-.DS_Store
 
 api
