@@ -70,7 +70,7 @@ extern NSString *const CDEventsEventStreamCreationFailureException;
  *
  * @since 1.0.0
  */
-#define CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY			((NSTimeInterval)3.0)
+#define CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY			(NSTimeInterval)3.0
 
 /**
  * The default value wheter events from sub directories should be ignored or not.
@@ -82,21 +82,18 @@ extern NSString *const CDEventsEventStreamCreationFailureException;
 /**
  * The default event stream creation flags.
  *
- * @since head
+ * @since 1.0.0
  */
-#define CD_EVENTS_DEFAULT_EVENT_STREAM_FLAGS			((CDEventsEventStreamCreationFlags) \
-															(kFSEventStreamCreateFlagUseCFTypes | \
-															kFSEventStreamCreateFlagWatchRoot))
+const CDEventsEventStreamCreationFlags kCDEventsDefaultEventStreamFlags =
+	(kFSEventStreamCreateFlagUseCFTypes |
+	 kFSEventStreamCreateFlagWatchRoot);
 
 /**
  * Use this to get all event since now when initializing a CDEvents object.
  *
- * @since head
+ * @since 1.1.0
  */
-//const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
-#define CD_EVENTS_SINCE_EVENT_NOW						((CDEventIdentifier) \
-															kFSEventStreamEventIdSinceNow)
-
+const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 
 
 #pragma mark -
