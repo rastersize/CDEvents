@@ -77,6 +77,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
 }
 
 #pragma mark Properties
+/** @name Getting Event Properties */
 /**
  * The event identifier.
  *
@@ -106,6 +107,8 @@ typedef FSEventStreamEventFlags CDEventFlags;
  */
 @property (readonly) NSURL						*URL;
 
+
+/** @name Getting Event Flags */
 /**
  * The flags of the event.
  *
@@ -123,14 +126,14 @@ typedef FSEventStreamEventFlags CDEventFlags;
 /**
  * Wheter there was some change in the directory at the specific path supplied in this event.
  *
- * @return <code>YES</code> if there was some change in the directory, otherwise <code>NO</code>
+ * @return <code>YES</code> if there was some change in the directory, otherwise <code>NO</code>.
  *
  * @see kFSEventStreamEventFlagNone
  * @see flags
  * @see mustRescanSubDirectories
  * @see isUserDropped
  * @see isKernelDropped
- * @see isEventIdsWrapped
+ * @see isEventIdentifiersWrapped
  * @see isHistoryDone
  * @see isRootChanged
  * @see didVolumeMount
@@ -148,19 +151,19 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * events were coalesced hierarchically. For example, an event in
  * <code>/Users/jsmith/Music</code> and an event in
  * <code>/Users/jsmith/Pictures</code> might be coalesced into an event with
- * this flag set and <i>URL</i><code>=/Users/jsmith</code>. If this flag is set
+ * this flag set and URL <code>= /Users/jsmith</code>. If this flag is set
  * you may be able to get an idea of whether the bottleneck happened in the
  * kernel (less likely) or in your client (more likely) by checking if
- * flagUserDropped or flagKernelDropped returns <code>YES</code>.
+ * isUserDropped or isKernelDropped returns <code>YES</code>.
  *
- * @return <code>YES</code> if you must rescan the whole directory including its children, otherwise <code>NO</code>
+ * @return <code>YES</code> if you must rescan the whole directory including its children, otherwise <code>NO</code>.
  *
  * @see kFSEventStreamEventFlagMustScanSubDirs
  * @see flags
  * @see isGenericChange
  * @see isUserDropped
  * @see isKernelDropped
- * @see isEventIdsWrapped
+ * @see isEventIdentifiersWrapped
  * @see isHistoryDone
  * @see isRootChanged
  * @see didVolumeMount
@@ -173,14 +176,14 @@ typedef FSEventStreamEventFlags CDEventFlags;
 /**
  * Provides some information as to what might have caused the need to rescan the URL including its children.
  *
- * @return <code>YES</code> if mustRescanSubDirectories returns <code>YES</code> and the cause were in userland, otherwise <code>NO</code>
+ * @return <code>YES</code> if mustRescanSubDirectories returns <code>YES</code> and the cause were in userland, otherwise <code>NO</code>.
  *
  * @see kFSEventStreamEventFlagUserDropped
  * @see flags
  * @see isGenericChange
  * @see mustRescanSubDirectories
  * @see isKernelDropped
- * @see isEventIdsWrapped
+ * @see isEventIdentifiersWrapped
  * @see isHistoryDone
  * @see isRootChanged
  * @see didVolumeMount
@@ -193,14 +196,14 @@ typedef FSEventStreamEventFlags CDEventFlags;
 /**
  * Provides some information as to what might have caused the need to rescan the URL including its children.
  *
- * @return <code>YES</code> if mustRescanSubDirectories returns <code>YES</code> and the cause were in kernelspace, otherwise <code>NO</code>
+ * @return <code>YES</code> if mustRescanSubDirectories returns <code>YES</code> and the cause were in kernelspace, otherwise <code>NO</code>.
  *
  * @see kFSEventStreamEventFlagKernelDropped
  * @see flags
  * @see isGenericChange
  * @see mustRescanSubDirectories
  * @see isUserDropped
- * @see isEventIdsWrapped
+ * @see isEventIdentifiersWrapped
  * @see isHistoryDone
  * @see isRootChanged
  * @see didVolumeMount
@@ -217,7 +220,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * previously-issued event identifiers are no longer valid arguments for the
  * sinceEventIdentifier parameter of the CDEvents init methods.
  *
- * @return <code>YES</code> if the 64-bit event identifier counter has wrapped around, otherwise <code>NO</code>
+ * @return <code>YES</code> if the 64-bit event identifier counter has wrapped around, otherwise <code>NO</code>.
  *
  * @see kFSEventStreamEventFlagEventIdsWrapped
  * @see flags
@@ -241,7 +244,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * as a result of specifying a <i>sinceEventIdentifier</i> argument other than
  * kCDEventsSinceEventNow with the CDEvents init methods.
  *
- * @return <code>YES</code> if if the event is sent to mark the end of the "historical" events sent, otherwise <code>NO</code>
+ * @return <code>YES</code> if if the event is sent to mark the end of the "historical" events sent, otherwise <code>NO</code>.
  *
  * @see kFSEventStreamEventFlagHistoryDone
  * @see flags
@@ -249,7 +252,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @see mustRescanSubDirectories
  * @see isUserDropped
  * @see isKernelDropped
- * @see isEventIdsWrapped
+ * @see isEventIdentifiersWrapped
  * @see isRootChanged
  * @see didVolumeMount
  * @see didVolumeUnmount
@@ -271,7 +274,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * with this flag set will only be sent if you passed the flag
  * <code>kFSEventStreamCreateFlagWatchRoot</code> to the CDEvents.
  *
- * @return <code>YES</code> if there is a change to one of the URLs you asked to watch, otherwise <code>NO</code>
+ * @return <code>YES</code> if there is a change to one of the URLs you asked to watch, otherwise <code>NO</code>.
  *
  * @see kFSEventStreamEventFlagRootChanged
  * @see flags
@@ -279,7 +282,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @see mustRescanSubDirectories
  * @see isUserDropped
  * @see isKernelDropped
- * @see isEventIdsWrapped
+ * @see isEventIdentifiersWrapped
  * @see isHistoryDone
  * @see didVolumeMount
  * @see didVolumeUnmount
@@ -304,7 +307,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * Also be aware of the <code>MNT_DONTBROWSE</code> flag that is set for volumes
  * which should not be displayed by user interface elements.
  *
- * @return <code>YES</code> if a volumen is mounted underneath one of the URLs being watched, otherwise <code>NO</code>
+ * @return <code>YES</code> if a volumen is mounted underneath one of the URLs being watched, otherwise <code>NO</code>.
  *
  * @see kFSEventStreamEventFlagMount
  * @see flags
@@ -312,7 +315,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @see mustRescanSubDirectories
  * @see isUserDropped
  * @see isKernelDropped
- * @see isEventIdsWrapped
+ * @see isEventIdentifiersWrapped
  * @see isHistoryDone
  * @see isRootChanged
  * @see didVolumeUnmount
@@ -333,7 +336,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * could uncover an arbitrarily large directory hierarchy, although Mac OS X
  * never does that.
  *
- * @return <code>YES</code> if a volume is unmounted underneath one of the URLs being watched, otherwise <code>NO</code>
+ * @return <code>YES</code> if a volume is unmounted underneath one of the URLs being watched, otherwise <code>NO</code>.
  *
  * @see kFSEventStreamEventFlagUnmount
  * @see flags
@@ -341,7 +344,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @see mustRescanSubDirectories
  * @see isUserDropped
  * @see isKernelDropped
- * @see isEventIdsWrapped
+ * @see isEventIdentifiersWrapped
  * @see isHistoryDone
  * @see isRootChanged
  * @see didVolumeMount
@@ -352,7 +355,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
 
 
 #pragma mark Class object creators
-
+/** @name Creating CDEvent Objects */
 /**
  * Returns an <code>CDEvent</code> created with the given identifier, date, URL and flags.
  *

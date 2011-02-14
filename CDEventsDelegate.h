@@ -43,7 +43,7 @@
  * The CDEventsDelegate protocol defines the required methods implemented by delegates of CDEvents objects.
  *
  * @see CDEvents
- * @see CDevent
+ * @see CDEvent
  *
  * @since 1.0.0
  */
@@ -57,7 +57,7 @@
  * @param event The event data.
  *
  * @see CDEvents
- * @see CDevent
+ * @see CDEvent
  *
  * @discussion Conforming objects' implementation of this method will be called
  * whenever an event occurs. The instance of CDEvents which received the event
