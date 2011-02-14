@@ -34,13 +34,13 @@
 @implementation CDEventsTestAppController
 
 - (void)run
-{
+{	
 	NSArray *watchedURLs = [NSArray arrayWithObject:
 							[NSURL URLWithString:[NSHomeDirectory()
 							 stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 	NSArray *excludeURLs = [NSMutableArray arrayWithObject:
-							[[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads"]
-							 stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+							[NSURL URLWithString:[[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads"]
+									stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 	
 	_events = [[CDEvents alloc] initWithURLs:watchedURLs
 									delegate:self
@@ -50,6 +50,7 @@
 					 ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
 								 excludeURLs:excludeURLs
 						 streamCreationFlags:kCDEventsDefaultEventStreamFlags];
+	//[_events setIgnoreEventsFromSubDirectories:YES];
 	
 	NSLog(@"-[CDEventsTestAppController run]:\n%@\n------\n%@",
 		  _events,
