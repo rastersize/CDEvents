@@ -27,6 +27,8 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 // Private API
 @interface CDEvents ()
 
+@property (retain, readwrite) CDEvent *lastEvent;
+
 // The FSEvents callback function
 static void CDEventsCallback(
 	ConstFSEventStreamRef streamRef,

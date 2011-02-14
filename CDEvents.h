@@ -163,7 +163,7 @@ extern const CDEventIdentifier kCDEventsSinceEventNow;
  *
  * @since 1.0.0
  */
-@property (retain) CDEvent						*lastEvent;
+@property (retain, readonly) CDEvent			*lastEvent;
 
 /**
  * The URLs that we watch for events.
