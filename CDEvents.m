@@ -246,9 +246,10 @@ static void CDEventsCallback(
 {
 	CDEvents *watcher = (CDEvents *)callbackCtxInfo;
 	
-	NSArray *excludedURLs = [watcher excludedURLs];
-	NSArray *eventPathsArray = (NSArray *)eventPaths;
-	BOOL shouldIgnore;
+	NSArray *watchedURLs		= [watcher watchedURLs];
+	NSArray *excludedURLs		= [watcher excludedURLs];
+	NSArray *eventPathsArray	= (NSArray *)eventPaths;
+	BOOL shouldIgnore = NO;
 	
 	for (NSUInteger i = 0; i < numEvents; ++i) {
 		shouldIgnore = NO;
@@ -256,10 +257,19 @@ static void CDEventsCallback(
 		NSString *eventPath = [[eventPathsArray objectAtIndex:i]
 							   stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		NSURL *eventURL		= [NSURL URLWithString:eventPath];
+		// We do this hackery to ensure that the eventPath string doesn't
+		// contain any trailing slash.
+		eventPath			= [eventURL path];
 		
-		if ([excludedURLs containsObject:eventURL]) {
+		if ([watcher ignoreEventsFromSubDirectories]) {
 			shouldIgnore = YES;
-		} else if (excludedURLs != nil && [watcher ignoreEventsFromSubDirectories]) {
+			for (NSURL *URL in watchedURLs) {
+				if ([[URL path] isEqualToString:eventPath]) {
+					shouldIgnore = NO;
+					break;
+				}
+			}
+		} else if (excludedURLs != nil) {
 			for (NSURL *URL in excludedURLs) {
 				if ([eventPath hasPrefix:[URL path]]) {
 					shouldIgnore = YES;
