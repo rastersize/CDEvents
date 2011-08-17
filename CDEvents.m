@@ -27,7 +27,8 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 // Private API
 @interface CDEvents ()
 
-@property (retain, readwrite) CDEvent *lastEvent;
+@property (strong, readwrite) CDEvent *lastEvent;
+@property (strong, readwrite) NSArray *watchedURLs;
 
 // The FSEvents callback function
 static void CDEventsCallback(
@@ -74,11 +75,7 @@ static void CDEventsCallback(
 	
 	_delegate = nil;
 	
-	[_lastEvent release];
-	[_watchedURLs release];
-	[_excludedURLs release];
 	
-	[super dealloc];
 }
 
 - (void)finalize
@@ -193,10 +190,10 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 - (NSString *)streamDescription
 {
 	CFStringRef streamDescriptionCF = FSEventStreamCopyDescription(_eventStream);
-	NSString *returnString = [[NSString alloc] initWithString:(NSString *)streamDescriptionCF];
+	NSString *returnString = [[NSString alloc] initWithString:(__bridge NSString *)streamDescriptionCF];
 	CFRelease(streamDescriptionCF);
 	
-	return [returnString autorelease];
+	return returnString;
 }
 
 
@@ -205,7 +202,7 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 {
 	FSEventStreamContext callbackCtx;
 	callbackCtx.version			= 0;
-	callbackCtx.info			= (void *)self;
+	callbackCtx.info			= (__bridge void *)self;
 	callbackCtx.retain			= NULL;
 	callbackCtx.release			= NULL;
 	callbackCtx.copyDescription	= NULL;
@@ -218,7 +215,7 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 	_eventStream = FSEventStreamCreate(kCFAllocatorDefault,
 									   &CDEventsCallback,
 									   &callbackCtx,
-									   (CFArrayRef)watchedPaths,
+									   (__bridge CFArrayRef)watchedPaths,
 									   (FSEventStreamEventId)[self sinceEventIdentifier],
 									   [self notificationLatency],
 									   _eventStreamCreationFlags);
@@ -244,11 +241,11 @@ static void CDEventsCallback(
 	const FSEventStreamEventFlags eventFlags[],
 	const FSEventStreamEventId eventIds[])
 {
-	CDEvents *watcher = (CDEvents *)callbackCtxInfo;
+	CDEvents *watcher = (__bridge CDEvents *)callbackCtxInfo;
 	
 	NSArray *watchedURLs		= [watcher watchedURLs];
 	NSArray *excludedURLs		= [watcher excludedURLs];
-	NSArray *eventPathsArray	= (NSArray *)eventPaths;
+	NSArray *eventPathsArray	= (__bridge NSArray *)eventPaths;
 	BOOL shouldIgnore = NO;
 	
 	for (NSUInteger i = 0; i < numEvents; ++i) {
@@ -293,7 +290,6 @@ static void CDEventsCallback(
 				[watcher setLastEvent:event];
 			}
 			
-			[event release];
 		}
 	}
 	
