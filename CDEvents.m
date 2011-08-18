@@ -25,10 +25,15 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 #pragma mark -
 #pragma mark Private API
 // Private API
-@interface CDEvents ()
+@interface CDEvents () {
+@private
+	FSEventStreamRef	_eventStream;
+	NSUInteger			_eventStreamCreationFlags;
+}
 
+// Redefine the properties that should be writeable.
 @property (strong, readwrite) CDEvent *lastEvent;
-@property (strong, readwrite) NSArray *watchedURLs;
+@property (copy, readwrite) NSArray *watchedURLs;
 
 // The FSEvents callback function
 static void CDEventsCallback(

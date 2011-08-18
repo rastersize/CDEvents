@@ -105,23 +105,7 @@ extern const CDEventIdentifier kCDEventsSinceEventNow;
  *
  * @since 1.0.0
  */
-@interface CDEvents : NSObject <NSCopying> {
-@private
-	//__weak id<CDEventsDelegate>		_delegate;
-	
-	FSEventStreamRef			_eventStream;
-	//CFTimeInterval				_notificationLatency;
-	
-	//CDEventIdentifier			_sinceEventIdentifier;
-	NSUInteger					_eventStreamCreationFlags;
-	
-	//BOOL						_ignoreEventsFromSubDirectories;
-	
-	//CDEvent						*_lastEvent;
-	
-	//NSArray						*_watchedURLs;
-	//NSArray						*_excludedURLs;
-}
+@interface CDEvents : NSObject <NSCopying> {}
 
 #pragma mark Properties
 /** @name Managing the Delegate */
@@ -157,9 +141,9 @@ extern const CDEventIdentifier kCDEventsSinceEventNow;
 @property (readonly) CDEventIdentifier			sinceEventIdentifier;
 
 /**
- * The last event that occured and thas has been delivered to the delegate.
+ * The last event that occured and has been delivered to the delegate.
  *
- * @return The last event that occured and thas has been delivered to the delegate.
+ * @return The last event that occured and has been delivered to the delegate.
  *
  * @since 1.0.0
  */
@@ -172,7 +156,7 @@ extern const CDEventIdentifier kCDEventsSinceEventNow;
  *
  * @since 1.0.0
  */
-@property (strong, readonly) NSArray			*watchedURLs;
+@property (copy, readonly) NSArray			*watchedURLs;
 
 
 /** @name Configuring the Event watcher */
