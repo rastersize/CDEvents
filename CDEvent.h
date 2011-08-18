@@ -68,13 +68,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  *
  * @since 1.0.0
  */
-@interface CDEvent : NSObject <NSCoding, NSCopying> {
-@private
-	CDEventIdentifier			_identifier;
-	NSDate						*__weak _date;
-	NSURL						*__weak _URL;
-	CDEventFlags				_flags;
-}
+@interface CDEvent : NSObject <NSCoding, NSCopying> {}
 
 #pragma mark Properties
 /** @name Getting Event Properties */
