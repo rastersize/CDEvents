@@ -1,10 +1,13 @@
 # CDEvents ![Project status](http://stillmaintained.com/rastersize/CDEvents.png) #
+***Note:*** Experimental ARC branch
 
 ## What is this? ##
 It's an Objective-C wrapper for Mac OS X's [FSEvents C API](http://developer.apple.com/mac/library/documentation/Darwin/Reference/FSEvents_Ref/FSEvents_h/index.html). Inspired and based upon the ([MIT-licensed](http://www.opensource.org/licenses/mit-license.php)) open source project [SCEvents](http://stuconnolly.com/projects/code/) created by [Stuart Connolly](http://stuconnolly.com/).
 
 ## Requirements ##
-Requires Mac OS X 10.5, since FSEvents were introduced in 10.5, and an Intel CPU. Supports both manual memory management and garbage collection.
+Requires Mac OS X 10.7 (Lion) and an Intel 64-bit CPU, the requirements stem from that automatic reference counting (ARC) was introduced with full support in OS X 10.7 when using the modern (i.e. 64-bit) Objective-C runtime. Supports both manual memory management and automatic reference counting.
+
+If you need to support older versions of OS X please see the non-ARC branch, currently `develop` and `master`. Though which branch is the non-ARC will probably change in the future.
 
 ## What differentiates CDEvents from SCEvents then? ##
 Not all that much but a few things differentiate the two. The (event data wrapper) class `CDEvent` is immutable in contrast to `SCEvent` which is mutable. The next difference, which were the initial reason why I decided to rewrite `SCEvents` is that the class `SCEvents`' is a singleton class, where's `CDEvents` is a "normal" class. I couldn't find a good reason as to why `SCEvents` had been designed that way and for my project a "normal" non-singleton class would be and is better.
