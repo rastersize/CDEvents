@@ -9,6 +9,30 @@ Requires Mac OS X 10.7 (Lion) and an Intel 64-bit CPU, the requirements stem fro
 
 If you need to support older versions of OS X please see the non-ARC branch, currently `develop` and `master`. Though which branch is the non-ARC will probably change in the future.
 
+## Usage ##
+
+1. Add CDEvents to your project,
+ * either by compiling the project and dragging the `CDEvents.framework` into your project or
+ * by dragging the entire CDEvents project into your project as a sub-project.
+2. Import the `CDEvents.h` header where you need it.
+3. Import the `CDEventsDelegate.h` header where you need it (i.e. in the file which declares your delegate).
+4. See the test app (`TestApp`) for details on how to use the framework. Essentially it boils down to,
+ 1. Implement the delegate method `-URLWatcher:eventOccurred:`.
+ 2. Set up your `CDEvents` instance.
+
+` `
+
+    self.events = [[CDEvents alloc] initWithURLs:<NSArray of URLs to watch>
+										delegate:<Your delegate>
+									   onRunLoop:[NSRunLoop currentRunLoop]
+							sinceEventIdentifier:kCDEventsSinceEventNow
+							notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
+						 ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
+									 excludeURLs:<NSArray of URLs to exlude>
+							 streamCreationFlags:kCDEventsDefaultEventStreamFlags];
+
+For more details please refer to the documentation in the header files and the section "API documentation" below.
+
 ## What differentiates CDEvents from SCEvents then? ##
 Not all that much but a few things differentiate the two. The (event data wrapper) class `CDEvent` is immutable in contrast to `SCEvent` which is mutable. The next difference, which were the initial reason why I decided to rewrite `SCEvents` is that the class `SCEvents`' is a singleton class, where's `CDEvents` is a "normal" class. I couldn't find a good reason as to why `SCEvents` had been designed that way and for my project a "normal" non-singleton class would be and is better.
 
