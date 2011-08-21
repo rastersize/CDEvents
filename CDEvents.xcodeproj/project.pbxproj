@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A05775A1400F49900BF73C4 /* compat.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A0577591400F49900BF73C4 /* compat.h */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		9C6D03031166AFFA00343E46 /* CDEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C6D03011166AFFA00343E46 /* CDEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C6D03041166AFFA00343E46 /* CDEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6D03021166AFFA00343E46 /* CDEvent.m */; };
@@ -50,6 +51,7 @@
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCF5E0370ADEE00C91783 /* CDEvents_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDEvents_Prefix.pch; sourceTree = "<group>"; };
+		6A0577591400F49900BF73C4 /* compat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compat.h; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* CDEvents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CDEvents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C6D03011166AFFA00343E46 /* CDEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDEvent.h; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				6A0577591400F49900BF73C4 /* compat.h */,
 				32DBCF5E0370ADEE00C91783 /* CDEvents_Prefix.pch */,
 			);
 			name = "Other Sources";
@@ -188,6 +191,7 @@
 				9C6D03031166AFFA00343E46 /* CDEvent.h in Headers */,
 				9C6D051D1166BD5800343E46 /* CDEventsDelegate.h in Headers */,
 				9C6D05241166BF5300343E46 /* CDEvents.h in Headers */,
+				6A05775A1400F49900BF73C4 /* compat.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
