@@ -38,7 +38,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreServices/CoreServices.h>
 
-
 #pragma mark -
 #pragma mark CDEvent types
 /**
@@ -115,6 +114,14 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @since 1.0.0
  */
 @property (readonly) CDEventFlags				flags;
+
+#pragma mark flag macros
+
+#define FLAG_CHECK(flags, flag) ((flags) & (flag))
+
+#define FLAG_PROPERTY(name, flag)                   \
+- (BOOL)name                                        \
+{ return (FLAG_CHECK(_flags, flag) ? YES : NO); }
 
 #pragma mark Specific flag properties
 /**
@@ -347,6 +354,24 @@ typedef FSEventStreamEventFlags CDEventFlags;
  */
 @property (readonly) BOOL						didVolumeUnmount;
 
+
+/**
+ * The entirety of the documentation on file level events in lion is 3 sentences
+ * long. Rename behavior is odd, making the combination of events and flags
+ * somewhat confusing for atomic writes. It also appears possible to get a
+ * singular event where a file has been created, modified, and removed.
+ */
+@property (readonly) BOOL                       isCreated;
+@property (readonly) BOOL                       isRemoved;
+@property (readonly) BOOL                       isInodeMetadataModified;
+@property (readonly) BOOL                       isRenamed;
+@property (readonly) BOOL                       isModified;
+@property (readonly) BOOL                       isFinderInfoModified;
+@property (readonly) BOOL                       didChangeOwner;
+@property (readonly) BOOL                       isXattrModified;
+@property (readonly) BOOL                       isFile;
+@property (readonly) BOOL                       isDir;
+@property (readonly) BOOL                       isSymlink;
 
 #pragma mark Class object creators
 /** @name Creating CDEvent Objects */

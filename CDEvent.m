@@ -27,7 +27,7 @@
  */
 
 #import "CDEvent.h"
-
+#import "compat.h"
 
 @implementation CDEvent
 
@@ -96,52 +96,33 @@
 	return self;
 }
 
-
 #pragma mark Specific flag properties 
 - (BOOL)isGenericChange
 {
 	return (kFSEventStreamEventFlagNone == _flags);
 }
 
-- (BOOL)mustRescanSubDirectories
-{
-	return (_flags & kFSEventStreamEventFlagMustScanSubDirs);
-}
+FLAG_PROPERTY(mustRescanSubDirectories,     kFSEventStreamEventFlagMustScanSubDirs)
+FLAG_PROPERTY(isUserDropped,                kFSEventStreamEventFlagUserDropped)
+FLAG_PROPERTY(isKernelDropped,              kFSEventStreamEventFlagKernelDropped)
+FLAG_PROPERTY(isEventIdentifiersWrapped,    kFSEventStreamEventFlagEventIdsWrapped)
+FLAG_PROPERTY(isHistoryDone,                kFSEventStreamEventFlagHistoryDone)
+FLAG_PROPERTY(isRootChanged,                kFSEventStreamEventFlagRootChanged)
+FLAG_PROPERTY(didVolumeMount,               kFSEventStreamEventFlagMount)
+FLAG_PROPERTY(didVolumeUnmount,             kFSEventStreamEventFlagUnmount)
 
-- (BOOL)isUserDropped
-{
-	return (_flags & kFSEventStreamEventFlagUserDropped);
-}
-
-- (BOOL)isKernelDropped
-{
-	return (_flags & kFSEventStreamEventFlagKernelDropped);
-}
-
-- (BOOL)isEventIdentifiersWrapped
-{
-	return (_flags & kFSEventStreamEventFlagEventIdsWrapped);
-}
-
-- (BOOL)isHistoryDone
-{
-	return (_flags & kFSEventStreamEventFlagHistoryDone);
-}
-
-- (BOOL)isRootChanged
-{
-	return (_flags & kFSEventStreamEventFlagRootChanged);
-}
-
-- (BOOL)didVolumeMount
-{
-	return (_flags & kFSEventStreamEventFlagMount);
-}
-
-- (BOOL)didVolumeUnmount
-{
-	return (_flags & kFSEventStreamEventFlagUnmount);
-}
+// file-level events introduced in 10.7
+FLAG_PROPERTY(isCreated,                    kFSEventStreamEventFlagItemCreated)
+FLAG_PROPERTY(isRemoved,                    kFSEventStreamEventFlagItemRemoved)
+FLAG_PROPERTY(isInodeMetadataModified,      kFSEventStreamEventFlagItemInodeMetaMod)
+FLAG_PROPERTY(isRenamed,                    kFSEventStreamEventFlagItemRenamed)
+FLAG_PROPERTY(isModified,                   kFSEventStreamEventFlagItemModified)
+FLAG_PROPERTY(isFinderInfoModified,         kFSEventStreamEventFlagItemFinderInfoMod)
+FLAG_PROPERTY(didChangeOwner,               kFSEventStreamEventFlagItemChangeOwner)
+FLAG_PROPERTY(isXattrModified,              kFSEventStreamEventFlagItemXattrMod)
+FLAG_PROPERTY(isFile,                       kFSEventStreamEventFlagItemIsFile)
+FLAG_PROPERTY(isDir,                        kFSEventStreamEventFlagItemIsDir)
+FLAG_PROPERTY(isSymlink,                    kFSEventStreamEventFlagItemIsSymlink)
 
 #pragma mark Misc
 - (NSString *)description
