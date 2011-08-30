@@ -5,7 +5,7 @@
 It's an Objective-C wrapper for Mac OS X's [FSEvents C API](http://developer.apple.com/mac/library/documentation/Darwin/Reference/FSEvents_Ref/FSEvents_h/index.html). Inspired and based upon the ([MIT-licensed](http://www.opensource.org/licenses/mit-license.php)) open source project [SCEvents](http://stuconnolly.com/projects/code/) created by [Stuart Connolly](http://stuconnolly.com/).
 
 ## Requirements ##
-Requires Mac OS X 10.7 (Lion) and an Intel 64-bit CPU, the requirements stem from that automatic reference counting (ARC) was introduced with full support in OS X 10.7 when using the modern (i.e. 64-bit) Objective-C runtime. Supports both manual memory management and automatic reference counting.
+Requires Mac OS X 10.6 (Snow Leopard) and an Intel 64-bit CPU. The requirements stems from that automatic reference counting (ARC) is supported from 10.6 and up as long as the modern (i.e. 64-bit) Objective-C runtime is used. (ARC requires the non-fragile ABI.) Although the built product should work on 10.6 and up it must be built on a machine running 10.7 (Lion) using Xcode 4.2 and the 10.7 SDK as the 10.6 SDK does not include ARC. Supports both manual memory management and automatic reference counting.
 
 If you need to support older versions of OS X please see the non-ARC branch, currently `develop` and `master`. Though which branch is the non-ARC will probably change in the future.
 
@@ -30,6 +30,8 @@ If you need to support older versions of OS X please see the non-ARC branch, cur
 						 ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
 									 excludeURLs:<NSArray of URLs to exlude>
 							 streamCreationFlags:kCDEventsDefaultEventStreamFlags];
+							
+**Important:** Since we have 10.6 set as the deployment target automatic zeroing of weak references is not available and as such you must set the `delegate` of  `CDEvents` to `nil` when you no longer want to receive events. That is, at least in your `-dealloc` method. This is also required when using 10.7 and up!
 
 For more details please refer to the documentation in the header files and the section "API documentation" below.
 
