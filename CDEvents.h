@@ -119,7 +119,7 @@ extern const CDEventIdentifier kCDEventsSinceEventNow;
  *
  * @since 1.0.0
  */
-@property (weak) id<CDEventsDelegate>			delegate;
+@property (unsafe_unretained) id<CDEventsDelegate>	delegate;
 
 /** @name Getting Event Watcher Properties */
 /**
@@ -129,7 +129,7 @@ extern const CDEventIdentifier kCDEventsSinceEventNow;
  *
  * @since 1.0.0
  */
-@property (readonly) CFTimeInterval				notificationLatency;
+@property (readonly) CFTimeInterval					notificationLatency;
 
 /**
  * The event identifier from which events will be supplied to the delegate.
@@ -138,7 +138,7 @@ extern const CDEventIdentifier kCDEventsSinceEventNow;
  *
  * @since 1.0.0
  */
-@property (readonly) CDEventIdentifier			sinceEventIdentifier;
+@property (readonly) CDEventIdentifier				sinceEventIdentifier;
 
 /**
  * The last event that occured and has been delivered to the delegate.
@@ -147,7 +147,7 @@ extern const CDEventIdentifier kCDEventsSinceEventNow;
  *
  * @since 1.0.0
  */
-@property (strong, readonly) CDEvent			*lastEvent;
+@property (strong, readonly) CDEvent				*lastEvent;
 
 /**
  * The URLs that we watch for events.
@@ -156,7 +156,7 @@ extern const CDEventIdentifier kCDEventsSinceEventNow;
  *
  * @since 1.0.0
  */
-@property (copy, readonly) NSArray			*watchedURLs;
+@property (copy, readonly) NSArray					*watchedURLs;
 
 
 /** @name Configuring the Event watcher */
@@ -168,7 +168,7 @@ extern const CDEventIdentifier kCDEventsSinceEventNow;
  *
  * @since 1.0.0
  */
-@property (copy) NSArray						*excludedURLs;
+@property (copy) NSArray							*excludedURLs;
 
 /**
  * Wheter events from sub-directories of the watched URLs should be ignored or not.
@@ -178,7 +178,7 @@ extern const CDEventIdentifier kCDEventsSinceEventNow;
  *
  * @since 1.0.0
  */
-@property (assign) BOOL							ignoreEventsFromSubDirectories;
+@property (assign) BOOL								ignoreEventsFromSubDirectories;
 
 
 #pragma mark Event identifier class methods
