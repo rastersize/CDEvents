@@ -95,6 +95,17 @@ extern const CDEventIdentifier kCDEventsSinceEventNow;
 
 
 #pragma mark -
+#pragma mark CDEvents Block Type
+@class CDEvents;
+/**
+ * Type of the block which gets called when an event occurs.
+ *
+ * @since head
+ */
+typedef void (^CDEventsEventBlock)(CDEvents *watcher, CDEvent *event);
+
+
+#pragma mark -
 #pragma mark CDEvents interface
 /**
  * An Objective-C wrapper for the <code>FSEvents</code> C API.
