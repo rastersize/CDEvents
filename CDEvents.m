@@ -27,6 +27,8 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 // Private API
 @interface CDEvents () {
 @private
+	CDEventsEventBlock	_eventBlock;
+	
 	FSEventStreamRef	_eventStream;
 	NSUInteger			_eventStreamCreationFlags;
 }
@@ -79,8 +81,6 @@ static void CDEventsCallback(
 	[self disposeEventStream];
 	
 	_delegate = nil;
-	
-	
 }
 
 - (void)finalize
@@ -115,22 +115,73 @@ static void CDEventsCallback(
 
 - (id)initWithURLs:(NSArray *)URLs
 		  delegate:(id<CDEventsDelegate>)delegate
-		   onRunLoop:(NSRunLoop *)runLoop
+		 onRunLoop:(NSRunLoop *)runLoop
 sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
 notificationLantency:(CFTimeInterval)notificationLatency
 ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
-		 excludeURLs:(NSArray *)exludeURLs
- streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags
+	   excludeURLs:(NSArray *)exludeURLs
+streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags
 {
-	if (delegate == nil || URLs == nil || [URLs count] == 0) {
+	if (delegate == nil) {
+		[NSException raise:NSInvalidArgumentException
+					format:@"Invalid arguments passed to CDEvents init-method."];
+	}
+	
+	_delegate = delegate;
+	
+	return [self initWithURLs:URLs
+						block:^(CDEvents *watcher, CDEvent *event){
+							if ([(id)[watcher delegate] conformsToProtocol:@protocol(CDEventsDelegate)]) {
+								[[watcher delegate] URLWatcher:watcher eventOccurred:event];
+							}
+						}
+					onRunLoop:runLoop
+		 sinceEventIdentifier:sinceEventIdentifier
+		 notificationLantency:notificationLatency
+	  ignoreEventsFromSubDirs:ignoreEventsFromSubDirs
+				  excludeURLs:exludeURLs
+		  streamCreationFlags:streamCreationFlags];
+}
+
+
+#pragma mark Creating CDEvents Objects With a Block
+- (id)initWithURLs:(NSArray *)URLs block:(CDEventsEventBlock)block
+{
+	return [self initWithURLs:URLs block:block onRunLoop:[NSRunLoop currentRunLoop]];
+}
+
+- (id)initWithURLs:(NSArray *)URLs
+			 block:(CDEventsEventBlock)block
+		 onRunLoop:(NSRunLoop *)runLoop
+{
+	return [self initWithURLs:URLs
+						block:block
+					onRunLoop:runLoop
+		 sinceEventIdentifier:kCDEventsSinceEventNow
+		 notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
+	  ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
+				  excludeURLs:nil
+		  streamCreationFlags:kCDEventsDefaultEventStreamFlags];
+}
+
+- (id)initWithURLs:(NSArray *)URLs
+			 block:(CDEventsEventBlock)block
+		 onRunLoop:(NSRunLoop *)runLoop
+sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
+notificationLantency:(CFTimeInterval)notificationLatency
+ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
+	   excludeURLs:(NSArray *)exludeURLs
+streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags
+{
+	if (block == NULL || URLs == nil || [URLs count] == 0) {
 		[NSException raise:NSInvalidArgumentException
 					format:@"Invalid arguments passed to CDEvents init-method."];
 	}
 	
 	if ((self = [super init])) {
 		_watchedURLs = [URLs copy];
-		[self setExcludedURLs:exludeURLs];
-		[self setDelegate:delegate];
+		_excludedURLs = [exludeURLs copy];
+		_eventBlock = block;
 		
 		_sinceEventIdentifier = sinceEventIdentifier;
 		_eventStreamCreationFlags = streamCreationFlags;
@@ -159,7 +210,7 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 - (id)copyWithZone:(NSZone *)zone
 {
 	CDEvents *copy = [[CDEvents alloc] initWithURLs:[self watchedURLs]
-										   delegate:[self delegate]
+											  block:[self eventBlock]
 										  onRunLoop:[NSRunLoop currentRunLoop]
 							   sinceEventIdentifier:[self sinceEventIdentifier]
 							   notificationLantency:[self notificationLatency]
@@ -168,6 +219,12 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 								streamCreationFlags:_eventStreamCreationFlags];
 	
 	return copy;
+}
+
+#pragma mark Block
+- (CDEventsEventBlock)eventBlock
+{
+	return _eventBlock;
 }
 
 
@@ -286,9 +343,8 @@ static void CDEventsCallback(
 													URL:eventURL
 												  flags:eventFlags[i]];
 			
-			if ([(id)[watcher delegate] conformsToProtocol:@protocol(CDEventsDelegate)]) {
-				[[watcher delegate] URLWatcher:watcher eventOccurred:event];
-			}
+			CDEventsEventBlock eventBlock = [watcher eventBlock];
+			eventBlock(watcher, event);
 			
 			// Last event?
 			if (i == (numEvents - 1)) {
