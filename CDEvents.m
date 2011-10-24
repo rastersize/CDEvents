@@ -249,7 +249,8 @@ static void CDEventsCallback(
 	NSArray *watchedURLs		= [watcher watchedURLs];
 	NSArray *excludedURLs		= [watcher excludedURLs];
 	NSArray *eventPathsArray	= (NSArray *)eventPaths;
-	BOOL shouldIgnore = NO;
+	BOOL shouldIgnore			= NO;
+	CDEvent *lastEvent			= nil;
 	
 	for (NSUInteger i = 0; i < numEvents; ++i) {
 		shouldIgnore = NO;
@@ -283,6 +284,9 @@ static void CDEventsCallback(
 												   date:[NSDate date]
 													URL:eventURL
 												  flags:eventFlags[i]];
+			// Dispose of old lastEvent and retain the currently last
+			[lastEvent release];
+			lastEvent = [event retain];
 			
 			if ([(id)[watcher delegate] conformsToProtocol:@protocol(CDEventsDelegate)]) {
 				[[watcher delegate] URLWatcher:watcher eventOccurred:event];
@@ -297,7 +301,10 @@ static void CDEventsCallback(
 		}
 	}
 	
-	
+	if (lastEvent) {
+		[watcher setLastEvent:lastEvent];
+		[lastEvent release];
+	}
 }
 
 @end
