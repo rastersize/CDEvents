@@ -94,7 +94,7 @@ bool systemVersionIsAtLeast(SInt32 major, SInt32 minor)
 
 - (void)URLWatcher:(CDEvents *)URLWatcher eventOccurred:(CDEvent *)event
 {
-	NSLog(@"URLWatcher: %@\nEvent: %@", URLWatcher, event);
+	NSLog(@"[Delegate] URLWatcher: %@\nEvent: %@", URLWatcher, event);
 }
 
 @end

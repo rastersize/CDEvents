@@ -67,13 +67,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  *
  * @since 1.0.0
  */
-@interface CDEvent : NSObject <NSCoding, NSCopying> {
-@private
-	CDEventIdentifier			_identifier;
-	NSDate						*_date;
-	NSURL						*_URL;
-	CDEventFlags				_flags;
-}
+@interface CDEvent : NSObject <NSCoding, NSCopying> {}
 
 #pragma mark Properties
 /** @name Getting Event Properties */
@@ -95,7 +89,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  *
  * @since 1.0.0
  */
-@property (readonly) NSDate						*date;
+@property (unsafe_unretained, readonly) NSDate	*date;
 
 /**
  * The URL of the item which changed.
@@ -104,7 +98,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  *
  * @since 1.0.0
  */
-@property (readonly) NSURL						*URL;
+@property (unsafe_unretained, readonly) NSURL	*URL;
 
 
 /** @name Getting Event Flags */
