@@ -299,38 +299,41 @@ static void CDEventsCallback(
 	ConstFSEventStreamRef streamRef,
 	void *callbackCtxInfo,
 	size_t numEvents,
-	void *eventPaths,
+	void *eventPaths, // CFArrayRef
 	const FSEventStreamEventFlags eventFlags[],
 	const FSEventStreamEventId eventIds[])
 {
-	CDEvents *watcher = (__bridge CDEvents *)callbackCtxInfo;
-	
+	CDEvents *watcher			= (__bridge CDEvents *)callbackCtxInfo;
+	NSArray *eventPathsArray	= (__bridge NSArray *)eventPaths;
 	NSArray *watchedURLs		= [watcher watchedURLs];
 	NSArray *excludedURLs		= [watcher excludedURLs];
-	NSArray *eventPathsArray	= (__bridge NSArray *)eventPaths;
-	BOOL shouldIgnore = NO;
-	
+	CDEvent *lastEvent			= nil;
+
 	for (NSUInteger i = 0; i < numEvents; ++i) {
-		shouldIgnore = NO;
+		BOOL shouldIgnore = NO;
+		FSEventStreamEventFlags flags = eventFlags[i];
+		FSEventStreamEventId identifier = eventIds[i];
 		
-		NSString *eventPath = [[eventPathsArray objectAtIndex:i]
-							   stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		NSURL *eventURL		= [NSURL URLWithString:eventPath];
 		// We do this hackery to ensure that the eventPath string doesn't
 		// contain any trailing slash.
+		NSString *eventPath = [[eventPathsArray objectAtIndex:i] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		NSURL *eventURL		= [NSURL URLWithString:eventPath];
 		eventPath			= [eventURL path];
 		
+		// Ignore all events except for the URLs we are explicitly watching.
 		if ([watcher ignoreEventsFromSubDirectories]) {
 			shouldIgnore = YES;
-			for (NSURL *URL in watchedURLs) {
-				if ([[URL path] isEqualToString:eventPath]) {
+			for (NSURL *url in watchedURLs) {
+				if ([[url path] isEqualToString:eventPath]) {
 					shouldIgnore = NO;
 					break;
 				}
 			}
+		// Ignore all explicitly excludeded URLs (not required to check if we
+		// ignore all events from sub-directories).
 		} else if (excludedURLs != nil) {
-			for (NSURL *URL in excludedURLs) {
-				if ([eventPath hasPrefix:[URL path]]) {
+			for (NSURL *url in excludedURLs) {
+				if ([eventPath hasPrefix:[url path]]) {
 					shouldIgnore = YES;
 					break;
 				}
@@ -338,23 +341,17 @@ static void CDEventsCallback(
 		}
 		
 		if (!shouldIgnore) {
-			CDEvent *event = [[CDEvent alloc] initWithIdentifier:eventIds[i]
-												   date:[NSDate date]
-													URL:eventURL
-												  flags:eventFlags[i]];
+			CDEvent *event = [[CDEvent alloc] initWithIdentifier:identifier date:[NSDate date] URL:eventURL flags:flags];
+			lastEvent = event;
 			
 			CDEventsEventBlock eventBlock = [watcher eventBlock];
 			eventBlock(watcher, event);
-			
-			// Last event?
-			if (i == (numEvents - 1)) {
-				[watcher setLastEvent:event];
-			}
-			
 		}
 	}
 	
-	
+	if (lastEvent) {
+		[watcher setLastEvent:lastEvent];
+	}
 }
 
 @end
