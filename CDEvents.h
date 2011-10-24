@@ -70,7 +70,7 @@ extern NSString *const CDEventsEventStreamCreationFailureException;
  *
  * @since 1.0.0
  */
-#define CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY			(NSTimeInterval)3.0
+#define CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY			((NSTimeInterval)3.0)
 
 /**
  * The default value wheter events from sub directories should be ignored or not.
@@ -84,16 +84,14 @@ extern NSString *const CDEventsEventStreamCreationFailureException;
  *
  * @since 1.0.0
  */
-const CDEventsEventStreamCreationFlags kCDEventsDefaultEventStreamFlags =
-	(kFSEventStreamCreateFlagUseCFTypes |
-	 kFSEventStreamCreateFlagWatchRoot);
+extern const CDEventsEventStreamCreationFlags kCDEventsDefaultEventStreamFlags;
 
 /**
  * Use this to get all event since now when initializing a CDEvents object.
  *
  * @since 1.1.0
  */
-const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
+extern const CDEventIdentifier kCDEventsSinceEventNow;
 
 
 #pragma mark -
@@ -109,7 +107,7 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
  */
 @interface CDEvents : NSObject <NSCopying> {
 @private
-	id<CDEventsDelegate>		_delegate;
+	__weak id<CDEventsDelegate>	_delegate;
 	
 	FSEventStreamRef			_eventStream;
 	CFTimeInterval				_notificationLatency;
@@ -126,16 +124,20 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 }
 
 #pragma mark Properties
+/** @name Managing the Delegate */
 /**
  * The delegate object the <code>CDEvents</code> object calls when it recieves an event.
  *
- * @param delegate Delegate for the events object. <code>nil</code> removed the delegate.
+ * @param delegate Delegate for the events object. <code>nil</code> removes the delegate.
  * @return The events's delegate.
+ *
+ * @see CDEventsDelegate
  *
  * @since 1.0.0
  */
-@property (assign) id<CDEventsDelegate>		delegate;
+@property (assign) __weak id<CDEventsDelegate>	delegate;
 
+/** @name Getting Event Watcher Properties */
 /**
  * The (approximate) time intervall between notifications sent to the delegate.
  *
@@ -143,7 +145,7 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
  *
  * @since 1.0.0
  */
-@property (readonly) CFTimeInterval			notificationLatency;
+@property (readonly) CFTimeInterval				notificationLatency;
 
 /**
  * The event identifier from which events will be supplied to the delegate.
@@ -152,7 +154,37 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
  *
  * @since 1.0.0
  */
-@property (readonly) CDEventIdentifier		sinceEventIdentifier;
+@property (readonly) CDEventIdentifier			sinceEventIdentifier;
+
+/**
+ * The last event that occured and thas has been delivered to the delegate.
+ *
+ * @return The last event that occured and thas has been delivered to the delegate.
+ *
+ * @since 1.0.0
+ */
+@property (retain, readonly) CDEvent			*lastEvent;
+
+/**
+ * The URLs that we watch for events.
+ *
+ * @return An array of <code>NSURL</code> object for the URLs which we watch for events.
+ *
+ * @since 1.0.0
+ */
+@property (readonly) NSArray					*watchedURLs;
+
+
+/** @name Configuring the Event watcher */
+/**
+ * The URLs that we should ignore events from. 
+ *
+ * @return An array of <code>NSURL</code> object for the URLs which we want to ignore.
+ * @discussion Events from concerning these URLs and there sub-directories will not be delivered to the delegate.
+ *
+ * @since 1.0.0
+ */
+@property (copy) NSArray						*excludedURLs;
 
 /**
  * Wheter events from sub-directories of the watched URLs should be ignored or not.
@@ -162,38 +194,11 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
  *
  * @since 1.0.0
  */
-@property (assign) BOOL						ignoreEventsFromSubDirectories;
-
-/**
- * The last event that occured and thas has been delivered to the delegate.
- *
- * @return The last event that occured and thas has been delivered to the delegate.
- *
- * @since 1.0.0
- */
-@property (retain) CDEvent					*lastEvent;
-
-/**
- * The URLs that we watch for events.
- *
- * @return An array of <code>NSURL</code> object for the URLs which we watch for events.
- *
- * @since 1.0.0
- */
-@property (readonly) NSArray				*watchedURLs;
-
-/**
- * The URLs that we should ignore events from. 
- *
- * @return An array of <code>NSURL</code> object for the URLs which we want to ignore.
- * @discussion Events from concerning these URLs and there sub-directories will not be delivered to the delegate.
- *
- * @since 1.0.0
- */
-@property (copy) NSArray					*excludedURLs;
+@property (assign) BOOL							ignoreEventsFromSubDirectories;
 
 
 #pragma mark Event identifier class methods
+/** @name Current Event Identifier */
 /**
  * The current event identifier.
  *
@@ -207,28 +212,30 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 
 
 #pragma mark Init methods
+/** @name Creating CDEvents Objects */
 /**
  * Returns an <code>CDEvents</code> object initialized with the given URLs to watch.
  *
  * @param URLs An array of URLs we want to watch.
- * @param delegate The delegate object the <code>CDEvents</code> object calls when it recieves an event.
- * @return An <code>CDEvents</code> object initialized with the given URLs to watch. 
+ * @param delegate The delegate object the CDEvents object calls when it recieves an event.
+ * @return An CDEvents object initialized with the given URLs to watch. 
  * @throws NSInvalidArgumentException if <em>URLs</em> is empty or points to <code>nil</code>.
  * @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
  * @throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.
  *
  * @see initWithURLs:delegate:onRunLoop:
- * @see initWithURLs:delegate:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
+ * @see initWithURLs:delegate:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
+ * @see CDEventsDelegate
  * @see kCDEventsDefaultEventStreamFlags
  * @see kCDEventsSinceEventNow
  *
- * @discussion Calls startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
- * with <em>sinceEventIdentifier</em> with the event identifier for "event since
- * now", <em>notificationLatency</em> set to 3.0 seconds,
- * <em>ignoreEventsFromSubDirectories</em> set to <code>NO</code>,
- * <em>excludedURLs</em> to no URLs, the event stream creation flags will be set
- * to <code>kCDEventsDefaultEventStreamFlags</code> and schedueled on the
- * current run loop.
+ * @discussion Calls initWithURLs:delegate:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
+ * with <code>sinceEventIdentifier</code> with the event identifier for "event
+ * since now", <code>notificationLatency</code> set to 3.0 seconds,
+ * <code>ignoreEventsFromSubDirectories</code> set to <code>NO</code>,
+ * <code>excludedURLs</code> to <code>nil</code>, the event stream creation
+ * flags will be set to <code>kCDEventsDefaultEventStreamFlags</code> and
+ * schedueled on the current run loop.
  *
  * @since 1.0.0
  */
@@ -238,24 +245,25 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
  * Returns an <code>CDEvents</code> object initialized with the given URLs to watch and schedules the watcher on the given run loop.
  *
  * @param URLs An array of URLs we want to watch.
- * @param delegate The delegate object the <code>CDEvents</code> object calls when it recieves an event.
- * @param The run loop which the which the watcher should be schedueled on.
- * @return An <code>CDEvents</code> object initialized with the given URLs to watch.
+ * @param delegate The delegate object the CDEvents object calls when it recieves an event.
+ * @param runLoop The run loop which the which the watcher should be schedueled on.
+ * @return An CDEvents object initialized with the given URLs to watch.
  * @throws NSInvalidArgumentException if <em>URLs</em> is empty or points to <code>nil</code>.
  * @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
  * @throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.
  *
- * @see initWithURLs:
- * @see initWithURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
+ * @see initWithURLs:delegate:
+ * @see initWithURLs:delegate:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
+ * @see CDEventsDelegate
  * @see kCDEventsDefaultEventStreamFlags
  * @see kCDEventsSinceEventNow
  *
- * @discussion Calls startWatchingURLs:onRunLoop:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
- * with <em>runLoop</em> set to the current run loop, <em>sinceEventIdentifier</em>
- * with the event identifier for "event since now", <em>notificationLatency</em>
- * set to 3.0 seconds, <em>ignoreEventsFromSubDirectories</em> set to
- * <code>NO</code>, <em>excludedURLs</em> to no URLs and the event stream
- * creation flags will be set to <code>kCDEventsDefaultEventStreamFlags</code>.
+ * @discussion Calls initWithURLs:delegate:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:
+ * with <code>sinceEventIdentifier</code> with the event identifier for "event
+ * since now", <code>notificationLatency</code> set to 3.0 seconds,
+ * <code>ignoreEventsFromSubDirectories</code> set to <code>NO</code>,
+ * <code>excludedURLs</code> to <code>nil</code> and the event stream creation
+ * flags will be set to <code>kCDEventsDefaultEventStreamFlags</code>.
  *
  * @since 1.0.0
  */
@@ -263,30 +271,33 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 			delegate:(id<CDEventsDelegate>)delegate
 		  onRunLoop:(NSRunLoop *)runLoop;
 
+
+
 /**
  * Returns an <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and schedules the watcher on the given run loop.
  *
- * @param URLs An array of URLs we want to watch.
- * @param delegate The delegate object the <code>CDEvents</code> object calls when it recieves an event.
+ * @param URLs An array of URLs (<code>NSURL</code>) we want to watch.
+ * @param delegate The delegate object the CDEvents object calls when it recieves an event.
  * @param runLoop The run loop which the which the watcher should be schedueled on.
  * @param sinceEventIdentifier Events that have happened after the given event identifier will be supplied.
  * @param notificationLatency The (approximate) time intervall between notifications sent to the delegate.
  * @param ignoreEventsFromSubDirs Wheter events from sub-directories of the watched URLs should be ignored or not.
  * @param exludeURLs An array of URLs that we should ignore events from. Pass <code>nil</code> if none should be excluded.
  * @param streamCreationFlags The event stream creation flags.
- * @return An <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and run on the given run loop.
+ * @return An CDEvents object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and run on the given run loop.
  * @throws NSInvalidArgumentException if the parameter URLs is empty or points to <code>nil</code>.
  * @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
  * @throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.
  *
- * @see initWithURLs:
- * @see initWithURLs:onRunLoop:
+ * @see initWithURLs:delegate:
+ * @see initWithURLs:delegate:onRunLoop:
  * @see ignoreEventsFromSubDirectories
  * @see excludedURLs
+ * @see CDEventsDelegate
  * @see FSEventStreamCreateFlags
  *
  * @discussion To ask for events "since now" pass the return value of
- * currentEventIdentifier as the parameter sinceEventIdentifier.
+ * currentEventIdentifier as the parameter <code>sinceEventIdentifier</code>.
  * CDEventStreamCreationFailureException should be extremely rare.
  *
  * @since 1.0.0
@@ -301,7 +312,7 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
  streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags;
 
 #pragma mark Flush methods
-
+/** @name Flushing Events */
 /**
  * Flushes the event stream synchronously.
  *
@@ -325,6 +336,7 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 - (void)flushAsynchronously;
 
 #pragma mark Misc methods
+/** @name Events Description */
 /**
  * Returns a NSString containing the description of the current event stream.
  *

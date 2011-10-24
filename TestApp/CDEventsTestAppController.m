@@ -31,20 +31,53 @@
 #import <CDEvents/CDEvents.h>
 
 
+bool systemVersionIsAtLeast(SInt32 major, SInt32 minor)
+{
+    static SInt32 versionMajor = 0, versionMinor = 0;
+
+    if (versionMajor == 0) {
+        Gestalt(gestaltSystemVersionMajor, &versionMajor);
+    }
+
+    if (versionMinor == 0) {
+        Gestalt(gestaltSystemVersionMinor, &versionMinor);
+    }
+
+    return ((versionMajor > major) ||
+            ((versionMajor == major) && (versionMinor >= minor)));
+}
+
+
 @implementation CDEventsTestAppController
 
 - (void)run
-{
+{	
 	NSArray *watchedURLs = [NSArray arrayWithObject:
 							[NSURL URLWithString:[NSHomeDirectory()
 							 stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 	NSArray *excludeURLs = [NSMutableArray arrayWithObject:
-							[[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads"]
-							 stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+							[NSURL URLWithString:[[NSHomeDirectory() stringByAppendingPathComponent:@"Downloads"]
+									stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 	
+    CDEventsEventStreamCreationFlags creationFlags = kCDEventsDefaultEventStreamFlags;
+
+    if (systemVersionIsAtLeast(10,6)) {
+        creationFlags |= kFSEventStreamCreateFlagIgnoreSelf;
+    }
+
+    if (systemVersionIsAtLeast(10,7)) {
+        creationFlags |= kFSEventStreamCreateFlagFileEvents;
+    }
+
 	_events = [[CDEvents alloc] initWithURLs:watchedURLs
-									delegate:self];
-	[_events setExcludedURLs:excludeURLs];
+									delegate:self
+								   onRunLoop:[NSRunLoop currentRunLoop]
+						sinceEventIdentifier:kCDEventsSinceEventNow
+						notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
+					 ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
+								 excludeURLs:excludeURLs
+						 streamCreationFlags:creationFlags];
+	//[_events setIgnoreEventsFromSubDirectories:YES];
 	
 	NSLog(@"-[CDEventsTestAppController run]:\n%@\n------\n%@",
 		  _events,

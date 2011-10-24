@@ -13,11 +13,21 @@
 #pragma mark CDEvents custom exceptions
 NSString *const CDEventsEventStreamCreationFailureException = @"CDEventsEventStreamCreationFailureException";
 
+#pragma -
+#pragma mark Default values
+const CDEventsEventStreamCreationFlags kCDEventsDefaultEventStreamFlags =
+	(kFSEventStreamCreateFlagUseCFTypes |
+	 kFSEventStreamCreateFlagWatchRoot);
+
+const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
+
 
 #pragma mark -
 #pragma mark Private API
 // Private API
 @interface CDEvents ()
+
+@property (retain, readwrite) CDEvent *lastEvent;
 
 // The FSEvents callback function
 static void CDEventsCallback(
@@ -236,9 +246,11 @@ static void CDEventsCallback(
 {
 	CDEvents *watcher = (CDEvents *)callbackCtxInfo;
 	
-	NSArray *excludedURLs = [watcher excludedURLs];
-	NSArray *eventPathsArray = (NSArray *)eventPaths;
-	BOOL shouldIgnore;
+	NSArray *watchedURLs		= [watcher watchedURLs];
+	NSArray *excludedURLs		= [watcher excludedURLs];
+	NSArray *eventPathsArray	= (NSArray *)eventPaths;
+	BOOL shouldIgnore			= NO;
+	CDEvent *lastEvent			= nil;
 	
 	for (NSUInteger i = 0; i < numEvents; ++i) {
 		shouldIgnore = NO;
@@ -246,10 +258,19 @@ static void CDEventsCallback(
 		NSString *eventPath = [[eventPathsArray objectAtIndex:i]
 							   stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		NSURL *eventURL		= [NSURL URLWithString:eventPath];
+		// We do this hackery to ensure that the eventPath string doesn't
+		// contain any trailing slash.
+		eventPath			= [eventURL path];
 		
-		if ([excludedURLs containsObject:eventURL]) {
+		if ([watcher ignoreEventsFromSubDirectories]) {
 			shouldIgnore = YES;
-		} else if (excludedURLs != nil && [watcher ignoreEventsFromSubDirectories]) {
+			for (NSURL *URL in watchedURLs) {
+				if ([[URL path] isEqualToString:eventPath]) {
+					shouldIgnore = NO;
+					break;
+				}
+			}
+		} else if (excludedURLs != nil) {
 			for (NSURL *URL in excludedURLs) {
 				if ([eventPath hasPrefix:[URL path]]) {
 					shouldIgnore = YES;
@@ -263,6 +284,9 @@ static void CDEventsCallback(
 												   date:[NSDate date]
 													URL:eventURL
 												  flags:eventFlags[i]];
+			// Dispose of old lastEvent and retain the currently last
+			[lastEvent release];
+			lastEvent = [event retain];
 			
 			if ([(id)[watcher delegate] conformsToProtocol:@protocol(CDEventsDelegate)]) {
 				[[watcher delegate] URLWatcher:watcher eventOccurred:event];
@@ -277,7 +301,10 @@ static void CDEventsCallback(
 		}
 	}
 	
-	
+	if (lastEvent) {
+		[watcher setLastEvent:lastEvent];
+		[lastEvent release];
+	}
 }
 
 @end
