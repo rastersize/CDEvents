@@ -14,22 +14,31 @@ li {
 
 a {
 	text-decoration: none;
-	color: #36C;
+	/*color: #36C;*/
+	color: #db413d;
 }
 
 a:hover {
 	text-decoration: underline;
-	color: #36C;
+	/*color: #36C;*/
+	color: #db413d;
 }
 
 h1 {
-	color: #36C;
-	font-size: 200%;
+	color: #db413d;
+	font-size: 275%;
+	margin-bottom: -.125em;
+}
+
+h1 a, h1 a:hover, h1 a:active, h1 a:focus {
+	color: #db413d;
 }
 
 h2 {
-	border-bottom: 1px solid #8391A8;
-	color: #3C4C6C;
+	/*border-bottom: 1px solid #8391A8;
+	color: #3C4C6C;*/
+	border-bottom: 4px solid #db413d;
+	color: #D52823;
 	font-size: 160%;
 	font-weight: normal;
 	margin-top: 1.75em;
@@ -50,9 +59,21 @@ p {
 	padding-bottom: 2em;
 }
 
+.small {
+	font-size: 80%;
+}
+
+h1 .small {
+	font-size: 50%;
+}
+
 #container {
 	margin: 0 auto;
 	width: 700px;
+}
+
+.description {
+	margin-bottom: -2em;
 }
 
 code {
@@ -77,7 +98,7 @@ pre {
 
 
 code .keyword, pre .prompt {
-	color: #db403d;
+	color: #db413d;
 }
 
 code .method, code .property, pre .command, pre .program {
@@ -92,7 +113,7 @@ code .class {
 	color: #8d5bdb;
 }
 
-code .string {
+code .string, pre .argument {
 	color: #ba5bd7;
 }
 
