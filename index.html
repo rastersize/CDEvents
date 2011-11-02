@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+
+  <title>rastersize/CDEvents @ GitHub</title>
+
+  <style type="text/css">
+    body {
+      margin-top: 1.0em;
+      background-color: #0dbb84;
+      font-family: Helvetica, Arial, FreeSans, san-serif;
+      color: #ffffff;
+    }
+    #container {
+      margin: 0 auto;
+      width: 700px;
+    }
+    h1 { font-size: 3.8em; color: #f2447b; margin-bottom: 3px; }
+    h1 .small { font-size: 0.4em; }
+    h1 a { text-decoration: none }
+    h2 { font-size: 1.5em; color: #f2447b; }
+    h3 { text-align: center; color: #f2447b; }
+    a { color: #f2447b; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+    pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+  </style>
+</head>
+
+<body>
+  <a href="https://github.com/rastersize/CDEvents"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
+  <div id="container">
+
+    <div class="download">
+      <a href="https://github.com/rastersize/CDEvents/zipball/master">
+        <img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a>
+      <a href="https://github.com/rastersize/CDEvents/tarball/master">
+        <img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
+    </div>
+
+    <h1><a href="https://github.com/rastersize/CDEvents">CDEvents</a>
+      <span class="small">by <a href="https://github.com/rastersize">rastersize</a></span></h1>
+
+    <div class="description">
+      An Objective-C wrapper for Mac OS X's FSEvents C API.
+    </div>
+
+    
+      <p>CDEvents is an Objective-C wrapper for Mac OS X's [FSEvents C API](http://developer.apple.com/mac/library/documentation/Darwin/Reference/FSEvents_Ref/FSEvents_h/index.html) with support for blocks. Furthermore, all the classes are immutable and it should be thread-safe.</p>
+    
+
+    
+      <h2>Depdendencies</h2>
+      <p>- Mac OS X 10.6 (Snow Leopard)
+- Modern Objective-C runtime (i.e. 64-bit)
+- Intel 64-bit CPU.
+- Automatic Reference Counting </p>
+    
+
+    
+      <h2>Install</h2>
+      <p>1. Add CDEvents to your project,
+ * either by compiling the project and dragging the `CDEvents.framework` into your project or
+ * by dragging the entire CDEvents project into your project as a sub-project.
+2. Import the `CDEvents.h` header where you need it.
+3. Set up your `CDEvents` instance and give it a block to execute when a event occurs.
+
+Easy example code:
+
+    self.events = [[CDEvents alloc]] initWithURLs:<NSArray of URLs to watch>
+                                            block:^(CDEvents *watcher, CDEvent *event) {
+	                                            <Your code here>
+	                                        }];
+
+Or use all the glory-all-options initiator:
+
+    self.events = [[CDEvents alloc] initWithURLs:<NSArray of URLs to watch>
+                                           block:^(CDEvents *watcher, CDEvent *event) {
+                                               <Your code here>
+                                           }
+                                       onRunLoop:[NSRunLoop currentRunLoop]
+                            sinceEventIdentifier:kCDEventsSinceEventNow
+                            notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
+                         ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
+                                     excludeURLs:<NSArray of URLs to exlude>
+                             streamCreationFlags:kCDEventsDefaultEventStreamFlags];</p>
+    
+
+    
+      <h2>License</h2>
+      <p>Copyright (c) 2010, 2011 Aron Cedercrantz
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+    
+
+    
+      <h2>Authors</h2>
+      <p>Aron Cedercrantz (aron@cedercrantz.se)<br/>      </p>
+    
+
+    
+      <h2>Contact</h2>
+      <p>Aron Cedercrantz (aron@cedercrantz.se)<br/>      </p>
+    
+
+    <h2>Download</h2>
+    <p>
+      You can download this project in either
+      <a href="https://github.com/rastersize/CDEvents/zipball/master">zip</a> or
+      <a href="https://github.com/rastersize/CDEvents/tarball/master">tar formats.
+    </p>
+    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
+      by running:
+      <pre>$ git clone git://github.com/rastersize/CDEvents</pre>
+    </p>
+
+    <div class="footer">
+      get the source code on GitHub : <a href="https://github.com/rastersize/CDEvents">rastersize/CDEvents</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
