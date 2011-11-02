@@ -243,6 +243,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Aron Cedercrantz";
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "CDEvents" */;
 			compatibilityVersion = "Xcode 3.2";
