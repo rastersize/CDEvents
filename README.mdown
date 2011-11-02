@@ -1,6 +1,7 @@
 # CDEvents ![Project status](http://stillmaintained.com/rastersize/CDEvents.png) #
 ***Note:*** The `develop` branch **requires Mac OS X 10.6 or newer** as the framework relies on  [ARC](http://clang.llvm.org/docs/AutomaticReferenceCounting.html "Automatic Reference Counting Technical Specification") and [blocks](http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html "Blocks Programming Topics").
 
+Website: http://rastersize.github.com/CDEvents
 
 ## What is this? ##
 It's an Objective-C wrapper for Mac OS X's [FSEvents C API](http://developer.apple.com/mac/library/documentation/Darwin/Reference/FSEvents_Ref/FSEvents_h/index.html) with support for blocks. Furthermore, all the classes are immutable and it should be thread-safe.
