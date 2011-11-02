@@ -3,9 +3,9 @@
 <head>
   <meta charset='utf-8'>
 
-  <title>rastersize/CDEvents @ GitHub</title>
+  <title>CDEvents - Objective-C wrapper of FSEvents</title>
 
-  <style type="text/css">
+  <!--<style type="text/css">
     body {
       margin-top: 1.0em;
       background-color: #0dbb84;
@@ -27,7 +27,8 @@
     pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
+  </style>-->
+  <link rel="stylesheet" href="styles.css?v=1" type="text/css" media="screen" charset="utf-8">
 </head>
 
 <body>
@@ -50,65 +51,49 @@
     </div>
 
     
-      <p>CDEvents is an Objective-C wrapper for Mac OS X's [FSEvents C API](http://developer.apple.com/mac/library/documentation/Darwin/Reference/FSEvents_Ref/FSEvents_h/index.html) with support for blocks. Furthermore, all the classes are immutable and it should be thread-safe.</p>
+      <p>CDEvents is an Objective-C wrapper for Mac OS X's <a href="http://developer.apple.com/mac/library/documentation/Darwin/Reference/FSEvents_Ref/FSEvents_h/index.html" title="The FSEvents C API documentation on Apples developer site">FSEvents C API</a> with support for blocks. Furthermore, all the classes are immutable and it should be thread-safe.</p>
     
+      <h2 id="usage">Usage</h2>
+      <ol>
+         <li>Add CDEvents to your project,</li>
+         <ul>
+            <li>either by compiling the project and dragging the `CDEvents.framework` into your project or</li>
+            <li>by dragging the entire CDEvents project into your project as a sub-project.</li>
+         </ul>
+         <li>Import the `CDEvents.h` header where you need it.</li>
+         <li>Set up your `CDEvents` instance and give it a block to execute when a event occurs.</li>
+      </ol>
 
-    
-      <h2>Depdendencies</h2>
-      <p>- Mac OS X 10.6 (Snow Leopard)
-- Modern Objective-C runtime (i.e. 64-bit)
-- Intel 64-bit CPU.
-- Automatic Reference Counting </p>
-    
+<p>Short example which will print each event:</p>
+<code><pre>
+<span class="pre-processor">#import</span> <span class="string">&lt;CDEvents/CDEvents.h&gt;</span>
 
-    
-      <h2>Install</h2>
-      <p>1. Add CDEvents to your project,
- * either by compiling the project and dragging the `CDEvents.framework` into your project or
- * by dragging the entire CDEvents project into your project as a sub-project.
-2. Import the `CDEvents.h` header where you need it.
-3. Set up your `CDEvents` instance and give it a block to execute when a event occurs.
+...
 
-Easy example code:
+<span class="class">NSArray</span> *url  = [<span class="class">NSURL</span> <span class="method">URLWithString</span>:<span class="string">@"/path/to/directory"</span>];
+<span class="class">NSArray</span> *urls = [<span class="class">NSArray</span> <span class="method">arrayWithObject</span>:url];
+<span class="keyword">self</span>.<span class="property">events</span>   = [[<span class="class">CDEvents</span> <span class="method">alloc</span>]] <span class="method">initWithURLs</span>:urls <span class="method">block</span>:
+                    ^(<span class="class">CDEvents</span> *watcher, <span class="class">CDEvent</span> *event) {
+                        <span class="external-function">NSLog</span>(
+                            <span class="string">@"URLWatcher: %@\nEvent: %@"</span>,
+                            <span class="variable">watcher</span>,
+                            <span class="variable">event</span>
+                        );
+	            }];</pre></code>
 
-    self.events = [[CDEvents alloc]] initWithURLs:<NSArray of URLs to watch>
-                                            block:^(CDEvents *watcher, CDEvent *event) {
-	                                            <Your code here>
-	                                        }];
+<p>For a more complete example of usage please see the example application CDEventsTestApp target in the CDEvents Xcode project. Please, also have a look at the API documentation</p>
 
-Or use all the glory-all-options initiator:
+    <h2 id="documentation">Documentation</h2>
+    <p>View the <a href="docs/api">index of API documentation</a> for all version of CDEvents or go directly to <a href="docs/api/latest"> API documentation for the latest version</a> of CDEvents. Now and then the <a href="docs/api/head">API documentation for HEAD</a> is also updated. The API documentation for all versions of CDEvents can be</p>
 
-    self.events = [[CDEvents alloc] initWithURLs:<NSArray of URLs to watch>
-                                           block:^(CDEvents *watcher, CDEvent *event) {
-                                               <Your code here>
-                                           }
-                                       onRunLoop:[NSRunLoop currentRunLoop]
-                            sinceEventIdentifier:kCDEventsSinceEventNow
-                            notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
-                         ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
-                                     excludeURLs:<NSArray of URLs to exlude>
-                             streamCreationFlags:kCDEventsDefaultEventStreamFlags];</p>
-    
+	<h2>Depdendencies</h2>
+      <p>Requires <a href="http://www.apple.com/macosx/">Mac OS X</a> 10.6 (Snow Leopard) and an Intel 64-bit CPU. The requirements stems from that <a href="http://clang.llvm.org/docs/AutomaticReferenceCounting.html">automatic reference counting</a> (ARC) is supported from 10.6 and up as long as the modern (i.e. 64-bit) Objective-C runtime is used since ARC requires the non-fragile ABI. Although the built product works on 10.6 and up it must be built on a machine running 10.7 (Lion) using Xcode 4.2 and the 10.7 SDK as the 10.6 SDK does not include ARC. The built product support both manual memory management and automatic reference counting.</p>
 
-    
-      <h2>License</h2>
-      <p>Copyright (c) 2010, 2011 Aron Cedercrantz
+	<p>If you need to support older versions of OS X or garbage collection please see the branch <a href="https://github.com/rastersize/CDEvents/tree/support%2F1.1" title="CDEvents support branch 1.1 with support for GC and OS X 10.5">support/1.1</a> All 1.1.x version will support garbage collection and OS X 10.5.</p>
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-    
-
-    
-      <h2>Authors</h2>
-      <p>Aron Cedercrantz (aron@cedercrantz.se)<br/>      </p>
-    
-
-    
-      <h2>Contact</h2>
-      <p>Aron Cedercrantz (aron@cedercrantz.se)<br/>      </p>
+    <h2>Author</h2>
+    <p>Aron Cedercrantz (my first name: aron @ my last name: cedercrantz dot se, or <a href="http://github.com/inbox/new/rastersize" title="Send Aron Cedercrantz (rastersize) a message via GitHub">send me a message via GitHub</a>)
+<br/>      </p>
     
 
     <h2>Download</h2>
@@ -119,11 +104,20 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     </p>
     <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
       by running:
-      <pre>$ git clone git://github.com/rastersize/CDEvents</pre>
+      <pre><span class="prompt">$</span> <span class="program">git</span> <span class="command">clone</span> <span class="argument">git://github.com/rastersize/CDEvents</span></pre>
     </p>
 
+	<h2>License</h2>
+    <p>Copyright (c) 2010, 2011 Aron Cedercrantz</p>
+    
+    <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+    <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+    <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+
     <div class="footer">
-      get the source code on GitHub : <a href="https://github.com/rastersize/CDEvents">rastersize/CDEvents</a>
+	  © 2011 Aron Cedercrantz. View source on <a href="https://github.com/rastersize/CDEvents" title="View source on GitHub (repository: rastersize/CDEvents)">GitHub</a>.
     </div>
 
   </div>
