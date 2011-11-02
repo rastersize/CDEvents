@@ -74,6 +74,12 @@ For more details please refer to the documentation in the header files and the s
 
 
 ## API documentation ##
+Read the latest [API documentation](http://rastersize.github.com/CDEvents/docs/api/head) or [browse for each version](http://rastersize.github.com/CDEvents/docs/api) of CDEvents. Alternatively you can generate it yourself, please see below.
+
+### appledoc ###
+Run the script `api.appledoc.sh` from the root of the project. The script takes one optional argument, the version of the project as a string. If the version string is empty "HEAD" will be used instead.
+
+### Doxygen ###
 You can generate API documentation with the help of [Doxygen](http://www.stack.nl/~dimitri/doxygen/). In Doxygen open the file `api.doxygen`, click the `Run` tab and then the `Run doxygen` button. When it's done you should have a directory (ignored by git) in the root of the project named `api` with a sub-directory `html` in which you will find `index.html` double-click and enjoy.
 
 ## Author ##
