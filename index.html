@@ -14,6 +14,7 @@
   <div id="container">
 
     <div class="download">
+	  <p>Download the project</p>
       <a href="https://github.com/rastersize/CDEvents/zipball/master">
         <img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a>
       <a href="https://github.com/rastersize/CDEvents/tarball/master">
@@ -24,7 +25,7 @@
       <span class="small">by <a href="https://github.com/rastersize">rastersize</a></span></h1>
 
     <div class="description">
-      <p>CDEvents is an Objective-C wrapper for Mac OS X's <a href="http://developer.apple.com/mac/library/documentation/Darwin/Reference/FSEvents_Ref/FSEvents_h/index.html" title="The FSEvents C API documentation on Apples developer site">FSEvents C API</a> with support for blocks. Furthermore, all the classes are immutable and it should be thread-safe.</p>
+      <p>CDEvents is an Objective-C wrapper for Mac OS X's <a href="http://developer.apple.com/mac/library/documentation/Darwin/Reference/FSEvents_Ref/FSEvents_h/index.html" title="The FSEvents C API documentation on Apples developer site">FSEvents C API</a> with support for blocks. Furthermore, all the classes are immutable.</p>
     </div>
     
       <h2 id="usage">Usage</h2>
@@ -60,7 +61,7 @@
     <h2 id="documentation">Documentation</h2>
     <p>View the <a href="docs/api">index of API documentation</a> for all version of CDEvents or go directly to <a href="docs/api/latest"> API documentation for the latest version</a> of CDEvents. Now and then the <a href="docs/api/head">API documentation for HEAD</a> is also updated. The API documentation for all versions of CDEvents can be</p>
 
-	<h2>Depdendencies</h2>
+	<h2>Requirements</h2>
       <p>Requires <a href="http://www.apple.com/macosx/">Mac OS X</a> 10.6 (Snow Leopard) and an Intel 64-bit CPU. The requirements stems from that <a href="http://clang.llvm.org/docs/AutomaticReferenceCounting.html">automatic reference counting</a> (ARC) is supported from 10.6 and up as long as the modern (i.e. 64-bit) Objective-C runtime is used since ARC requires the non-fragile ABI. Although the built product works on 10.6 and up it must be built on a machine running 10.7 (Lion) using Xcode 4.2 and the 10.7 SDK as the 10.6 SDK does not include ARC. The built product support both manual memory management and automatic reference counting.</p>
 
 	<p>If you need to support older versions of OS X or garbage collection please see the branch <a href="https://github.com/rastersize/CDEvents/tree/support%2F1.1" title="CDEvents support branch 1.1 with support for GC and OS X 10.5">support/1.1</a> All 1.1.x version will support garbage collection and OS X 10.5.</p>
@@ -82,19 +83,10 @@
     </p>
 
 	<h2>License</h2>
-	<p>CDEvents is licensed under the <a href="http://en.wikipedia.org/wiki/MIT_License">MIT license</a> (the Expat version).</p>
-	<blockquote>
-        <p>Copyright (c) 2010, 2011 Aron Cedercrantz</p>
-        
-        <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
-
-        <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
-
-        <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-	</blockquote>
+	<p>CDEvents is licensed under the <a href="http://en.wikipedia.org/wiki/MIT_License">MIT license</a> (the Expat version). See the <a href="https://github.com/rastersize/CDEvents/blob/develop/LICENSE" title="CDEvents license file">LICENSE file</a> in the project root for the full text.</p>
 
     <div class="footer">
-	  © 2011 Aron Cedercrantz. View source on <a href="https://github.com/rastersize/CDEvents" title="View source on GitHub (repository: rastersize/CDEvents)">GitHub</a>.
+	  © 2011 <a href="http://aron.cedercrantz.com/">Aron Cedercrantz</a>. View source on <a href="https://github.com/rastersize/CDEvents" title="View source on GitHub (repository: rastersize/CDEvents)">GitHub</a>.
     </div>
 
   </div>

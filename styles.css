@@ -2,46 +2,39 @@ body {
 	font-family: 'Helvetica Nueu',Helvetica,Arial,FreeSans,sans-serif;
 	font-size: 18px;
 	margin-top: 1em;
-}
-
-ul {
-	list-style-type: square;
+	color: #333;
 }
 
 li {
-	margin-bottom: 10px;
+	margin-bottom: .5em;
 }
 
 a {
 	text-decoration: none;
-	/*color: #36C;*/
-	color: #db413d;
+	color: #36C;
 }
 
 a:hover {
 	text-decoration: underline;
-	/*color: #36C;*/
-	color: #db413d;
+	color: #36C;
 }
 
 h1 {
-	color: #db413d;
+	color: #000;
 	font-size: 275%;
 	margin-bottom: -.125em;
 }
 
 h1 a, h1 a:hover, h1 a:active, h1 a:focus {
-	color: #db413d;
+	color: #000;
 }
 
 h2 {
-	/*border-bottom: 1px solid #8391A8;
-	color: #3C4C6C;*/
-	border-bottom: 4px solid #db413d;
-	color: #D52823;
+	color: #000;
 	font-size: 160%;
 	font-weight: normal;
 	margin-top: 1.75em;
+	margin-bottom: -.125em;
 	padding-bottom: 2px;	
 }
 
@@ -49,14 +42,25 @@ p {
 	line-height: 1.5em;
 }
 
-.download { float: right; }
+.download {
+	color: #666;
+	float: right;
+	margin-top: 1em;
+}
+
+.download p {
+	margin-bottom: -.25em;
+	margin-left: 15px;
+	font-size: 80%;
+	font-weight: bold;
+}
 
 .footer {
 	font-size: 80%;
 	color: #666;
 	text-align: center;
-	padding-top: 1em;
-	padding-bottom: 2em;
+	padding-top: 2.5em;
+	padding-bottom: 10em;
 }
 
 .small {
@@ -73,7 +77,8 @@ h1 .small {
 }
 
 .description {
-	margin-bottom: -2em;
+	margin-bottom: -1em;
+	font-size: 110%;
 }
 
 code {
@@ -119,4 +124,12 @@ code .string, pre .argument {
 
 code .pre-processor {
 	color: #c7afff;
+}
+
+blockquote {
+	color: #666;
+	font-family: Courier, Consolas, monospace;
+	font-size: 80%;
+	margin-left: 2em;
+	margin-right: 2em;
 }
