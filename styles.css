@@ -1,5 +1,5 @@
 body {
-	font-family: 'Helvetica Nueu',Helvetica,Arial,FreeSans,sans-serif;
+	font-family: 'HelveticaNeue',Helvetica,Arial,FreeSans,sans-serif;
 	font-size: 18px;
 	margin-top: 1em;
 	color: #333;
@@ -22,6 +22,7 @@ a:hover {
 h1 {
 	color: #000;
 	font-size: 275%;
+	font-weight: bold;
 	margin-bottom: -.125em;
 }
 
