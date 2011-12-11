@@ -84,7 +84,7 @@ Run the script `api.appledoc.sh` from the root of the project. The script takes 
 You can generate API documentation with the help of [Doxygen](http://www.stack.nl/~dimitri/doxygen/). In Doxygen open the file `api.doxygen`, click the `Run` tab and then the `Run doxygen` button. When it's done you should have a directory (ignored by git) in the root of the project named `api` with a sub-directory `html` in which you will find `index.html` double-click and enjoy.
 
 ## Contributors ##
-See GitHubs [https://github.com/rastersize/CDEvents/contributors](contributors to rastersize/CDEvents) statistics page.
+See GitHubs [contributors to rastersize/CDEvents](https://github.com/rastersize/CDEvents/contributors) statistics page.
 
 ## License ##
 The code is released under the [MIT-license](http://www.opensource.org/licenses/mit-license.php).
