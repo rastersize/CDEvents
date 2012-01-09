@@ -30,7 +30,7 @@ Easy example code:
 	                                            <Your code here>
 	                                        }];
 
-Or use all the glory-all-options initiator:
+Or use all the all-options initiator:
 
     self.events = [[CDEvents alloc] initWithURLs:<NSArray of URLs to watch>
                                            block:^(CDEvents *watcher, CDEvent *event) {
