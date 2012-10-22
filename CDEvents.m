@@ -316,9 +316,8 @@ static void CDEventsCallback(
 		
 		// We do this hackery to ensure that the eventPath string doesn't
 		// contain any trailing slash.
-		NSString *eventPath = [[eventPathsArray objectAtIndex:i] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		NSURL *eventURL		= [NSURL fileURLWithPath:eventPath];
-		eventPath			= [eventURL path];
+		NSURL *eventURL		= [NSURL fileURLWithPath:[[eventPathsArray objectAtIndex:i] stringByStandardizingPath]];
+		NSString *eventPath	= [eventURL path];
 		
 		// Ignore all events except for the URLs we are explicitly watching.
 		if ([watcher ignoreEventsFromSubDirectories]) {
