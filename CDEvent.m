@@ -27,7 +27,6 @@
  */
 
 #import "CDEvent.h"
-#import "compat.h"
 
 @implementation CDEvent
 
