@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
-		<meta name="generator" content="appledoc 2.0.4 (build 703)" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
 	</head>
 	<body>
 		<header id="top_header">
@@ -40,9 +40,11 @@
 	
 	<option value="properties">Properties</option>
 	
-	<option value="//api/name/excludedURLs">&nbsp;&nbsp;&nbsp;&nbsp;excludedURLs</option>
+	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
 	
-	<option value="//api/name/id">&nbsp;&nbsp;&nbsp;&nbsp;id</option>
+	<option value="//api/name/eventBlock">&nbsp;&nbsp;&nbsp;&nbsp;eventBlock</option>
+	
+	<option value="//api/name/excludedURLs">&nbsp;&nbsp;&nbsp;&nbsp;excludedURLs</option>
 	
 	<option value="//api/name/ignoreEventsFromSubDirectories">&nbsp;&nbsp;&nbsp;&nbsp;ignoreEventsFromSubDirectories</option>
 	
@@ -70,6 +72,12 @@
 	
 	<option value="//api/name/flushSynchronously">&nbsp;&nbsp;&nbsp;&nbsp;- flushSynchronously</option>
 	
+	<option value="//api/name/initWithURLs:block:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithURLs:block:</option>
+	
+	<option value="//api/name/initWithURLs:block:onRunLoop:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithURLs:block:onRunLoop:</option>
+	
+	<option value="//api/name/initWithURLs:block:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithURLs:block:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:</option>
+	
 	<option value="//api/name/initWithURLs:delegate:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithURLs:delegate:</option>
 	
 	<option value="//api/name/initWithURLs:delegate:onRunLoop:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithURLs:delegate:onRunLoop:</option>
@@ -96,13 +104,17 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Managing the Delegate">Managing the Delegate</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Getting Event Block">Getting Event Block</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Getting Event Watcher Properties">Getting Event Watcher Properties</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Configuring the Event watcher">Configuring the Event watcher</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Current Event Identifier">Current Event Identifier</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Creating CDEvents Objects">Creating CDEvents Objects</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Creating CDEvents Objects With a Delegate">Creating CDEvents Objects With a Delegate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Creating CDEvents Objects With a Block">Creating CDEvents Objects With a Block</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Flushing Events">Flushing Events</a></span></li>
 	
@@ -116,9 +128,11 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/excludedURLs">excludedURLs</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/id">id</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/eventBlock">eventBlock</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/excludedURLs">excludedURLs</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/ignoreEventsFromSubDirectories">ignoreEventsFromSubDirectories</a></span></li>
 	
@@ -147,6 +161,12 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/flushAsynchronously">flushAsynchronously</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/flushSynchronously">flushSynchronously</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithURLs:block:">initWithURLs:block:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithURLs:block:onRunLoop:">initWithURLs:block:onRunLoop:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithURLs:block:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:">initWithURLs:block:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithURLs:delegate:">initWithURLs:delegate:</a></span></li>
 	
@@ -196,9 +216,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>An Objective-C wrapper for the <code>FSEvents</code> C API.</p>
-
-<p>@note Inpired by <code>SCEvents</code> class of the <code>SCEvents</code> project by Stuart Connolly.</p>
+						<p>An Objective-C wrapper for the <code>FSEvents</code> C API.</p><div class="note"><p><strong>Note:</strong> Inpired by <code>SCEvents</code> class of the <code>SCEvents</code> project by Stuart Connolly.</p></div>
 					</div>
 					
 					
@@ -216,8 +234,23 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/id">&nbsp;&nbsp;id</a></code>
+		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
 		<span class="tooltip"><p>The delegate object the <code>CDEvents</code> object calls when it recieves an event.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Getting Event Block" name="task_Getting Event Block"></a>
+						<h3 class="subsubtitle task-title">Getting Event Block</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/eventBlock">&nbsp;&nbsp;eventBlock</a></code>
+		<span class="tooltip"><p>The event block.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -232,21 +265,21 @@
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/notificationLatency">&nbsp;&nbsp;notificationLatency</a></code>
-		<span class="tooltip"><p>The (approximate) time intervall between notifications sent to the delegate.</p></span>
+		<span class="tooltip"><p>The (approximate) time intervall between notifications sent to the <a href="#//api/name/delegate">delegate</a>.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/sinceEventIdentifier">&nbsp;&nbsp;sinceEventIdentifier</a></code>
-		<span class="tooltip"><p>The event identifier from which events will be supplied to the delegate.</p></span>
+		<span class="tooltip"><p>The event identifier from which events will be supplied to the <a href="#//api/name/delegate">delegate</a>.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/lastEvent">&nbsp;&nbsp;lastEvent</a></code>
-		<span class="tooltip"><p>The last event that occured and thas has been delivered to the delegate.</p></span>
+		<span class="tooltip"><p>The last event that occured and has been delivered to the <a href="#//api/name/delegate">delegate</a>.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -298,8 +331,8 @@
 						</ul>
 						
 						
-						<a title="Creating CDEvents Objects" name="task_Creating CDEvents Objects"></a>
-						<h3 class="subsubtitle task-title">Creating CDEvents Objects</h3>
+						<a title="Creating CDEvents Objects With a Delegate" name="task_Creating CDEvents Objects With a Delegate"></a>
+						<h3 class="subsubtitle task-title">Creating CDEvents Objects With a Delegate</h3>
 
 						<ul class="task-list">
 							<li>
@@ -319,6 +352,35 @@
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/initWithURLs:delegate:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:">&ndash;&nbsp;initWithURLs:delegate:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:</a></code>
+		<span class="tooltip"><p>Returns an <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and schedules the watcher on the given run loop.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Creating CDEvents Objects With a Block" name="task_Creating CDEvents Objects With a Block"></a>
+						<h3 class="subsubtitle task-title">Creating CDEvents Objects With a Block</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithURLs:block:">&ndash;&nbsp;initWithURLs:block:</a></code>
+		<span class="tooltip"><p>Returns an <code>CDEvents</code> object initialized with the given URLs to watch.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithURLs:block:onRunLoop:">&ndash;&nbsp;initWithURLs:block:onRunLoop:</a></code>
+		<span class="tooltip"><p>Returns an <code>CDEvents</code> object initialized with the given URLs to watch and schedules the watcher on the given run loop.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithURLs:block:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:">&ndash;&nbsp;initWithURLs:block:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:</a></code>
 		<span class="tooltip"><p>Returns an <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and schedules the watcher on the given run loop.</p></span>
 	</span>
 	
@@ -374,58 +436,8 @@
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/excludedURLs" title="excludedURLs"></a>
-	<h3 class="subsubtitle method-title">excludedURLs</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The URLs that we should ignore events from.</p>
-	</div>		
-	
-	
-	<div class="method-subsection method-declaration"><code>@property (copy) NSArray *excludedURLs</code></div>
-	
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>An array of <code>NSURL</code> object for the URLs which we want to ignore.
-@discussion Events from concerning these URLs and there sub-directories will not be delivered to the delegate.</p>
-	</div>
-	
-	
-	
-	<div class="method-subsection availability">
-		<h4 class="method-subtitle parameter-title">Availability</h4>
-		<p>1.0.0</p>
-	</div>
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The URLs that we should ignore events from.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">CDEvents.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/id" title="id"></a>
-	<h3 class="subsubtitle method-title">id</h3>
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="subsubtitle method-title">delegate</h3>
 	
 	
 	
@@ -434,7 +446,7 @@
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (assign) __weak id</code></div>
+	<div class="method-subsection method-declaration"><code>@property (unsafe_unretained) id&lt;CDEventsDelegate&gt; delegate</code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -480,6 +492,105 @@
 			
 		</ul>
 	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CDEvents.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/eventBlock" title="eventBlock"></a>
+	<h3 class="subsubtitle method-title">eventBlock</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The event block.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (readonly) CDEventsEventBlock eventBlock</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The CDEventsEventBlock block which is executed when an event occurs.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>head</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The event block.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CDEvents.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/excludedURLs" title="excludedURLs"></a>
+	<h3 class="subsubtitle method-title">excludedURLs</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The URLs that we should ignore events from.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (copy) NSArray *excludedURLs</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An array of <code>NSURL</code> object for the URLs which we want to ignore.
+@discussion Events from concerning these URLs and there sub-directories will not be delivered to the <a href="#//api/name/delegate">delegate</a>.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>1.0.0</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The URLs that we should ignore events from.</p>
+	</div>
+	
+	
+	
+	
 	
 	
 	
@@ -557,18 +668,18 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The last event that occured and thas has been delivered to the delegate.</p>
+		<p>The last event that occured and has been delivered to the <a href="#//api/name/delegate">delegate</a>.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (retain, readonly) CDEvent *lastEvent</code></div>
+	<div class="method-subsection method-declaration"><code>@property (strong, readonly) CDEvent *lastEvent</code></div>
 	
 	
 	
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The last event that occured and thas has been delivered to the delegate.</p>
+		<p>The last event that occured and has been delivered to the <a href="#//api/name/delegate">delegate</a>.</p>
 	</div>
 	
 	
@@ -582,7 +693,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The last event that occured and thas has been delivered to the delegate.</p>
+		<p>The last event that occured and has been delivered to the <a href="#//api/name/delegate">delegate</a>.</p>
 	</div>
 	
 	
@@ -606,7 +717,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The (approximate) time intervall between notifications sent to the delegate.</p>
+		<p>The (approximate) time intervall between notifications sent to the <a href="#//api/name/delegate">delegate</a>.</p>
 	</div>		
 	
 	
@@ -631,7 +742,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The (approximate) time intervall between notifications sent to the delegate.</p>
+		<p>The (approximate) time intervall between notifications sent to the <a href="#//api/name/delegate">delegate</a>.</p>
 	</div>
 	
 	
@@ -655,7 +766,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The event identifier from which events will be supplied to the delegate.</p>
+		<p>The event identifier from which events will be supplied to the <a href="#//api/name/delegate">delegate</a>.</p>
 	</div>		
 	
 	
@@ -666,7 +777,7 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The event identifier from which events will be supplied to the delegate.</p>
+		<p>The event identifier from which events will be supplied to the <a href="#//api/name/delegate">delegate</a>.</p>
 	</div>
 	
 	
@@ -680,7 +791,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The event identifier from which events will be supplied to the delegate.</p>
+		<p>The event identifier from which events will be supplied to the <a href="#//api/name/delegate">delegate</a>.</p>
 	</div>
 	
 	
@@ -708,7 +819,7 @@
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (readonly) NSArray *watchedURLs</code></div>
+	<div class="method-subsection method-declaration"><code>@property (copy, readonly) NSArray *watchedURLs</code></div>
 	
 	
 	
@@ -792,15 +903,6 @@
 	
 	
 	
-	
-	<div class="method-subsection see-also-section">
-		<h4 class="method-subtitle">See Also</h4>
-		<ul>
-			
-			<li><code><p>FSEventsGetCurrentEventId(vo<a href="#//api/name/id">@property id</a>)</p></code></li>
-			
-		</ul>
-	</div>
 	
 	
 	
@@ -931,6 +1033,304 @@
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/initWithURLs:block:" title="initWithURLs:block:"></a>
+	<h3 class="subsubtitle method-title">initWithURLs:block:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an <code>CDEvents</code> object initialized with the given URLs to watch.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithURLs:(NSArray *)<em>URLs</em> block:(CDEventsEventBlock)<em>block</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>URLs</em></dt>
+			<dd><p>An array of URLs we want to watch.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>block</em></dt>
+			<dd><p>The block which the CDEvents object executes when it recieves an event.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An CDEvents object initialized with the given URLs to watch.
+@throws NSInvalidArgumentException if <em>URLs</em> is empty or points to <code>nil</code>.
+@throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
+@throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>head</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns an <code>CDEvents</code> object initialized with the given URLs to watch.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/initWithURLs:delegate:onRunLoop:">&ndash; initWithURLs:delegate:onRunLoop:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithURLs:delegate:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:">&ndash; initWithURLs:delegate:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:</a></p></code></li>
+			
+			<li><code><p>kCDEventsSinceEventNow</p>
+
+<p>@discussion Calls <a href="#//api/name/initWithURLs:block:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:">&ndash; initWithURLs:block:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:</a>
+with <code>sinceEventIdentifier</code> with the event identifier for &ldquo;event
+since now&rdquo;, <code>notificationLatency</code> set to 3.0 seconds,
+<code>ignoreEventsFromSubDirectories</code> set to <code>NO</code>,
+<code>excludedURLs</code> to <code>nil</code>, the event stream creation
+flags will be set to <code>kCDEventsDefaultEventStreamFlags</code> and
+schedueled on the current run loop.</p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CDEvents.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithURLs:block:onRunLoop:" title="initWithURLs:block:onRunLoop:"></a>
+	<h3 class="subsubtitle method-title">initWithURLs:block:onRunLoop:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an <code>CDEvents</code> object initialized with the given URLs to watch and schedules the watcher on the given run loop.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithURLs:(NSArray *)<em>URLs</em> block:(CDEventsEventBlock)<em>block</em> onRunLoop:(NSRunLoop *)<em>runLoop</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>URLs</em></dt>
+			<dd><p>An array of URLs we want to watch.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>block</em></dt>
+			<dd><p>The block which the CDEvents object executes when it recieves an event.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>runLoop</em></dt>
+			<dd><p>The run loop which the which the watcher should be schedueled on.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An CDEvents object initialized with the given URLs to watch.
+@throws NSInvalidArgumentException if <em>URLs</em> is empty or points to <code>nil</code>.
+@throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
+@throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>head</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns an <code>CDEvents</code> object initialized with the given URLs to watch and schedules the watcher on the given run loop.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/initWithURLs:delegate:">&ndash; initWithURLs:delegate:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithURLs:delegate:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:">&ndash; initWithURLs:delegate:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:</a></p></code></li>
+			
+			<li><code><p>kCDEventsSinceEventNow</p>
+
+<p>@discussion Calls <a href="#//api/name/initWithURLs:delegate:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:">&ndash; initWithURLs:delegate:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:</a>
+with <code>sinceEventIdentifier</code> with the event identifier for &ldquo;event
+since now&rdquo;, <code>notificationLatency</code> set to 3.0 seconds,
+<code>ignoreEventsFromSubDirectories</code> set to <code>NO</code>,
+<code>excludedURLs</code> to <code>nil</code> and the event stream creation
+flags will be set to <code>kCDEventsDefaultEventStreamFlags</code>.</p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CDEvents.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithURLs:block:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:" title="initWithURLs:block:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:"></a>
+	<h3 class="subsubtitle method-title">initWithURLs:block:onRunLoop:sinceEventIdentifier:notificationLantency:ignoreEventsFromSubDirs:excludeURLs:streamCreationFlags:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and schedules the watcher on the given run loop.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithURLs:(NSArray *)<em>URLs</em> block:(CDEventsEventBlock)<em>block</em> onRunLoop:(NSRunLoop *)<em>runLoop</em> sinceEventIdentifier:(CDEventIdentifier)<em>sinceEventIdentifier</em> notificationLantency:(CFTimeInterval)<em>notificationLatency</em> ignoreEventsFromSubDirs:(BOOL)<em>ignoreEventsFromSubDirs</em> excludeURLs:(NSArray *)<em>exludeURLs</em> streamCreationFlags:(CDEventsEventStreamCreationFlags)<em>streamCreationFlags</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>URLs</em></dt>
+			<dd><p>An array of URLs (<code>NSURL</code>) we want to watch.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>block</em></dt>
+			<dd><p>The block which the CDEvents object executes when it recieves an event.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>runLoop</em></dt>
+			<dd><p>The run loop which the which the watcher should be schedueled on.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>sinceEventIdentifier</em></dt>
+			<dd><p>Events that have happened after the given event identifier will be supplied.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>notificationLatency</em></dt>
+			<dd><p>The (approximate) time intervall between notifications sent to the <a href="#//api/name/delegate">delegate</a>.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>ignoreEventsFromSubDirs</em></dt>
+			<dd><p>Wheter events from sub-directories of the watched URLs should be ignored or not.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>exludeURLs</em></dt>
+			<dd><p>An array of URLs that we should ignore events from. Pass <code>nil</code> if none should be excluded.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>streamCreationFlags</em></dt>
+			<dd><p>The event stream creation flags.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An CDEvents object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and run on the given run loop.
+@throws NSInvalidArgumentException if the parameter URLs is empty or points to <code>nil</code>.
+@throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
+@throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>head</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns an <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and schedules the watcher on the given run loop.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/initWithURLs:delegate:">&ndash; initWithURLs:delegate:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithURLs:delegate:onRunLoop:">&ndash; initWithURLs:delegate:onRunLoop:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/ignoreEventsFromSubDirectories">@property ignoreEventsFromSubDirectories</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/excludedURLs">@property excludedURLs</a></p></code></li>
+			
+			<li><code><p>FSEventStreamCreateFlags</p>
+
+<p>@discussion To ask for events &ldquo;since now&rdquo; pass the return value of
+<a href="#//api/name/currentEventIdentifier">+ currentEventIdentifier</a> as the parameter <code>sinceEventIdentifier</code>.
+CDEventStreamCreationFailureException should be extremely rare.</p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">CDEvents.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/initWithURLs:delegate:" title="initWithURLs:delegate:"></a>
 	<h3 class="subsubtitle method-title">initWithURLs:delegate:</h3>
 	
@@ -954,7 +1354,7 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>delegate</em></dt>
-			<dd><p>The delegate object the <a href="CDEvents.html">CDEvents</a> object calls when it recieves an event.</p></dd>
+			<dd><p>The <a href="#//api/name/delegate">delegate</a> object the CDEvents object calls when it recieves an event.</p></dd>
 		</dl>
 		
 	</div>
@@ -963,7 +1363,7 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>An <a href="CDEvents.html">CDEvents</a> object initialized with the given URLs to watch.
+		<p>An CDEvents object initialized with the given URLs to watch.
 @throws NSInvalidArgumentException if <em>URLs</em> is empty or points to <code>nil</code>.
 @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
 @throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.</p>
@@ -1044,7 +1444,7 @@ schedueled on the current run loop.</p></code></li>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>delegate</em></dt>
-			<dd><p>The delegate object the <a href="CDEvents.html">CDEvents</a> object calls when it recieves an event.</p></dd>
+			<dd><p>The <a href="#//api/name/delegate">delegate</a> object the CDEvents object calls when it recieves an event.</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
@@ -1058,7 +1458,7 @@ schedueled on the current run loop.</p></code></li>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>An <a href="CDEvents.html">CDEvents</a> object initialized with the given URLs to watch.
+		<p>An CDEvents object initialized with the given URLs to watch.
 @throws NSInvalidArgumentException if <em>URLs</em> is empty or points to <code>nil</code>.
 @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
 @throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.</p>
@@ -1138,7 +1538,7 @@ flags will be set to <code>kCDEventsDefaultEventStreamFlags</code>.</p></code></
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>delegate</em></dt>
-			<dd><p>The delegate object the <a href="CDEvents.html">CDEvents</a> object calls when it recieves an event.</p></dd>
+			<dd><p>The <a href="#//api/name/delegate">delegate</a> object the CDEvents object calls when it recieves an event.</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
@@ -1153,7 +1553,7 @@ flags will be set to <code>kCDEventsDefaultEventStreamFlags</code>.</p></code></
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>notificationLatency</em></dt>
-			<dd><p>The (approximate) time intervall between notifications sent to the delegate.</p></dd>
+			<dd><p>The (approximate) time intervall between notifications sent to the <a href="#//api/name/delegate">delegate</a>.</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
@@ -1177,7 +1577,7 @@ flags will be set to <code>kCDEventsDefaultEventStreamFlags</code>.</p></code></
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>An <a href="CDEvents.html">CDEvents</a> object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and run on the given run loop.
+		<p>An CDEvents object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and run on the given run loop.
 @throws NSInvalidArgumentException if the parameter URLs is empty or points to <code>nil</code>.
 @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
 @throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.</p>
@@ -1296,9 +1696,9 @@ CDEventStreamCreationFailureException should be extremely rare.</p></code></li>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2011 Aron Cedercrantz. All rights reserved. (Last updated: 2011-11-02)</span><br />
+						<p><span class="copyright">&copy; 2012 Aron Cedercrantz. All rights reserved. (Last updated: 2012-11-21)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 703)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
 					</div>
 				</div>

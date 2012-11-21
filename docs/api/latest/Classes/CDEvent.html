@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
-		<meta name="generator" content="appledoc 2.0.4 (build 703)" />
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
 	</head>
 	<body>
 		<header id="top_header">
@@ -196,10 +196,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>An Objective-C wrapper for a <code>FSEvents</code> event data.</p>
-
-<p>@note Inpired by <code>SCEvent</code> class of the <code>SCEvents</code> project by Stuart Connolly.
-@note The class is immutable.</p>
+						<p>An Objective-C wrapper for a <code>FSEvents</code> event data.</p><div class="note"><p><strong>Note:</strong> Inpired by <code>SCEvent</code> class of the <code>SCEvents</code> project by Stuart Connolly.</p></div><div class="note"><p><strong>Note:</strong> The class is immutable.</p></div>
 					</div>
 					
 					
@@ -218,21 +215,21 @@
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/identifier">&nbsp;&nbsp;identifier</a></code>
-		<span class="tooltip"><p>The event <a href="#//api/name/identifier">identifier</a>.</p></span>
+		<span class="tooltip"><p>The event identifier.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/date">&nbsp;&nbsp;date</a></code>
-		<span class="tooltip"><p>An approximate <a href="#//api/name/date">date</a> and time the event occured.</p></span>
+		<span class="tooltip"><p>An approximate date and time the event occured.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/URL">&nbsp;&nbsp;URL</a></code>
-		<span class="tooltip"><p>The <a href="#//api/name/URL">URL</a> of the item which changed.</p></span>
+		<span class="tooltip"><p>The URL of the item which changed.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -247,7 +244,7 @@
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/flags">&nbsp;&nbsp;flags</a></code>
-		<span class="tooltip"><p>The <a href="#//api/name/flags">flags</a> of the event.</p></span>
+		<span class="tooltip"><p>The flags of the event.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -366,18 +363,18 @@ singular event where a file has been created, modified, and removed.</p></span>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The <a href="#//api/name/URL">URL</a> of the item which changed.</p>
+		<p>The URL of the item which changed.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (readonly) NSURL *URL</code></div>
+	<div class="method-subsection method-declaration"><code>@property (unsafe_unretained, readonly) NSURL *URL</code></div>
 	
 	
 	
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The <a href="#//api/name/URL">URL</a> of the item which changed.</p>
+		<p>The URL of the item which changed.</p>
 	</div>
 	
 	
@@ -391,7 +388,7 @@ singular event where a file has been created, modified, and removed.</p></span>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The <a href="#//api/name/URL">URL</a> of the item which changed.</p>
+		<p>The URL of the item which changed.</p>
 	</div>
 	
 	
@@ -415,18 +412,18 @@ singular event where a file has been created, modified, and removed.</p></span>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>An approximate <a href="#//api/name/date">date</a> and time the event occured.</p>
+		<p>An approximate date and time the event occured.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (readonly) NSDate *date</code></div>
+	<div class="method-subsection method-declaration"><code>@property (unsafe_unretained, readonly) NSDate *date</code></div>
 	
 	
 	
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The approximate <a href="#//api/name/date">date</a> and time the event occured.</p>
+		<p>The approximate date and time the event occured.</p>
 	</div>
 	
 	
@@ -440,7 +437,7 @@ singular event where a file has been created, modified, and removed.</p></span>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>An approximate <a href="#//api/name/date">date</a> and time the event occured.</p>
+		<p>An approximate date and time the event occured.</p>
 	</div>
 	
 	
@@ -632,7 +629,7 @@ never does that.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The <a href="#//api/name/flags">flags</a> of the event.</p>
+		<p>The flags of the event.</p>
 	</div>		
 	
 	
@@ -643,7 +640,7 @@ never does that.</p>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The <a href="#//api/name/flags">flags</a> of the event.</p>
+		<p>The flags of the event.</p>
 	</div>
 	
 	
@@ -657,9 +654,9 @@ never does that.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The <a href="#//api/name/flags">flags</a> of the event.</p>
+		<p>The flags of the event.</p>
 
-<p>The <a href="#//api/name/flags">flags</a> of the event as returned by <code>FSEvents</code>.</p>
+<p>The flags of the event as returned by <code>FSEvents</code>.</p>
 	</div>
 	
 	
@@ -683,7 +680,7 @@ never does that.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The event <a href="#//api/name/identifier">identifier</a>.</p>
+		<p>The event identifier.</p>
 	</div>		
 	
 	
@@ -694,7 +691,7 @@ never does that.</p>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The event <a href="#//api/name/identifier">identifier</a>.</p>
+		<p>The event identifier.</p>
 	</div>
 	
 	
@@ -708,9 +705,9 @@ never does that.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The event <a href="#//api/name/identifier">identifier</a>.</p>
+		<p>The event identifier.</p>
 
-<p>The event <a href="#//api/name/identifier">identifier</a> as returned by <code>FSEvents</code>.</p>
+<p>The event identifier as returned by <code>FSEvents</code>.</p>
 	</div>
 	
 	
@@ -1515,9 +1512,9 @@ kernel (less likely) or in your client (more likely) by checking if
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2011 Aron Cedercrantz. All rights reserved. (Last updated: 2011-11-02)</span><br />
+						<p><span class="copyright">&copy; 2012 Aron Cedercrantz. All rights reserved. (Last updated: 2012-11-21)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 703)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
 					</div>
 				</div>
