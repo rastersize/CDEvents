@@ -10,6 +10,19 @@
 
 #import "CDEventsDelegate.h"
 
+#ifndef __has_feature
+	#define __has_feature(x) 0
+#endif
+
+#if !__has_feature(objc_arc)
+	#error CDEvents must be built with ARC.
+#endif
+
+#if !__has_feature(blocks)
+	#error CDEvents must be built with support for blocks.
+#endif
+
+
 #pragma mark CDEvents custom exceptions
 NSString *const CDEventsEventStreamCreationFailureException = @"CDEventsEventStreamCreationFailureException";
 
