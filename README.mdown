@@ -1,22 +1,22 @@
-# CDEvents ![Project status](http://stillmaintained.com/rastersize/CDEvents.png) #
+# CDEvents
 ***Note:*** The `develop` branch **requires Mac OS X 10.6 or newer** as the framework relies on  [ARC](http://clang.llvm.org/docs/AutomaticReferenceCounting.html "Automatic Reference Counting Technical Specification") and [blocks](http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html "Blocks Programming Topics").
 
 Website: http://rastersize.github.com/CDEvents
 
-## What is this? ##
+## What is this?
 It's an Objective-C wrapper for Mac OS X's [FSEvents C API](http://developer.apple.com/mac/library/documentation/Darwin/Reference/FSEvents_Ref/FSEvents_h/index.html) with support for blocks. Furthermore, all the classes are immutable and it should be thread-safe.
 
 
-## Requirements ##
+## Requirements
 Requires Mac OS X 10.6 (Snow Leopard) and an Intel 64-bit CPU. The requirements stems from that automatic reference counting (ARC) is supported from 10.6 and up as long as the modern (i.e. 64-bit) Objective-C runtime is used since ARC requires the non-fragile ABI. Although the built product works on 10.6 and up it must be built on a machine running 10.7 (Lion) using Xcode 4.2 and the 10.7 SDK as the 10.6 SDK does not include ARC. The built product support both manual memory management and automatic reference counting.
 
 If you need to support older versions of OS X or garbage collection please see the branch `support/1.1`. All _1.1.x_ version will support garbage collection and OS X 10.5.
 
 
-## Usage ##
+## Usage
 You can use either the block based version (recommended) or the delegate based. Using both systems at the same time is not supported.
 
-### Block based (recommended) ###
+### Block based (recommended)
 1. Add CDEvents to your project,
  * either by compiling the project and dragging the `CDEvents.framework` into your project or
  * by dragging the entire CDEvents project into your project as a sub-project.
@@ -45,7 +45,7 @@ Or use all the all-options initiator:
 
 See the test app (`TestApp`) for an example on how to use the framework.
 
-### Delegate based ###
+### Delegate based
 ***This is the same behavior as pre ARC and blocks.***
 
 1. Add CDEvents to your project,
@@ -74,19 +74,19 @@ See the test app (`TestApp`) for an example on how to use the framework.
 For more details please refer to the documentation in the header files and the section "API documentation" below.
 
 
-## API documentation ##
+## API documentation
 Read the latest [API documentation](http://rastersize.github.com/CDEvents/docs/api/head) or [browse for each version](http://rastersize.github.com/CDEvents/docs/api) of CDEvents. Alternatively you can generate it yourself, please see below.
 
-### appledoc ###
+### appledoc
 Run the script `api.appledoc.sh` from the root of the project. The script takes one optional argument, the version of the project as a string. If the version string is empty "HEAD" will be used instead.
 
-### Doxygen ###
+### Doxygen
 You can generate API documentation with the help of [Doxygen](http://www.stack.nl/~dimitri/doxygen/). In Doxygen open the file `api.doxygen`, click the `Run` tab and then the `Run doxygen` button. When it's done you should have a directory (ignored by git) in the root of the project named `api` with a sub-directory `html` in which you will find `index.html` double-click and enjoy.
 
-## Contributors ##
+## Contributors
 See GitHubs [contributors to rastersize/CDEvents](https://github.com/rastersize/CDEvents/contributors) statistics page.
 
-## License ##
+## License
 The code is released under the [MIT-license](http://www.opensource.org/licenses/mit-license.php).
 
-If you want, even though you really don't have to, I would love to hear what you use CDEvents for! Send me an email (first name (i.e. aron) @ last name (i.e. cedercrantz) dot se) or a [message via GitHub](http://github.com/inbox/new/rastersize).
+If you want, even though you really don't have to, I would love to hear what you use CDEvents for! Send me an email (first name (i.e. aron) @ last name (i.e. cedercrantz) dot se).
