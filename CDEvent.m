@@ -1,7 +1,7 @@
 /**
  * CDEvents
  *
- * Copyright (c) 2010 Aron Cedercrantz
+ * Copyright (c) 2010-2012 Aron Cedercrantz
  * http://github.com/rastersize/CDEvents/
  *
  * Permission is hereby granted, free of charge, to any person
@@ -44,22 +44,14 @@
 							 URL:(NSURL *)URL
 						   flags:(CDEventFlags)flags
 {
-	return [[[CDEvent alloc] initWithIdentifier:identifier
+	return [[CDEvent alloc] initWithIdentifier:identifier
 										   date:date
 											URL:URL
-										  flags:flags]
-			autorelease];
+										  flags:flags];
 }
 
 
 #pragma mark Init/dealloc methods
-- (void)dealloc
-{
-	[_date release];
-	[_URL release];
-	
-	[super dealloc];
-}
 
 - (id)initWithIdentifier:(NSUInteger)identifier
 					date:(NSDate *)date
@@ -69,8 +61,8 @@
 	if ((self = [super init])) {
 		_identifier	= identifier;
 		_flags		= flags;
-		_date		= [date retain];
-		_URL		= [URL retain];
+		_date		= date;
+		_URL		= URL;
 	}
 	
 	return self;
@@ -101,7 +93,7 @@
 - (id)copyWithZone:(NSZone *)zone
 {
 	// We can do this since we are immutable.
-	return [self retain];
+	return self;
 }
 
 #pragma mark Specific flag properties 
