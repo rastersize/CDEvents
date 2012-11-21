@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.version      = "1.2.0"
   s.summary      = "An Objective-C wrapper for Mac OS X’s FSEvents C API."
   s.homepage     = "http://rastersize.github.com/CDEvents"
-  s.license      = { :type => 'MIT', :file => 'LICENSE' }
+  s.license      = 'MIT'
   s.author       = { "Aron Cedercrantz" => "aron@cedercrantz.se" }
   s.source       = { :git => "https://github.com/rastersize/CDEvents.git", :tag => "1.2.0" }
   s.platform     = :osx, '10.6'
