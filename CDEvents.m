@@ -26,6 +26,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#import <CDEvents/CDEvents.h>
 #import "CDEvents.h"
 
 #import "CDEventsDelegate.h"
@@ -146,6 +147,18 @@ static void CDEventsCallback(
 		  streamCreationFlags:kCDEventsDefaultEventStreamFlags];
 }
 
+- (id)initWithURLs:(NSArray *)URLs delegate:(id <CDEventsDelegate>)delegate onQueue:(dispatch_queue_t)queue {
+    return [self initWithURLs:URLs
+                     delegate:delegate
+                      onQueue:queue
+         sinceEventIdentifier:kCDEventsSinceEventNow
+         notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
+      ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
+                  excludeURLs:nil
+          streamCreationFlags:kCDEventsDefaultEventStreamFlags];
+}
+
+
 - (id)initWithURLs:(NSArray *)URLs
 		  delegate:(id<CDEventsDelegate>)delegate
 		 onRunLoop:(NSRunLoop *)runLoop
@@ -176,6 +189,36 @@ streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags
 		  streamCreationFlags:streamCreationFlags];
 }
 
+- (id)initWithURLs:(NSArray *)URLs
+          delegate:(id <CDEventsDelegate>)delegate
+             onQueue:(dispatch_queue_t)queue
+sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
+   notificationLantency:(CFTimeInterval)notificationLatency
+ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
+            excludeURLs:(NSArray *)exludeURLs
+    streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags {
+    if (delegate == nil) {
+        [NSException raise:NSInvalidArgumentException
+                    format:@"Invalid arguments passed to CDEvents init-method."];
+    }
+
+    _delegate = delegate;
+
+    return [self initWithURLs:URLs
+                        block:^(CDEvents *watcher, CDEvent *event){
+                            if ([(id)[watcher delegate] conformsToProtocol:@protocol(CDEventsDelegate)]) {
+                                [[watcher delegate] URLWatcher:watcher eventOccurred:event];
+                            }
+                        }
+                      onQueue:queue
+         sinceEventIdentifier:sinceEventIdentifier
+         notificationLantency:notificationLatency
+      ignoreEventsFromSubDirs:ignoreEventsFromSubDirs
+                  excludeURLs:exludeURLs
+          streamCreationFlags:streamCreationFlags];
+}
+
+
 
 #pragma mark Creating CDEvents Objects With a Block
 - (id)initWithURLs:(NSArray *)URLs block:(CDEventsEventBlock)block
@@ -196,6 +239,19 @@ streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags
 				  excludeURLs:nil
 		  streamCreationFlags:kCDEventsDefaultEventStreamFlags];
 }
+
+- (id)initWithURLs:(NSArray *)URLs block:(CDEventsEventBlock)block onQueue:(dispatch_queue_t)queue {
+    return [self initWithURLs:URLs
+                        block:block
+                      onQueue:queue
+         sinceEventIdentifier:kCDEventsSinceEventNow
+         notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
+      ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
+                  excludeURLs:nil
+          streamCreationFlags:kCDEventsDefaultEventStreamFlags];
+
+}
+
 
 - (id)initWithURLs:(NSArray *)URLs
 			 block:(CDEventsEventBlock)block
@@ -237,6 +293,45 @@ streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags
 	
 	return self;
 }
+
+- (id)initWithURLs:(NSArray *)URLs
+             block:(CDEventsEventBlock)block
+             onQueue:(dispatch_queue_t)queue
+sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
+   notificationLantency:(CFTimeInterval)notificationLatency
+ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
+            excludeURLs:(NSArray *)exludeURLs
+    streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags {
+    if (block == NULL || URLs == nil || [URLs count] == 0) {
+        [NSException raise:NSInvalidArgumentException
+                    format:@"Invalid arguments passed to CDEvents init-method."];
+    }
+
+    if ((self = [super init])) {
+        _watchedURLs = [URLs copy];
+        _excludedURLs = [exludeURLs copy];
+        _eventBlock = block;
+
+        _sinceEventIdentifier = sinceEventIdentifier;
+        _eventStreamCreationFlags = streamCreationFlags;
+
+        _notificationLatency = notificationLatency;
+        _ignoreEventsFromSubDirectories = ignoreEventsFromSubDirs;
+
+        _lastEvent = nil;
+
+        [self createEventStream];
+
+        FSEventStreamSetDispatchQueue(_eventStream, queue);
+        if (!FSEventStreamStart(_eventStream)) {
+            [NSException raise:CDEventsEventStreamCreationFailureException
+                        format:@"Failed to create event stream."];
+        }
+    }
+
+    return self;
+}
+
 
 
 #pragma mark NSCopying method
