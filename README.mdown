@@ -25,7 +25,7 @@ You can use either the block based version (recommended) or the delegate based. 
 
 Easy example code:
 
-    self.events = [[CDEvents alloc]] initWithURLs:<NSArray of URLs to watch>
+    self.events = [[CDEvents alloc] initWithURLs:<NSArray of URLs to watch>
                                             block:^(CDEvents *watcher, CDEvent *event) {
 	                                            <Your code here>
 	                                        }];
