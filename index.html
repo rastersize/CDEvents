@@ -59,7 +59,7 @@
 
 <span class="class">NSArray</span> *url  = [<span class="class">NSURL</span> <span class="method">URLWithString</span>:<span class="string">@"/path/to/directory"</span>];
 <span class="class">NSArray</span> *urls = [<span class="class">NSArray</span> <span class="method">arrayWithObject</span>:url];
-<span class="keyword">self</span>.<span class="property">events</span>   = [[<span class="class">CDEvents</span> <span class="method">alloc</span>]] <span class="method">initWithURLs</span>:urls <span class="method">block</span>:
+<span class="keyword">self</span>.<span class="property">events</span>   = [[<span class="class">CDEvents</span> <span class="method">alloc</span>] <span class="method">initWithURLs</span>:urls <span class="method">block</span>:
                     ^(<span class="class">CDEvents</span> *watcher, <span class="class">CDEvent</span> *event) {
                         <span class="external-function">NSLog</span>(
                             <span class="string">@"URLWatcher: %@\nEvent: %@"</span>,
