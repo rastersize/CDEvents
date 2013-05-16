@@ -96,7 +96,7 @@
 	return self;
 }
 
-#pragma mark Specific flag properties 
+#pragma mark Specific flag properties
 - (BOOL)isGenericChange
 {
 	return (kFSEventStreamEventFlagNone == _flags);
