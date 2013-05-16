@@ -110,7 +110,7 @@ typedef void (^CDEventsEventBlock)(CDEvents *watcher, CDEvent *event);
 /**
  * An Objective-C wrapper for the <code>FSEvents</code> C API.
  *
- * @note Inpired by <code>SCEvents</code> class of the <code>SCEvents</code> project by Stuart Connolly.
+ * @note Inspired by <code>SCEvents</code> class of the <code>SCEvents</code> project by Stuart Connolly.
  *
  * @see FSEvents.h in CoreServices
  *
