@@ -60,7 +60,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
 /**
  * An Objective-C wrapper for a <code>FSEvents</code> event data.
  *
- * @note Inpired by <code>SCEvent</code> class of the <code>SCEvents</code> project by Stuart Connolly.
+ * @note Inspired by <code>SCEvent</code> class of the <code>SCEvents</code> project by Stuart Connolly.
  * @note The class is immutable.
  *
  * @see FSEvents.h in CoreServices

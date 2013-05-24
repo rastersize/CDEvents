@@ -73,7 +73,7 @@ extern NSString *const CDEventsEventStreamCreationFailureException;
 #define CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY			((NSTimeInterval)3.0)
 
 /**
- * The default value wheter events from sub directories should be ignored or not.
+ * The default value whether events from sub directories should be ignored or not.
  *
  * @since 1.0.0
  */
@@ -110,7 +110,7 @@ typedef void (^CDEventsEventBlock)(CDEvents *watcher, CDEvent *event);
 /**
  * An Objective-C wrapper for the <code>FSEvents</code> C API.
  *
- * @note Inpired by <code>SCEvents</code> class of the <code>SCEvents</code> project by Stuart Connolly.
+ * @note Inspired by <code>SCEvents</code> class of the <code>SCEvents</code> project by Stuart Connolly.
  *
  * @see FSEvents.h in CoreServices
  *
@@ -277,7 +277,7 @@ typedef void (^CDEventsEventBlock)(CDEvents *watcher, CDEvent *event);
 		  onRunLoop:(NSRunLoop *)runLoop;
 
 /**
- * Returns an <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and schedules the watcher on the given run loop.
+ * Returns an <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, whether events from sub-directories are ignored or not and schedules the watcher on the given run loop.
  *
  * @param URLs An array of URLs (<code>NSURL</code>) we want to watch.
  * @param delegate The delegate object the CDEvents object calls when it recieves an event.
@@ -287,7 +287,7 @@ typedef void (^CDEventsEventBlock)(CDEvents *watcher, CDEvent *event);
  * @param ignoreEventsFromSubDirs Wheter events from sub-directories of the watched URLs should be ignored or not.
  * @param exludeURLs An array of URLs that we should ignore events from. Pass <code>nil</code> if none should be excluded.
  * @param streamCreationFlags The event stream creation flags.
- * @return An CDEvents object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and run on the given run loop.
+ * @return An CDEvents object initialized with the given URLs to watch, URLs to exclude, whether events from sub-directories are ignored or not and run on the given run loop.
  * @throws NSInvalidArgumentException if the parameter URLs is empty or points to <code>nil</code>.
  * @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
  * @throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.
@@ -375,7 +375,7 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 		 onRunLoop:(NSRunLoop *)runLoop;
 
 /**
- * Returns an <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and schedules the watcher on the given run loop.
+ * Returns an <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, whether events from sub-directories are ignored or not and schedules the watcher on the given run loop.
  *
  * @param URLs An array of URLs (<code>NSURL</code>) we want to watch.
  * @param block The block which the CDEvents object executes when it recieves an event.
@@ -385,7 +385,7 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
  * @param ignoreEventsFromSubDirs Wheter events from sub-directories of the watched URLs should be ignored or not.
  * @param exludeURLs An array of URLs that we should ignore events from. Pass <code>nil</code> if none should be excluded.
  * @param streamCreationFlags The event stream creation flags.
- * @return An CDEvents object initialized with the given URLs to watch, URLs to exclude, wheter events from sub-directories are ignored or not and run on the given run loop.
+ * @return An CDEvents object initialized with the given URLs to watch, URLs to exclude, whether events from sub-directories are ignored or not and run on the given run loop.
  * @throws NSInvalidArgumentException if the parameter URLs is empty or points to <code>nil</code>.
  * @throws NSInvalidArgumentException if <em>delegate</em>is <code>nil</code>.
  * @throws CDEventsEventStreamCreationFailureException if we failed to create a event stream.
