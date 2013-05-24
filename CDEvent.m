@@ -102,6 +102,12 @@
 	return (kFSEventStreamEventFlagNone == _flags);
 }
 
+#define FLAG_CHECK(flags, flag) ((flags) & (flag))
+
+#define FLAG_PROPERTY(name, flag)                   \
+- (BOOL)name                                        \
+{ return (FLAG_CHECK(_flags, flag) ? YES : NO); }
+
 FLAG_PROPERTY(mustRescanSubDirectories,     kFSEventStreamEventFlagMustScanSubDirs)
 FLAG_PROPERTY(isUserDropped,                kFSEventStreamEventFlagUserDropped)
 FLAG_PROPERTY(isKernelDropped,              kFSEventStreamEventFlagKernelDropped)
