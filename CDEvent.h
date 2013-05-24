@@ -115,14 +115,6 @@ typedef FSEventStreamEventFlags CDEventFlags;
  */
 @property (readonly) CDEventFlags				flags;
 
-#pragma mark flag macros
-
-#define FLAG_CHECK(flags, flag) ((flags) & (flag))
-
-#define FLAG_PROPERTY(name, flag)                   \
-- (BOOL)name                                        \
-{ return (FLAG_CHECK(_flags, flag) ? YES : NO); }
-
 #pragma mark Specific flag properties
 /**
  * Wheter there was some change in the directory at the specific path supplied in this event.
