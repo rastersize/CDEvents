@@ -275,6 +275,9 @@ typedef void (^CDEventsEventBlock)(CDEvents *watcher, CDEvent *event);
 - (id)initWithURLs:(NSArray *)URLs
 			delegate:(id<CDEventsDelegate>)delegate
 		  onRunLoop:(NSRunLoop *)runLoop;
+- (id)initWithURLs:(NSArray *)URLs
+          delegate:(id<CDEventsDelegate>)delegate
+         onQueue:(dispatch_queue_t)queue;
 
 /**
  * Returns an <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, whether events from sub-directories are ignored or not and schedules the watcher on the given run loop.
@@ -313,6 +316,14 @@ notificationLantency:(CFTimeInterval)notificationLatency
 ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 		 excludeURLs:(NSArray *)exludeURLs
  streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags;
+- (id)initWithURLs:(NSArray *)URLs
+          delegate:(id<CDEventsDelegate>)delegate
+           onQueue:(dispatch_queue_t)queue
+sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
+   notificationLantency:(CFTimeInterval)notificationLatency
+ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
+            excludeURLs:(NSArray *)exludeURLs
+    streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags;
 
 #pragma mark Creating CDEvents Objects With a Block
 /** @name Creating CDEvents Objects With a Block */
@@ -373,6 +384,9 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 - (id)initWithURLs:(NSArray *)URLs
 			 block:(CDEventsEventBlock)block
 		 onRunLoop:(NSRunLoop *)runLoop;
+- (id)initWithURLs:(NSArray *)URLs
+             block:(CDEventsEventBlock)block
+           onQueue:(dispatch_queue_t)queue;
 
 /**
  * Returns an <code>CDEvents</code> object initialized with the given URLs to watch, URLs to exclude, whether events from sub-directories are ignored or not and schedules the watcher on the given run loop.
@@ -411,6 +425,14 @@ notificationLantency:(CFTimeInterval)notificationLatency
 ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 	   excludeURLs:(NSArray *)exludeURLs
 streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags;
+- (id)initWithURLs:(NSArray *)URLs
+             block:(CDEventsEventBlock)block
+           onQueue:(dispatch_queue_t)queue
+sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
+   notificationLantency:(CFTimeInterval)notificationLatency
+ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
+            excludeURLs:(NSArray *)exludeURLs
+    streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags;
 
 #pragma mark Flush methods
 /** @name Flushing Events */
