@@ -31,6 +31,9 @@
 #import <CDEvents/CDEvents.h>
 
 
+#define CD_EVENTS_TEST_APP_USE_BLOCKS_API				1
+
+
 bool systemVersionIsAtLeast(SInt32 major, SInt32 minor)
 {
     static SInt32 versionMajor = 0, versionMinor = 0;
@@ -69,6 +72,16 @@ bool systemVersionIsAtLeast(SInt32 major, SInt32 minor)
         creationFlags |= kFSEventStreamCreateFlagFileEvents;
     }
 
+#if CD_EVENTS_TEST_APP_USE_BLOCKS_API
+	_events = [[CDEvents alloc] initWithURLs:watchedURLs
+									   block:^(CDEvents *watcher, CDEvent *event){ NSLog(@"[Block] URLWatcher: %@\nEvent: %@", watcher, event); }
+								   onRunLoop:[NSRunLoop currentRunLoop]
+						sinceEventIdentifier:kCDEventsSinceEventNow
+						notificationLantency:CD_EVENTS_DEFAULT_NOTIFICATION_LATENCY
+					 ignoreEventsFromSubDirs:CD_EVENTS_DEFAULT_IGNORE_EVENT_FROM_SUB_DIRS
+								 excludeURLs:excludeURLs
+						 streamCreationFlags:creationFlags];
+#else
 	_events = [[CDEvents alloc] initWithURLs:watchedURLs
 									delegate:self
 								   onRunLoop:[NSRunLoop currentRunLoop]
@@ -78,6 +91,7 @@ bool systemVersionIsAtLeast(SInt32 major, SInt32 minor)
 								 excludeURLs:excludeURLs
 						 streamCreationFlags:creationFlags];
 	//[_events setIgnoreEventsFromSubDirectories:YES];
+#endif
 	
 	NSLog(@"-[CDEventsTestAppController run]:\n%@\n------\n%@",
 		  _events,
@@ -92,9 +106,9 @@ bool systemVersionIsAtLeast(SInt32 major, SInt32 minor)
 	[super dealloc];
 }
 
-- (void)URLWatcher:(CDEvents *)URLWatcher eventOccurred:(CDEvent *)event
+- (void)URLWatcher:(CDEvents *)urlWatcher eventOccurred:(CDEvent *)event
 {
-	NSLog(@"URLWatcher: %@\nEvent: %@", URLWatcher, event);
+	NSLog(@"[Delegate] URLWatcher: %@\nEvent: %@", urlWatcher, event);
 }
 
 @end

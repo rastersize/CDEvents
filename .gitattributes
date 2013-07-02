@@ -1,3 +1,2 @@
-*.pbxproj	binary
 *.m		diff=objc
 *.mm		diff=objc
