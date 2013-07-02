@@ -1,7 +1,7 @@
 /**
  * CDEvents
  *
- * Copyright (c) 2010-2012 Aron Cedercrantz
+ * Copyright (c) 2010-2013 Aron Cedercrantz
  * http://github.com/rastersize/CDEvents/
  *
  * Permission is hereby granted, free of charge, to any person
@@ -60,7 +60,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
 /**
  * An Objective-C wrapper for a <code>FSEvents</code> event data.
  *
- * @note Inpired by <code>SCEvent</code> class of the <code>SCEvents</code> project by Stuart Connolly.
+ * @note Inspired by <code>SCEvent</code> class of the <code>SCEvents</code> project by Stuart Connolly.
  * @note The class is immutable.
  *
  * @see FSEvents.h in CoreServices
@@ -114,14 +114,6 @@ typedef FSEventStreamEventFlags CDEventFlags;
  * @since 1.0.0
  */
 @property (readonly) CDEventFlags				flags;
-
-#pragma mark flag macros
-
-#define FLAG_CHECK(flags, flag) ((flags) & (flag))
-
-#define FLAG_PROPERTY(name, flag)                   \
-- (BOOL)name                                        \
-{ return (FLAG_CHECK(_flags, flag) ? YES : NO); }
 
 #pragma mark Specific flag properties
 /**
