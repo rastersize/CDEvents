@@ -38,7 +38,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreServices/CoreServices.h>
 
-#import <CDEvents/CDEvent.h>
+#import "CDEvent.h"
 
 @protocol CDEventsDelegate;
 

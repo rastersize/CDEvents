@@ -89,7 +89,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  *
  * @since 1.0.0
  */
-@property (unsafe_unretained, readonly) NSDate	*date;
+@property (strong, readonly) NSDate	*date;
 
 /**
  * The URL of the item which changed.
@@ -98,7 +98,7 @@ typedef FSEventStreamEventFlags CDEventFlags;
  *
  * @since 1.0.0
  */
-@property (unsafe_unretained, readonly) NSURL	*URL;
+@property (strong, readonly) NSURL	*URL;
 
 
 /** @name Getting Event Flags */
