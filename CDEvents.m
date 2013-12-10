@@ -249,7 +249,7 @@ streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags
 							   notificationLantency:[self notificationLatency]
 							ignoreEventsFromSubDirs:[self ignoreEventsFromSubDirectories]
 										excludeURLs:[self excludedURLs]
-								streamCreationFlags:_eventStreamCreationFlags];
+								streamCreationFlags:(uint) _eventStreamCreationFlags];
 	
 	return copy;
 }
@@ -313,7 +313,7 @@ streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags
 									   (__bridge CFArrayRef)watchedPaths,
 									   (FSEventStreamEventId)[self sinceEventIdentifier],
 									   [self notificationLatency],
-									   _eventStreamCreationFlags);
+									   (uint) _eventStreamCreationFlags);
 }
 
 - (void)disposeEventStream
