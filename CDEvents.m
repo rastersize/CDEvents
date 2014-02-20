@@ -60,10 +60,10 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 // Private API
 @interface CDEvents () {
 @private
-	CDEventsEventBlock	_eventBlock;
+	CDEventsEventBlock                          _eventBlock;
 	
-	FSEventStreamRef	_eventStream;
-	NSUInteger			_eventStreamCreationFlags;
+	FSEventStreamRef							_eventStream;
+	CDEventsEventStreamCreationFlags			_eventStreamCreationFlags;
 }
 
 // Redefine the properties that should be writeable.
@@ -249,7 +249,7 @@ streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags
 							   notificationLantency:[self notificationLatency]
 							ignoreEventsFromSubDirs:[self ignoreEventsFromSubDirectories]
 										excludeURLs:[self excludedURLs]
-								streamCreationFlags:(uint) _eventStreamCreationFlags];
+								streamCreationFlags:_eventStreamCreationFlags];
 	
 	return copy;
 }
