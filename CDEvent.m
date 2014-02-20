@@ -83,7 +83,7 @@
 	self = [self initWithIdentifier:[[aDecoder decodeObjectForKey:@"identifier"] unsignedIntegerValue]
 							   date:[aDecoder decodeObjectForKey:@"date"]
 								URL:[aDecoder decodeObjectForKey:@"URL"]
-							  flags:[[aDecoder decodeObjectForKey:@"flags"] unsignedIntegerValue]];
+							  flags:[[aDecoder decodeObjectForKey:@"flags"] unsignedIntValue]];
 	
 	return self;
 }
