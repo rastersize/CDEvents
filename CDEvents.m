@@ -60,10 +60,10 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 // Private API
 @interface CDEvents () {
 @private
-	CDEventsEventBlock	_eventBlock;
+	CDEventsEventBlock                          _eventBlock;
 	
-	FSEventStreamRef	_eventStream;
-	NSUInteger			_eventStreamCreationFlags;
+	FSEventStreamRef							_eventStream;
+	CDEventsEventStreamCreationFlags			_eventStreamCreationFlags;
 }
 
 // Redefine the properties that should be writeable.
@@ -313,7 +313,7 @@ streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags
 									   (__bridge CFArrayRef)watchedPaths,
 									   (FSEventStreamEventId)[self sinceEventIdentifier],
 									   [self notificationLatency],
-									   _eventStreamCreationFlags);
+									   (uint) _eventStreamCreationFlags);
 }
 
 - (void)disposeEventStream
