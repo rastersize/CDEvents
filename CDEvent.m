@@ -1,7 +1,7 @@
 /**
  * CDEvents
  *
- * Copyright (c) 2010-2012 Aron Cedercrantz
+ * Copyright (c) 2010-2013 Aron Cedercrantz
  * http://github.com/rastersize/CDEvents/
  *
  * Permission is hereby granted, free of charge, to any person
@@ -83,7 +83,7 @@
 	self = [self initWithIdentifier:[[aDecoder decodeObjectForKey:@"identifier"] unsignedIntegerValue]
 							   date:[aDecoder decodeObjectForKey:@"date"]
 								URL:[aDecoder decodeObjectForKey:@"URL"]
-							  flags:[[aDecoder decodeObjectForKey:@"flags"] unsignedIntegerValue]];
+							  flags:[[aDecoder decodeObjectForKey:@"flags"] unsignedIntValue]];
 	
 	return self;
 }
@@ -96,11 +96,17 @@
 	return self;
 }
 
-#pragma mark Specific flag properties 
+#pragma mark Specific flag properties
 - (BOOL)isGenericChange
 {
 	return (kFSEventStreamEventFlagNone == _flags);
 }
+
+#define FLAG_CHECK(flags, flag) ((flags) & (flag))
+
+#define FLAG_PROPERTY(name, flag)                   \
+- (BOOL)name                                        \
+{ return (FLAG_CHECK(_flags, flag) ? YES : NO); }
 
 FLAG_PROPERTY(mustRescanSubDirectories,     kFSEventStreamEventFlagMustScanSubDirs)
 FLAG_PROPERTY(isUserDropped,                kFSEventStreamEventFlagUserDropped)

@@ -1,7 +1,7 @@
 /**
  * CDEvents
  *
- * Copyright (c) 2010-2012 Aron Cedercrantz
+ * Copyright (c) 2010-2013 Aron Cedercrantz
  * http://github.com/rastersize/CDEvents/
  *
  * Permission is hereby granted, free of charge, to any person
@@ -61,10 +61,10 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 // Private API
 @interface CDEvents () {
 @private
-	CDEventsEventBlock	_eventBlock;
+	CDEventsEventBlock                          _eventBlock;
 	
-	FSEventStreamRef	_eventStream;
-	NSUInteger			_eventStreamCreationFlags;
+	FSEventStreamRef							_eventStream;
+	CDEventsEventStreamCreationFlags			_eventStreamCreationFlags;
 }
 
 // Redefine the properties that should be writeable.
@@ -408,7 +408,7 @@ ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
 									   (__bridge CFArrayRef)watchedPaths,
 									   (FSEventStreamEventId)[self sinceEventIdentifier],
 									   [self notificationLatency],
-									   _eventStreamCreationFlags);
+									   (uint) _eventStreamCreationFlags);
 }
 
 - (void)disposeEventStream
