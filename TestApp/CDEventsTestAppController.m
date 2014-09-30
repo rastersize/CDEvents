@@ -34,23 +34,6 @@
 #define CD_EVENTS_TEST_APP_USE_BLOCKS_API				1
 
 
-bool systemVersionIsAtLeast(SInt32 major, SInt32 minor)
-{
-    static SInt32 versionMajor = 0, versionMinor = 0;
-
-    if (versionMajor == 0) {
-        Gestalt(gestaltSystemVersionMajor, &versionMajor);
-    }
-
-    if (versionMinor == 0) {
-        Gestalt(gestaltSystemVersionMinor, &versionMinor);
-    }
-
-    return ((versionMajor > major) ||
-            ((versionMajor == major) && (versionMinor >= minor)));
-}
-
-
 @implementation CDEventsTestAppController
 
 - (void)run
@@ -64,11 +47,10 @@ bool systemVersionIsAtLeast(SInt32 major, SInt32 minor)
 	
     CDEventsEventStreamCreationFlags creationFlags = kCDEventsDefaultEventStreamFlags;
 
-    if (systemVersionIsAtLeast(10,6)) {
+    if (floor(NSAppKitVersionNumber) >= NSAppKitVersionNumber10_6) {
         creationFlags |= kFSEventStreamCreateFlagIgnoreSelf;
     }
-
-    if (systemVersionIsAtLeast(10,7)) {
+    if (floor(NSAppKitVersionNumber) >= NSAppKitVersionNumber10_7) {
         creationFlags |= kFSEventStreamCreateFlagFileEvents;
     }
 
