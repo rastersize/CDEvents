@@ -64,6 +64,8 @@ const CDEventIdentifier kCDEventsSinceEventNow = kFSEventStreamEventIdSinceNow;
 	
 	FSEventStreamRef							_eventStream;
 	CDEventsEventStreamCreationFlags			_eventStreamCreationFlags;
+    
+    dispatch_queue_t                            _queue;
 }
 
 // Redefine the properties that should be writeable.
@@ -238,19 +240,72 @@ streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags
 	return self;
 }
 
+- (id)initWithURLs:(NSArray *)URLs
+             block:(CDEventsEventBlock)block
+             queue:(dispatch_queue_t)queue
+sinceEventIdentifier:(CDEventIdentifier)sinceEventIdentifier
+notificationLantency:(CFTimeInterval)notificationLatency
+ignoreEventsFromSubDirs:(BOOL)ignoreEventsFromSubDirs
+       excludeURLs:(NSArray *)exludeURLs
+streamCreationFlags:(CDEventsEventStreamCreationFlags)streamCreationFlags
+{
+    if (block == NULL || URLs == nil || [URLs count] == 0) {
+        [NSException raise:NSInvalidArgumentException
+                    format:@"Invalid arguments passed to CDEvents init-method."];
+    }
+    
+    if ((self = [super init])) {
+        _watchedURLs = [URLs copy];
+        _excludedURLs = [exludeURLs copy];
+        _eventBlock = block;
+        
+        _sinceEventIdentifier = sinceEventIdentifier;
+        _eventStreamCreationFlags = streamCreationFlags;
+        
+        _notificationLatency = notificationLatency;
+        _ignoreEventsFromSubDirectories = ignoreEventsFromSubDirs;
+        
+        _lastEvent = nil;
+        
+        _queue = queue;
+        
+        [self createEventStream];
+        
+        FSEventStreamSetDispatchQueue(_eventStream, _queue);
+        if (!FSEventStreamStart(_eventStream)) {
+            [NSException raise:CDEventsEventStreamCreationFailureException
+                        format:@"Failed to create event stream."];
+        }
+    }
+    
+    return self;
+}
+
 
 #pragma mark NSCopying method
 - (id)copyWithZone:(NSZone *)zone
 {
-	CDEvents *copy = [[CDEvents alloc] initWithURLs:[self watchedURLs]
-											  block:[self eventBlock]
-										  onRunLoop:[NSRunLoop currentRunLoop]
-							   sinceEventIdentifier:[self sinceEventIdentifier]
-							   notificationLantency:[self notificationLatency]
-							ignoreEventsFromSubDirs:[self ignoreEventsFromSubDirectories]
-										excludeURLs:[self excludedURLs]
-								streamCreationFlags:_eventStreamCreationFlags];
-	
+    CDEvents *copy;
+    if (!_queue) {
+        copy = [[CDEvents alloc] initWithURLs:[self watchedURLs]
+                                        block:[self eventBlock]
+                                    onRunLoop:[NSRunLoop currentRunLoop]
+                         sinceEventIdentifier:[self sinceEventIdentifier]
+                         notificationLantency:[self notificationLatency]
+                      ignoreEventsFromSubDirs:[self ignoreEventsFromSubDirectories]
+                                  excludeURLs:[self excludedURLs]
+                          streamCreationFlags:_eventStreamCreationFlags];
+    }
+    else {
+        copy = [[CDEvents alloc] initWithURLs:[self watchedURLs]
+                                        block:[self eventBlock]
+                                        queue:_queue
+                         sinceEventIdentifier:[self sinceEventIdentifier]
+                         notificationLantency:[self notificationLatency]
+                      ignoreEventsFromSubDirs:[self ignoreEventsFromSubDirectories]
+                                  excludeURLs:[self excludedURLs]
+                          streamCreationFlags:_eventStreamCreationFlags];
+    }
 	return copy;
 }
 
@@ -351,16 +406,20 @@ static void CDEventsCallback(
 		// contain any trailing slash.
 		NSURL *eventURL		= [NSURL fileURLWithPath:[[eventPathsArray objectAtIndex:i] stringByStandardizingPath]];
 		NSString *eventPath	= [eventURL path];
-		
-		// Ignore all events except for the URLs we are explicitly watching.
-		if ([watcher ignoreEventsFromSubDirectories]) {
-			shouldIgnore = YES;
-			for (NSURL *url in watchedURLs) {
-				if ([[url path] isEqualToString:eventPath]) {
-					shouldIgnore = NO;
-					break;
-				}
-			}
+        NSString *eventDirectoryPath    = [eventPath stringByDeletingLastPathComponent];
+        
+        // Check if is directory
+        BOOL isDirectory = CFURLHasDirectoryPath((__bridge CFURLRef)eventURL);
+        
+        // Ignore all events except for the URLs we are explicitly watching.
+        if ([watcher ignoreEventsFromSubDirectories]) {
+            shouldIgnore = YES;
+            for (NSURL *url in watchedURLs) {
+                if ([[url path] isEqualToString:eventDirectoryPath] && !isDirectory) {
+                    shouldIgnore = NO;
+                    break;
+                }
+            }
 		// Ignore all explicitly excludeded URLs (not required to check if we
 		// ignore all events from sub-directories).
 		} else if (excludedURLs != nil) {
